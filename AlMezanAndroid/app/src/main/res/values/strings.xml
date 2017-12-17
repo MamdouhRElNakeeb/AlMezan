@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AlMezan</string>
+
+    <string name="doaa0">أستغفر الله العظيم</string>
+    <string name="doaa1">الله أكبر</string>
+    <string name="doaa2">لا إله إلا الله</string>
+    <string name="doaa3">لا حول ولا قوة إلا بالله</string>
+    <string name="doaa4">الحمد لله</string>
+    <string name="doaa5">سبحان الله</string>
+    <string name="doaa6">سبحان الله و بحمده</string>
+    <string name="doaa7">سبحان الله و بحمده \n سبحان الله العظيم</string>
+    <string name="doaa8">لا إله إلا أنت سبحانك \n إنى كنت من الظالمين</string>
+
+
+</resources>

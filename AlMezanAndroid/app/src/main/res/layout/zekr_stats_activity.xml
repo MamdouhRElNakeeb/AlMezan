@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_gradient"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/pattern"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"/>
+
+
+    <ImageView
+        android:id="@+id/almezan_logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/almezan_logo"
+        android:layout_alignParentTop="true"/>
+
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        android:layout_margin="10dp"
+        android:tint="@color/orange"
+        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/sidemenu_icn"
+        android:background="@android:color/transparent"/>
+
+
+    <TextView
+        android:id="@+id/zekrTitleTV"
+        android:layout_below="@id/almezan_logo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="إحصائيات الذِكر"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:padding="5dp"
+        android:background="@android:color/holo_red_dark"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"/>
+
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/almezan_logo"
+        android:src="@drawable/islamic_icn"
+        android:adjustViewBounds="true"
+        android:layout_alignParentRight="true"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/almezan_logo"
+        android:src="@drawable/islamic_icn"
+        android:adjustViewBounds="true"
+        android:layout_alignParentLeft="true"/>
+
+
+    <ScrollView
+        android:layout_below="@id/zekrTitleTV"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="left"
+                android:text="يومياً"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/doaa0"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa0StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/doaa1"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa1StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/doaa2"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa2StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/doaa3"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa3StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/doaa4"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa4StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/doaa5"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa5StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/doaa6"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa6StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/doaa7"
+                    android:textSize="15sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa7StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/doaa8"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/doaa8StatsTV"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/zekr_stats_btn_bg"
+                    android:layout_alignParentLeft="true"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

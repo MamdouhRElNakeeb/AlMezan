@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_gradient"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/pattern"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"/>
+
+
+    <ImageView
+        android:id="@+id/almezan_logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/almezan_logo"
+        android:layout_alignParentTop="true"/>
+
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:scaleType="fitCenter"
+        android:layout_margin="10dp"
+        android:tint="@color/orange"
+        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/sidemenu_icn"
+        android:background="@android:color/transparent"/>
+
+
+    <TextView
+        android:id="@+id/zekrTitleTV"
+        android:layout_below="@id/almezan_logo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="الله أكبر"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:padding="5dp"
+        android:background="@color/deep_orange"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"/>
+
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/almezan_logo"
+        android:src="@drawable/islamic_icn"
+        android:adjustViewBounds="true"
+        android:layout_alignParentRight="true"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/almezan_logo"
+        android:src="@drawable/islamic_icn"
+        android:adjustViewBounds="true"
+        android:layout_alignParentLeft="true"/>
+
+
+    <LinearLayout
+        android:layout_below="@id/zekrTitleTV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/zekrCountTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:text="0"/>
+
+            <Button
+                android:id="@+id/saveCountBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/handout_btn_bg"
+                android:text="حفظ"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/zekrAddBtn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/seb7a_icn"
+                android:background="@android:color/transparent"/>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="عدد التسابيح"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/white"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="عدد أيام العمر"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginRight="10dp">
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/handout_btn_bg"/>
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/handout_btn_bg"
+                            android:layout_marginTop="2dp"/>
+
+                    </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="تراكمى"
+                            android:textColor="@color/white"
+                            android:textSize="17sp"/>
+
+                        <TextView
+                            android:id="@+id/zekrDailyTV"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:background="@drawable/handout_btn_bg"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="فى اليوم"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_marginRight="10dp"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="عدد التسابيح"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/white"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="عدد شهور العمر"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginRight="10dp">
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/handout_btn_bg"/>
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/handout_btn_bg"
+                            android:layout_marginTop="2dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="تراكمى"
+                            android:textColor="@color/white"
+                            android:textSize="17sp"/>
+
+                        <TextView
+                            android:id="@+id/zekrMonthlyTV"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:background="@drawable/handout_btn_bg"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="فى الشهر"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_marginRight="10dp"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="عدد التسابيح"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/white"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="عدد سنين العمر"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginRight="10dp">
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/handout_btn_bg"/>
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/handout_btn_bg"
+                            android:layout_marginTop="2dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="تراكمى"
+                            android:textColor="@color/white"
+                            android:textSize="17sp"/>
+
+                        <TextView
+                            android:id="@+id/zekrYearlyTV"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:text="0"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:background="@drawable/handout_btn_bg"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="20sp"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="فى السنة"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:layout_marginRight="10dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

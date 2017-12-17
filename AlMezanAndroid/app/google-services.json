@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "894887696126",
+    "firebase_url": "https://almezan-3156e.firebaseio.com",
+    "project_id": "almezan-3156e",
+    "storage_bucket": "almezan-3156e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894887696126:android:21e3be5168f908a3",
+        "android_client_info": {
+          "package_name": "me.nakeeb.almezan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894887696126-40upompt4guhfq8icbk4jlq9p324qcho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnd0njqu0ta0XLlh1l2wic1-0cHiSJjZ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
