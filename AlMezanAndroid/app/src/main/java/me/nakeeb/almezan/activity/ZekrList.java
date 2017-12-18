@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
+import me.nakeeb.almezan.R;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
@@ -40,6 +46,7 @@ public class ZekrList extends AppCompatActivity implements View.OnClickListener 
         doaa7.setOnClickListener(this);
         doaa8.setOnClickListener(this);
 
+        loadADs();
     }
 
     @Override
@@ -103,5 +110,16 @@ public class ZekrList extends AppCompatActivity implements View.OnClickListener 
                 break;
 
         }
+    }
+
+    private void loadADs(){
+
+        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
+
+        AdView mAdView;
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }

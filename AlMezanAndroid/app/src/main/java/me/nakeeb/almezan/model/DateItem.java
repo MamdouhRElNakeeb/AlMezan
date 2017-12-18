@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.model;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.

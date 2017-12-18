@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.helper;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import me.nakeeb.almezan.R;
+import me.nakeeb.almezan.model.DateItem;
 
 /**
  * Created by mamdouhelnakeeb on 12/13/17.

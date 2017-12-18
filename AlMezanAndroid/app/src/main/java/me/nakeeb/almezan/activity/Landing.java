@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+
+import me.nakeeb.almezan.R;
 
 /**
  * Created by mamdouhelnakeeb on 12/12/17.
@@ -49,6 +51,8 @@ public class Landing extends AppCompatActivity {
         findViewById(R.id.monthlyStatsBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                startActivity(new Intent(getApplicationContext(), MonthlyStats.class));
 
             }
         });

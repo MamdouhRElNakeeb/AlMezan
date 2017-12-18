@@ -77,8 +77,20 @@
         android:layout_alignParentLeft="true"/>
 
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-6430998960222915/3853975603">
+    </com.google.android.gms.ads.AdView>
+
     <LinearLayout
         android:layout_below="@id/zekrTitleTV"
+        android:layout_above="@id/adView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"

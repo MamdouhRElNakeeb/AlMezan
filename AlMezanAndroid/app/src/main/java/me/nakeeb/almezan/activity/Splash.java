@@ -1,9 +1,11 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+
+import me.nakeeb.almezan.R;
 
 public class Splash extends AppCompatActivity {
 

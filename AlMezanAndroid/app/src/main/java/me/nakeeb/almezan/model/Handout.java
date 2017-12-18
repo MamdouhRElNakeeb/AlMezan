@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.model;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
@@ -7,7 +7,8 @@ package me.nakeeb.almezan;
 public class Handout {
 
     public float amount = 0;
-    public long dayInMillis = 0;
+    public long timeInMillis = 0;
+    public int month = 0;
 
     public Handout(){
 

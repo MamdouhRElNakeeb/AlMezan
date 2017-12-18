@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.helper;
 
 import android.util.Log;
 
@@ -14,6 +14,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import me.nakeeb.almezan.model.DateItem;
+
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
  */
@@ -27,12 +29,42 @@ public class Utils {
         return x;
     }
 
+    public static ArrayList<DateItem> getYears(long currentMillis, long oldMillis, Locale locale){
+
+        ArrayList<DateItem> temp = new ArrayList<>();
+
+        int yearsNo = yearsNo(getDayMillis(currentMillis), getDayMillis(oldMillis));
+
+        if (yearsNo == 0){
+            yearsNo = 1;
+        }
+
+        Log.d("yearsNo", String.valueOf(yearsNo));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("y", locale);
+        Calendar calendar = Calendar.getInstance();
+        for (int i = 0; i < yearsNo; i++){
+
+            calendar.setTimeInMillis(oldMillis + 32140800000L * i);
+
+            DateItem dateItem = new DateItem();
+            dateItem.date = formatter.format(calendar.getTime());
+            dateItem.timeInMillis = oldMillis + 32140800000L * i;
+
+            temp.add(dateItem);
+
+            Log.d("daysFormat", temp.get(i).date);
+            Log.d("daysFormatsss", String.valueOf(oldMillis + 32140800000L * i));
+        }
+
+        return temp;
+    }
 
     public static ArrayList<DateItem> getDates(long currentMillis, long oldMillis, Locale locale){
 
         ArrayList<DateItem> temp = new ArrayList<>();
 
-        int daysNo = daysNo(currentMillis, oldMillis);
+        int daysNo = daysNo(getDayMillis(currentMillis), getDayMillis(oldMillis));
 
         if (daysNo == 0){
             daysNo = 1;
@@ -64,6 +96,32 @@ public class Utils {
         long dayInMilliseconds = 0;
 
         SimpleDateFormat dayFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        dayFormatter.setTimeZone(TimeZone.getDefault());
+
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeInMilliSeconds);
+        String dayMonthYear = dayFormatter.format(calendar.getTime());
+
+        try {
+
+            Date dDate = dayFormatter.parse(dayMonthYear);
+            dayInMilliseconds = dDate.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("timeInMillis", String.valueOf(dayInMilliseconds));
+
+        return dayInMilliseconds;
+
+    }
+
+    public static long getMillis (long timeInMilliSeconds, String pattern){
+
+        long dayInMilliseconds = 0;
+
+        SimpleDateFormat dayFormatter = new SimpleDateFormat(pattern, Locale.US);
         dayFormatter.setTimeZone(TimeZone.getDefault());
 
         // Create a calendar object that will convert the date and time value in milliseconds to date.
@@ -168,14 +226,20 @@ public class Utils {
         uCal.get(Calendar.DAY_OF_MONTH); // 20
 
         temp.add(uCal.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("ar")));
-        temp.add(uCal.getDisplayName(Calendar.MONTH + 1, Calendar.LONG, new Locale("ar")));
+        temp.add(uCal.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("ar")));
 
         return temp;
     }
 
-    private static int daysNo(long currentMillis, long oldMillis){
+    public static int daysNo(long currentMillis, long oldMillis){
 
         return (int) ((currentMillis - oldMillis) / 86400000);
+
+    }
+
+    public static int yearsNo(long currentMillis, long oldMillis){
+
+        return (int) ((currentMillis - oldMillis) / 32140800000L);
 
     }
 

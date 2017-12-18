@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash">
+        <activity android:name=".activity.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,16 +19,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Login"/>
-        <activity android:name=".Register"/>
-        <activity android:name=".Landing"/>
-        <activity android:name=".PrayerAdd"/>
-        <activity android:name=".PrayersStats"/>
-        <activity android:name=".HandoutAdd"/>
-        <activity android:name=".ZekrList"/>
-        <activity android:name=".ZekrDetails"/>
-        <activity android:name=".ZekrStats"/>
-        <activity android:name=".MonthlyStats"/>
+        <activity android:name=".activity.Login"/>
+        <activity android:name=".activity.Register"/>
+        <activity android:name=".activity.Landing"/>
+        <activity android:name=".activity.PrayerAdd"/>
+        <activity android:name=".activity.PrayersStats"/>
+        <activity android:name=".activity.HandoutAdd"/>
+        <activity android:name=".activity.ZekrList"/>
+        <activity android:name=".activity.ZekrDetails"/>
+        <activity android:name=".activity.ZekrStats"/>
+        <activity android:name=".activity.MonthlyStats"/>
     </application>
 
 </manifest>

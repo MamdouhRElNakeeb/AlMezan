@@ -1,6 +1,8 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.model;
 
 import java.util.ArrayList;
+
+import me.nakeeb.almezan.helper.Utils;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.

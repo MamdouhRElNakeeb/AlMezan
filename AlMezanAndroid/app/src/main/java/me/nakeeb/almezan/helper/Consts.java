@@ -1,4 +1,6 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.helper;
+
+import me.nakeeb.almezan.R;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.

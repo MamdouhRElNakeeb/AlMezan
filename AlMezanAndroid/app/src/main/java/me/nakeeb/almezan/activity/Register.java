@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -15,6 +15,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,12 +28,13 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import me.nakeeb.almezan.R;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
@@ -80,6 +84,8 @@ public class Register extends AppCompatActivity {
         });
 
         configAge();
+
+        loadADs();
     }
 
     @Override
@@ -249,5 +255,16 @@ public class Register extends AppCompatActivity {
                         Log.w("save user: ", "Error adding document", e);
                     }
                 });
+    }
+
+    private void loadADs(){
+
+        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
+
+        AdView mAdView;
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }

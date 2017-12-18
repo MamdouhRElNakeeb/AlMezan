@@ -27,6 +27,7 @@
         android:id="@+id/almezan_logo"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginTop="-5dp"
         android:adjustViewBounds="true"
         android:src="@drawable/almezan_logo"
         android:layout_alignParentTop="true"/>
@@ -48,11 +49,11 @@
         android:id="@+id/percentageTitleTV"
         android:layout_below="@id/almezan_logo"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:text="النسبة المئوية"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:padding="5dp"
         android:background="@drawable/faded_grey_gradient"/>
 
@@ -438,16 +439,25 @@
 
     </LinearLayout>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-6430998960222915/3414991905">
+    </com.google.android.gms.ads.AdView>
 
     <LinearLayout
         android:id="@+id/daysCounterLL"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/adView"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginRight="20dp">
 
         <TextView
             android:layout_width="0dp"

@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +24,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import me.nakeeb.almezan.helper.Consts;
+import me.nakeeb.almezan.R;
+import me.nakeeb.almezan.helper.Utils;
+import me.nakeeb.almezan.model.Zekr;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
@@ -78,6 +86,8 @@ public class ZekrDetails extends AppCompatActivity {
 
             }
         });
+
+        loadADs();
 
     }
 
@@ -164,4 +174,14 @@ public class ZekrDetails extends AppCompatActivity {
 
     }
 
+    private void loadADs(){
+
+        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
+
+        AdView mAdView;
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
 }

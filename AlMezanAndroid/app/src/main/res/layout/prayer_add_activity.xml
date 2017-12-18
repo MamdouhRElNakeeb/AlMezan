@@ -53,12 +53,9 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/5224354917">
+            ads:adUnitId="ca-app-pub-6430998960222915/8188559017">
         </com.google.android.gms.ads.AdView>
 
-
-        <!--ADmob ID-->
-        <!--ca-app-pub-6430998960222915/8188559017-->
 
         <LinearLayout
             android:id="@+id/prayerLL"

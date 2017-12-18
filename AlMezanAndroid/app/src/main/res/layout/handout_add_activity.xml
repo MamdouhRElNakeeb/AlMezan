@@ -75,10 +75,20 @@
         android:adjustViewBounds="true"
         android:layout_alignParentLeft="true"/>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-6430998960222915/4973037038">
+    </com.google.android.gms.ads.AdView>
 
     <LinearLayout
         android:id="@+id/daysCounterLL"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/adView"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginTop="5dp"
@@ -205,8 +215,8 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="35sp"
+            android:layout_height="50dp"
+            android:textSize="30sp"
             android:gravity="center"
             android:textColor="@color/white"
             android:layout_marginRight="20dp"
@@ -217,11 +227,11 @@
         <EditText
             android:id="@+id/amountET"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:text="0"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:inputType="numberDecimal"
@@ -258,8 +268,8 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:textSize="35sp"
+            android:layout_height="50dp"
+            android:textSize="30sp"
             android:gravity="center"
             android:textColor="@color/white"
             android:layout_marginRight="20dp"
@@ -271,11 +281,11 @@
         <TextView
             android:id="@+id/handoutsTotalTV"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:text="0"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:background="@drawable/handout_edttxt_bg"/>

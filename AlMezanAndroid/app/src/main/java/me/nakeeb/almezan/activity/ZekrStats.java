@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,6 +17,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import me.nakeeb.almezan.R;
+import me.nakeeb.almezan.helper.Utils;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
@@ -48,6 +54,8 @@ public class ZekrStats extends AppCompatActivity {
         initViews();
 
         getZekrStats();
+
+        loadADs();
     }
 
     private void getZekrStats(){
@@ -122,5 +130,16 @@ public class ZekrStats extends AppCompatActivity {
         doaa7TV = findViewById(R.id.doaa7StatsTV);
         doaa8TV = findViewById(R.id.doaa8StatsTV);
 
+    }
+
+    private void loadADs(){
+
+        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
+
+        AdView mAdView;
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }

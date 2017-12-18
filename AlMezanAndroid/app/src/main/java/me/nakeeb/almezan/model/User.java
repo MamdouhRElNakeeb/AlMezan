@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.model;
 
 import android.support.annotation.Keep;
 

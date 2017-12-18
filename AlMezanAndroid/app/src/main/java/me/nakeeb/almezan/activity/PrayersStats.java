@@ -1,4 +1,4 @@
-package me.nakeeb.almezan;
+package me.nakeeb.almezan.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +27,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import me.nakeeb.almezan.R;
+import me.nakeeb.almezan.helper.Utils;
+import me.nakeeb.almezan.model.PrayersDay;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
@@ -64,6 +71,8 @@ public class PrayersStats extends AppCompatActivity {
         prayersDay = new PrayersDay();
         
         getPrayersStats();
+
+        loadADs();
         
     }
 
@@ -74,6 +83,7 @@ public class PrayersStats extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        // TODO fix path issue
         CollectionReference docRef = db.collection("users")
                 .document(mAuth.getCurrentUser().getUid())
                 .collection("prayers");
@@ -343,7 +353,7 @@ public class PrayersStats extends AppCompatActivity {
         LegendEntry legendEntry[] = {inTime, late, left, notReg};
 
         Legend legend = new Legend(legendEntry);
-        legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+//        legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
 
         //create pie data object
         PieData pieData = new PieData(pieDataSet);
@@ -417,5 +427,16 @@ public class PrayersStats extends AppCompatActivity {
         isha2TV = findViewById(R.id.i2TV);
         isha3TV = findViewById(R.id.i3TV);
 
+    }
+
+    private void loadADs(){
+
+        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
+
+        AdView mAdView;
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }

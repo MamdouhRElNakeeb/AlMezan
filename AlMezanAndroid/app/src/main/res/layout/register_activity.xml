@@ -34,7 +34,8 @@
     <ImageView
         android:id="@+id/almezan_logo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="-20dp"
         android:adjustViewBounds="true"
         android:src="@drawable/almezan_logo"
         android:layout_alignParentTop="true"/>
@@ -135,5 +136,16 @@
             android:background="@android:color/transparent"/>
 
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-6430998960222915/2761096228">
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
