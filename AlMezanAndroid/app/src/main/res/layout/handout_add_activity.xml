@@ -1,294 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="rtl">
 
 
-    <ImageView
+    <RelativeLayout android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_gradient"/>
+        android:layoutDirection="rtl">
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/pattern"
-        android:scaleType="centerCrop"
-        android:layout_alignParentBottom="true"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_gradient"/>
 
 
-    <ImageView
-        android:id="@+id/almezan_logo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/almezan_logo"
-        android:layout_alignParentTop="true"/>
-
-
-    <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:scaleType="fitCenter"
-        android:layout_margin="10dp"
-        android:tint="@color/orange"
-        android:layout_weight="1"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/sidemenu_icn"
-        android:background="@android:color/transparent"/>
-
-
-    <TextView
-        android:id="@+id/handoutTitleTV"
-        android:layout_below="@id/almezan_logo"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="الصدقة"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        android:padding="5dp"
-        android:background="@color/lime"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"/>
-
-
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_below="@id/almezan_logo"
-        android:src="@drawable/islamic_icn"
-        android:adjustViewBounds="true"
-        android:layout_alignParentRight="true"/>
-
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_below="@id/almezan_logo"
-        android:src="@drawable/islamic_icn"
-        android:adjustViewBounds="true"
-        android:layout_alignParentLeft="true"/>
-
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-6430998960222915/4973037038">
-    </com.google.android.gms.ads.AdView>
-
-    <LinearLayout
-        android:id="@+id/daysCounterLL"
-        android:layout_above="@id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp">
-
-        <TextView
-            android:layout_width="0dp"
+        <ImageView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/pattern"
+            android:scaleType="centerCrop"
+            android:layout_alignParentBottom="true"/>
+
+
+        <ImageView
+            android:id="@+id/almezan_logo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/almezan_logo"
+            android:layout_alignParentTop="true"/>
+
+
+        <ImageButton
+            android:id="@+id/sideMenuIB"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            android:layout_margin="10dp"
+            android:tint="@color/orange"
             android:layout_weight="1"
-            android:text="عداد الأيام"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:layout_marginRight="5dp"
-                android:text="يوم"
-                android:textSize="17sp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-
-            <TextView
-                android:id="@+id/daysCounterTV"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/tv_grey_bg"
-                android:text="0"
-                android:textSize="17sp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:layout_marginRight="5dp"
-                android:text="شهر"
-                android:textSize="17sp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-
-            <TextView
-                android:id="@+id/monthsCounterTV"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/tv_grey_bg"
-                android:text="0"
-                android:textSize="17sp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:layout_marginRight="5dp"
-                android:text="سنة"
-                android:textSize="17sp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-
-            <TextView
-                android:id="@+id/yearsCounterTV"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/tv_grey_bg"
-                android:text="0"
-                android:textSize="17sp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/handoutTitleTV"
-        android:layout_above="@id/daysCounterLL"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:orientation="vertical">
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/sidemenu_icn"
+            android:background="@android:color/transparent"/>
 
 
         <TextView
+            android:id="@+id/handoutTitleTV"
+            android:layout_below="@id/almezan_logo"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textSize="30sp"
+            android:layout_height="60dp"
+            android:text="الصدقة"
             android:gravity="center"
             android:textColor="@color/white"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/handout_txtv_bg"
-            android:text="مبلغ متصدق به"/>
+            android:textSize="35sp"
+            android:padding="5dp"
+            android:background="@color/lime"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"/>
 
-        <EditText
-            android:id="@+id/amountET"
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/almezan_logo"
+            android:src="@drawable/islamic_icn"
+            android:adjustViewBounds="true"
+            android:layout_alignParentRight="true"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/almezan_logo"
+            android:src="@drawable/islamic_icn"
+            android:adjustViewBounds="true"
+            android:layout_alignParentLeft="true"/>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:text="0"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:inputType="numberDecimal"
-            android:background="@drawable/handout_edttxt_bg"/>
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-6430998960222915/4973037038">
+        </com.google.android.gms.ads.AdView>
+
+        <LinearLayout
+            android:id="@+id/daysCounterLL"
+            android:layout_above="@id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="عداد الأيام"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="15sp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_marginRight="5dp"
+                    android:text="يوم"
+                    android:textSize="17sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+
+
+                <TextView
+                    android:id="@+id/daysCounterTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/tv_grey_bg"
+                    android:text="0"
+                    android:textSize="17sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_marginRight="5dp"
+                    android:text="شهر"
+                    android:textSize="17sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+
+
+                <TextView
+                    android:id="@+id/monthsCounterTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/tv_grey_bg"
+                    android:text="0"
+                    android:textSize="17sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_marginRight="5dp"
+                    android:text="سنة"
+                    android:textSize="17sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+
+
+                <TextView
+                    android:id="@+id/yearsCounterTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/tv_grey_bg"
+                    android:text="0"
+                    android:textSize="17sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_below="@id/handoutTitleTV"
+            android:layout_above="@id/daysCounterLL"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/saveBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/handout_btn_bg"
-                android:text="حفظ"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/editBtn"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/handout_btn_bg"
-                android:text="تعديل"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:textColor="@color/white"
                 android:layout_marginRight="20dp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/handout_txtv_bg"
+                android:text="مبلغ متصدق به"/>
+
+            <EditText
+                android:id="@+id/amountET"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="0"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:inputType="numberDecimal"
+                android:background="@drawable/handout_edttxt_bg"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/saveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/handout_btn_bg"
+                    android:text="حفظ"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/editBtn"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/handout_btn_bg"
+                    android:text="تعديل"
+                    android:layout_marginRight="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/handout_txtv_bg"
+                android:layout_marginTop="10dp"
+                android:text="إجمالى الصدقات"/>
+
+            <TextView
+                android:id="@+id/handoutsTotalTV"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="0"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:background="@drawable/handout_edttxt_bg"/>
+
         </LinearLayout>
+    </RelativeLayout>
 
+    <include
+        layout="@layout/side_menu"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/handout_txtv_bg"
-            android:layout_marginTop="10dp"
-            android:text="إجمالى الصدقات"/>
-
-        <TextView
-            android:id="@+id/handoutsTotalTV"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:text="0"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:background="@drawable/handout_edttxt_bg"/>
-
-    </LinearLayout>
-</RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

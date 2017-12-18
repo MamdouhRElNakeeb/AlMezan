@@ -178,6 +178,7 @@ public class Utils {
         Calendar cl = Calendar.getInstance();
         cl.setTimeInMillis(milliSeconds);  //here your time in miliseconds
 
+        temp.add(cl.get(Calendar.DAY_OF_MONTH));
         temp.add(cl.get(Calendar.MONTH));
         temp.add(cl.get(Calendar.YEAR));
 

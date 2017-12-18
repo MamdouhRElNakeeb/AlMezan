@@ -1,15 +1,24 @@
 package me.nakeeb.almezan.activity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -59,6 +68,8 @@ public class HandoutAdd extends AppCompatActivity {
 
         initViews();
 
+        initNav();
+
         getHandoutsTotal();
 
         updatePeriod();
@@ -74,16 +85,19 @@ public class HandoutAdd extends AppCompatActivity {
 
         float amount = Float.parseFloat(amountET.getText().toString().trim());
 
+        long currentMillis = System.currentTimeMillis();
+
         Map<String, Object> handout = new HashMap<>();
         handout.put("amount", amount + monthHandoutsTotal);
+        handout.put("month", Utils.getDate(currentMillis).get(1));
 
         // Add a new document with a generated ID
         db.collection("users")
                 .document(mAuth.getCurrentUser().getUid())
                 .collection("handouts")
-                .document(String.valueOf(Utils.getMillis(System.currentTimeMillis(), "y")))
+                .document(String.valueOf(Utils.getMillis(currentMillis, "y")))
                 .collection("months")
-                .document(String.valueOf(Utils.getMillis(System.currentTimeMillis(), "MM/y")))
+                .document(String.valueOf(Utils.getMillis(currentMillis, "MM/y")))
                 .set(handout)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -265,6 +279,120 @@ public class HandoutAdd extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void initNav(){
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+
+
+        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
+        ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
+
+        sideMenuIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
+            }
+        });
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nameTV))
+                .setText(getSharedPreferences("User", MODE_PRIVATE).getString("name", ""));
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.ageTV))
+                .setText(String.valueOf(Utils.calcAge(getSharedPreferences("User", MODE_PRIVATE).getString("dob", "0/0/0"))));
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.homeBtnLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                    }
+                });
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.settingsBtnLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.logoutLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mAuth.signOut();
+                        startActivity(new Intent(HandoutAdd.this, Login.class));
+                        finish();
+                    }
+                });
+
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.fbIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String FACEBOOK_URL = "https://www.facebook.com/MamdouhRElNakeeb";
+                        String FACEBOOK_PAGE_ID = "MamdouhRElNakeeb";
+                        String facebookUrl = "";
+                        PackageManager packageManager = getPackageManager();
+                        try {
+                            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+                            if (versionCode >= 3002850) { //newer versions of fb app
+                                facebookUrl = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+                            } else { //older versions of fb app
+                                facebookUrl = "fb://page/" + FACEBOOK_PAGE_ID;
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            facebookUrl =  FACEBOOK_URL; //normal web url
+                        }
+
+                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                        facebookIntent.setData(Uri.parse(facebookUrl));
+                        startActivity(facebookIntent);
+                    }
+                });
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.twtIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = null;
+                        try {
+                            // get the Twitter app if possible
+                            getPackageManager().getPackageInfo("com.twitter.android", 0);
+                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=mamdouhelnakeeb"));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        } catch (Exception e) {
+                            // no Twitter app, revert to browser
+                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mamdouhelnakeeb"));
+                        }
+                        startActivity(intent);
+                    }
+                });
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.instaIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Uri uri = Uri.parse("http://instagram.com/_u/mamdouhrelnakeeb");
+                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                        likeIng.setPackage("com.instagram.android");
+
+                        try {
+                            startActivity(likeIng);
+                        } catch (ActivityNotFoundException e) {
+                            startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse("http://instagram.com/mamdouhrelnakeeb")));
+                        }
+                    }
+                });
 
     }
 

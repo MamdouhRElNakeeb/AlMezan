@@ -8,7 +8,7 @@ public class PrayersDay {
 
     public long timeInMillis = 0L;
 
-    public int fajr = 0;
+    public int fajr = 10;
     public int duhr = 0;
     public int asr = 0;
     public int mghreb = 0;
@@ -37,6 +37,9 @@ public class PrayersDay {
     public int asr3 = 0;
     public int mghreb3 = 0;
     public int isha3 = 0;
+
+
+    public int month = 1;
 
     public PrayersDay(){
 

@@ -1,200 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drawer"
     android:layoutDirection="rtl">
 
 
-    <ImageView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_gradient"/>
+        android:layoutDirection="rtl">
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/pattern"
-        android:scaleType="centerCrop"
-        android:layout_alignParentBottom="true"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_gradient"/>
 
 
-    <ImageView
-        android:id="@+id/almezan_logo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:src="@drawable/almezan_logo"
-        android:layout_alignParentTop="true"/>
-
-
-    <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:scaleType="fitCenter"
-        android:layout_margin="10dp"
-        android:tint="@color/orange"
-        android:layout_weight="1"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/sidemenu_icn"
-        android:background="@android:color/transparent"/>
-
-
-    <TextView
-        android:id="@+id/zekrTitleTV"
-        android:layout_below="@id/almezan_logo"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="الذِكر"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:padding="5dp"
-        android:background="@color/green"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="5dp"/>
-
-
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_below="@id/almezan_logo"
-        android:src="@drawable/islamic_icn"
-        android:adjustViewBounds="true"
-        android:layout_alignParentRight="true"/>
-
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_below="@id/almezan_logo"
-        android:src="@drawable/islamic_icn"
-        android:adjustViewBounds="true"
-        android:layout_alignParentLeft="true"/>
-
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-6430998960222915/7686119845">
-    </com.google.android.gms.ads.AdView>
-
-    <ScrollView
-        android:layout_below="@id/zekrTitleTV"
-        android:layout_above="@id/adView"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:orientation="vertical">
+            android:adjustViewBounds="true"
+            android:src="@drawable/pattern"
+            android:scaleType="centerCrop"
+            android:layout_alignParentBottom="true"/>
 
-            <Button
-                android:id="@+id/doaa0"
+
+        <ImageView
+            android:id="@+id/almezan_logo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:src="@drawable/almezan_logo"
+            android:layout_alignParentTop="true"/>
+
+
+        <ImageButton
+            android:id="@+id/sideMenuIB"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            android:layout_margin="10dp"
+            android:tint="@color/orange"
+            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/sidemenu_icn"
+            android:background="@android:color/transparent"/>
+
+
+        <TextView
+            android:id="@+id/zekrTitleTV"
+            android:layout_below="@id/almezan_logo"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="الذِكر"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:padding="5dp"
+            android:background="@color/green"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"/>
+
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/almezan_logo"
+            android:src="@drawable/islamic_icn"
+            android:adjustViewBounds="true"
+            android:layout_alignParentRight="true"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/almezan_logo"
+            android:src="@drawable/islamic_icn"
+            android:adjustViewBounds="true"
+            android:layout_alignParentLeft="true"/>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-6430998960222915/7686119845">
+        </com.google.android.gms.ads.AdView>
+
+        <ScrollView
+            android:layout_below="@id/zekrTitleTV"
+            android:layout_above="@id/adView"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="أستغفر الله العظيم"
-                android:textSize="20sp"
-                android:textColor="@color/white"/>
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/doaa1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="الله أكبر"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/doaa0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="أستغفر الله العظيم"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/doaa2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="لا إله إلا الله"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/doaa1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="الله أكبر"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/doaa3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="لا حول ولا قوة إلا بالله"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/doaa2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="لا إله إلا الله"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/doaa4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="الحمد لله"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/doaa3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="لا حول ولا قوة إلا بالله"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/doaa5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="سبحان الله"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/doaa4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="الحمد لله"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/doaa6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="سبحان الله و بحمده"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/doaa5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="سبحان الله"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/doaa7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="سبحان الله و بحمده \n سبحان الله العظيم"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/doaa6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="سبحان الله و بحمده"
+                    android:textSize="20sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/doaa8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/zekr_btn_bg"
-                android:text="لا إله إلا أنت سبحانك \n إنى كنت من الظالمين "
-                android:textSize="15sp"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/white"/>
+                <Button
+                    android:id="@+id/doaa7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="سبحان الله و بحمده \n سبحان الله العظيم"
+                    android:textSize="15sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/doaa8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/zekr_btn_bg"
+                    android:text="لا إله إلا أنت سبحانك \n إنى كنت من الظالمين "
+                    android:textSize="15sp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"/>
 
-    </ScrollView>
+            </LinearLayout>
+
+        </ScrollView>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
+
+    <include
+        layout="@layout/side_menu"/>
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,11 +1,22 @@
 package me.nakeeb.almezan.activity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -19,18 +30,23 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import me.nakeeb.almezan.R;
 import me.nakeeb.almezan.helper.Utils;
+import me.nakeeb.almezan.model.DateItem;
 import me.nakeeb.almezan.model.PrayersDay;
+import me.nakeeb.almezan.model.User;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
@@ -53,23 +69,31 @@ public class PrayersStats extends AppCompatActivity {
     PrayersDay prayersDay;
 
     int regDays = 0, totalDays = 0;
+
+    ArrayList<DateItem> dateItemArrayList;
     
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.prayer_stats_activity);
 
+        prayersDay = new PrayersDay();
 
         updatePeriod();
 
         initPrayers();
         initChart();
+        initNav();
 
 
         mAuth = FirebaseAuth.getInstance();
 
-        prayersDay = new PrayersDay();
-        
+
+        long currentMillis = System.currentTimeMillis();
+        dateItemArrayList = Utils.getDates(currentMillis,
+                getSharedPreferences("User", MODE_PRIVATE).getLong("startTime", currentMillis),
+                new Locale("ar", "EG"));
+
         getPrayersStats();
 
         loadADs();
@@ -81,37 +105,101 @@ public class PrayersStats extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        mAuth = FirebaseAuth.getInstance();
+        for (int i = 0; i < dateItemArrayList.size(); i++) {
 
-        // TODO fix path issue
-        CollectionReference docRef = db.collection("users")
-                .document(mAuth.getCurrentUser().getUid())
-                .collection("prayers");
+            // TODO fix path issue
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        Log.d("PrayerData: ", document.getId() + " => " + document.getData());
+            mAuth = FirebaseAuth.getInstance();
+            DocumentReference docRef = db.collection("users")
+                    .document(mAuth.getCurrentUser().getUid())
+                    .collection("prayers")
+                    .document(String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "y")))
+                    .collection("months")
+                    .document(String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "MM/y")))
+                    .collection("days")
+                    .document(String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "dd/MM/y")));
 
-                        prayersDay.fajr = Integer.parseInt(document.get("fajr").toString());
-                        prayersDay.duhr = Integer.parseInt(document.get("duhr").toString());
-                        prayersDay.asr = Integer.parseInt(document.get("asr").toString());
-                        prayersDay.mghreb = Integer.parseInt(document.get("mghreb").toString());
-                        prayersDay.isha = Integer.parseInt(document.get("isha").toString());
+            Log.d("yearP", String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "y")));
+            Log.d("monthP", String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "MM/y")));
+            Log.d("dayP", String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "dd/MM/y")));
 
-                        updatePrayers();
 
-                    }
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (!documentSnapshot.exists())
+                        return;
 
-                    regDays = task.getResult().size();
+                    Log.d("PrayerDatadsgd" + String.valueOf(regDays) + ": ", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+
+                    prayersDay.fajr = Integer.parseInt(documentSnapshot.get("fajr").toString());
+                    prayersDay.duhr = Integer.parseInt(documentSnapshot.get("duhr").toString());
+                    prayersDay.asr = Integer.parseInt(documentSnapshot.get("asr").toString());
+                    prayersDay.mghreb = Integer.parseInt(documentSnapshot.get("mghreb").toString());
+                    prayersDay.isha = Integer.parseInt(documentSnapshot.get("isha").toString());
+
+                    updatePrayers();
+
+                    regDays++;
+
+
                     addDataSet();
-                } else {
-                    Log.d("Error: ", "Error getting documents: ", task.getException());
+
                 }
-            }
-        });
+            });
+
+//            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                @Override
+//                public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                    if (documentSnapshot.exists())
+//                        Log.d("UserID", documentSnapshot.getId());
+//                    else
+//                        return;
+//                    Log.d("PrayerData: ", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+//
+//                    prayersDay.fajr = Integer.parseInt(documentSnapshot.get("fajr").toString());
+//                    prayersDay.duhr = Integer.parseInt(documentSnapshot.get("duhr").toString());
+//                    prayersDay.asr = Integer.parseInt(documentSnapshot.get("asr").toString());
+//                    prayersDay.mghreb = Integer.parseInt(documentSnapshot.get("mghreb").toString());
+//                    prayersDay.isha = Integer.parseInt(documentSnapshot.get("isha").toString());
+//
+//                    updatePrayers();
+//
+//                    regDays++;
+//
+//                }
+//            });
+
+
+//            docRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                    if (task.isSuccessful()) {
+//                        for (DocumentSnapshot document : task.getResult()) {
+//
+//                            if (!document.exists())
+//                                return;
+//
+//                            Log.d("PrayerData: ", document.getId() + " => " + document.getData());
+//
+//                            prayersDay.fajr = Integer.parseInt(document.get("fajr").toString());
+//                            prayersDay.duhr = Integer.parseInt(document.get("duhr").toString());
+//                            prayersDay.asr = Integer.parseInt(document.get("asr").toString());
+//                            prayersDay.mghreb = Integer.parseInt(document.get("mghreb").toString());
+//                            prayersDay.isha = Integer.parseInt(document.get("isha").toString());
+//
+//                            updatePrayers();
+//
+//                        }
+//
+//                        regDays += task.getResult().size();
+//                        addDataSet();
+//                    } else {
+//                        Log.d("Error: ", "Error getting documents: ", task.getException());
+//                    }
+//                }
+//            });
+        }
 
     }
 
@@ -137,7 +225,7 @@ public class PrayersStats extends AppCompatActivity {
     }
     
     private void updatePrayers(){
-        
+
         switch (prayersDay.fajr){
             case 0:
                 prayersDay.fajr0++;
@@ -212,6 +300,13 @@ public class PrayersStats extends AppCompatActivity {
                 prayersDay.isha0++;
                 break;
         }
+
+
+
+        Log.d("fajrFB2", String.valueOf(prayersDay.fajr0));
+        Log.d("fajrFB2", String.valueOf(prayersDay.fajr1));
+        Log.d("fajrFB2", String.valueOf(prayersDay.fajr2));
+        Log.d("fajrFB3", String.valueOf(prayersDay.fajr3));
         
     }
 
@@ -426,6 +521,120 @@ public class PrayersStats extends AppCompatActivity {
         isha1TV = findViewById(R.id.i1TV);
         isha2TV = findViewById(R.id.i2TV);
         isha3TV = findViewById(R.id.i3TV);
+
+    }
+
+    private void initNav(){
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+
+        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
+        ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
+
+        sideMenuIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
+            }
+        });
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nameTV))
+                .setText(getSharedPreferences("User", MODE_PRIVATE).getString("name", ""));
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.ageTV))
+                .setText(String.valueOf(Utils.calcAge(getSharedPreferences("User", MODE_PRIVATE).getString("dob", "0/0/0"))));
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.homeBtnLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                    }
+                });
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.settingsBtnLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                    }
+                });
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.logoutLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mAuth.signOut();
+                        startActivity(new Intent(PrayersStats.this, Login.class));
+                        finish();
+                    }
+                });
+
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.fbIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String FACEBOOK_URL = "https://www.facebook.com/MamdouhRElNakeeb";
+                        String FACEBOOK_PAGE_ID = "MamdouhRElNakeeb";
+                        String facebookUrl = "";
+                        PackageManager packageManager = getPackageManager();
+                        try {
+                            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+                            if (versionCode >= 3002850) { //newer versions of fb app
+                                facebookUrl = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+                            } else { //older versions of fb app
+                                facebookUrl = "fb://page/" + FACEBOOK_PAGE_ID;
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            facebookUrl =  FACEBOOK_URL; //normal web url
+                        }
+
+                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                        facebookIntent.setData(Uri.parse(facebookUrl));
+                        startActivity(facebookIntent);
+                    }
+                });
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.twtIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = null;
+                        try {
+                            // get the Twitter app if possible
+                            getPackageManager().getPackageInfo("com.twitter.android", 0);
+                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=mamdouhelnakeeb"));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        } catch (Exception e) {
+                            // no Twitter app, revert to browser
+                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mamdouhelnakeeb"));
+                        }
+                        startActivity(intent);
+                    }
+                });
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.instaIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Uri uri = Uri.parse("http://instagram.com/_u/mamdouhrelnakeeb");
+                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                        likeIng.setPackage("com.instagram.android");
+
+                        try {
+                            startActivity(likeIng);
+                        } catch (ActivityNotFoundException e) {
+                            startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse("http://instagram.com/mamdouhrelnakeeb")));
+                        }
+                    }
+                });
 
     }
 

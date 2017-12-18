@@ -1,9 +1,15 @@
 package me.nakeeb.almezan.activity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +17,10 @@ import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -62,6 +71,8 @@ public class MonthlyStats extends AppCompatActivity {
 
     ArrayList<DateItem> yearsArr;
     int datePos = 0;
+
+    PrayersDay prayersDay;
             
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +83,7 @@ public class MonthlyStats extends AppCompatActivity {
 
         initViews();
         initRV();
+        initNav();
 
         loadADs();
 
@@ -124,6 +136,150 @@ public class MonthlyStats extends AppCompatActivity {
 
     }
 
+    private void updatePrayers(){
+
+        switch (prayersDay.fajr){
+            case 0:
+                prayersDay.fajr0++;
+                break;
+            case 1:
+                prayersDay.fajr1++;
+                break;
+            case 2:
+                prayersDay.fajr2++;
+                break;
+            case 3:
+                prayersDay.fajr0++;
+                break;
+        }
+
+        switch (prayersDay.duhr){
+            case 0:
+                prayersDay.duhr0++;
+                break;
+            case 1:
+                prayersDay.duhr1++;
+                break;
+            case 2:
+                prayersDay.duhr2++;
+                break;
+            case 3:
+                prayersDay.duhr0++;
+                break;
+        }
+
+        switch (prayersDay.asr){
+            case 0:
+                prayersDay.asr0++;
+                break;
+            case 1:
+                prayersDay.asr1++;
+                break;
+            case 2:
+                prayersDay.asr2++;
+                break;
+            case 3:
+                prayersDay.asr0++;
+                break;
+        }
+
+        switch (prayersDay.mghreb){
+            case 0:
+                prayersDay.mghreb0++;
+                break;
+            case 1:
+                prayersDay.mghreb1++;
+                break;
+            case 2:
+                prayersDay.mghreb2++;
+                break;
+            case 3:
+                prayersDay.mghreb0++;
+                break;
+        }
+
+        switch (prayersDay.isha){
+            case 0:
+                prayersDay.isha0++;
+                break;
+            case 1:
+                prayersDay.isha1++;
+                break;
+            case 2:
+                prayersDay.isha2++;
+                break;
+            case 3:
+                prayersDay.isha0++;
+                break;
+        }
+
+        switch (prayersDay.month){
+
+            case 1:
+                jan0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                jan1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                jan2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 2:
+                feb0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                feb1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                feb2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 3:
+                march0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                march1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                march2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 4:
+                april0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                april1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                april2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 5:
+                may0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                may1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                may2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 6:
+                jun0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                jun1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                jun2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 7:
+                jul0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                jul1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                jul2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 8:
+                aug0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                aug1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                aug2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 9:
+                sep0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                sep1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                sep2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 10:
+                oct0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                oct1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                oct2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 11:
+                nov0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                nov1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                nov2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+            case 12:
+                dec0.setText(String.valueOf(prayersDay.fajr0 + prayersDay.duhr0 + prayersDay.asr0 + prayersDay.mghreb0 + prayersDay.isha0));
+                dec1.setText(String.valueOf(prayersDay.fajr1 + prayersDay.duhr1 + prayersDay.asr1 + prayersDay.mghreb1 + prayersDay.isha1));
+                dec2.setText(String.valueOf(prayersDay.fajr2 + prayersDay.duhr2 + prayersDay.asr2 + prayersDay.mghreb2 + prayersDay.isha2));
+                break;
+
+        }
+
+    }
+
     private void loadStats(){
 
         getPrayersStats();
@@ -132,17 +288,23 @@ public class MonthlyStats extends AppCompatActivity {
 
     private void getPrayersStats(){
 
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        for (int i = 0; i < yearsArr.size(); i++){
+        for (int i = 0; i < 12; i++){
+
+            prayersDay = new PrayersDay();
+            prayersDay.month = i + 1;
 
             CollectionReference docRef = db.collection("users")
                     .document(mAuth.getCurrentUser().getUid())
                     .collection("prayers")
                     .document(String.valueOf(Utils.getMillis(yearsArr.get(datePos).timeInMillis, "y")))
                     .collection("months")
-                    .document(String.valueOf(Utils.getMillis(yearsArr.get(datePos).timeInMillis, "y") + 2678400000L * i))
+                    .document(String.valueOf(Utils.getMillis((Utils.getMillis(yearsArr.get(datePos).timeInMillis, "y") + 2678400000L * i),"MM/y"))) //2678400000
                     .collection("days");
+
+            Log.d("prayersStatsTest", String.valueOf(Utils.getMillis((Utils.getMillis(yearsArr.get(datePos).timeInMillis, "y") + 2678400000L * i),"MM/y")));
 
             docRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -151,17 +313,16 @@ public class MonthlyStats extends AppCompatActivity {
                         for (DocumentSnapshot document : task.getResult()) {
                             Log.d("PrayerData: ", document.getId() + " => " + document.getData());
 
-                            PrayersDay prayersDay = new PrayersDay();
                             prayersDay.fajr = Integer.parseInt(document.get("fajr").toString());
                             prayersDay.duhr = Integer.parseInt(document.get("duhr").toString());
                             prayersDay.asr = Integer.parseInt(document.get("asr").toString());
                             prayersDay.mghreb = Integer.parseInt(document.get("mghreb").toString());
                             prayersDay.isha = Integer.parseInt(document.get("isha").toString());
 
-//                        updatePrayers(prayersDay);
+                            updatePrayers();
 
                         }
-//                    addDataSet();
+
                     } else {
                         Log.d("Error: ", "Error getting documents: ", task.getException());
                     }
@@ -367,6 +528,119 @@ public class MonthlyStats extends AppCompatActivity {
         dec1 = findViewById(R.id.dec1);
         dec2 = findViewById(R.id.dec2);
         dec3 = findViewById(R.id.dec3);
+    }
+
+    private void initNav(){
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+
+        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
+        ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
+
+        sideMenuIB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
+            }
+        });
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nameTV))
+                .setText(getSharedPreferences("User", MODE_PRIVATE).getString("name", ""));
+
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.ageTV))
+                .setText(String.valueOf(Utils.calcAge(getSharedPreferences("User", MODE_PRIVATE).getString("dob", "0/0/0"))));
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.homeBtnLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        finish();
+                    }
+                });
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.settingsBtnLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+
+        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.logoutLL))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mAuth.signOut();
+                        startActivity(new Intent(MonthlyStats.this, Login.class));
+                        finish();
+                    }
+                });
+
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.fbIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String FACEBOOK_URL = "https://www.facebook.com/MamdouhRElNakeeb";
+                        String FACEBOOK_PAGE_ID = "MamdouhRElNakeeb";
+                        String facebookUrl = "";
+                        PackageManager packageManager = getPackageManager();
+                        try {
+                            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+                            if (versionCode >= 3002850) { //newer versions of fb app
+                                facebookUrl = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+                            } else { //older versions of fb app
+                                facebookUrl = "fb://page/" + FACEBOOK_PAGE_ID;
+                            }
+                        } catch (PackageManager.NameNotFoundException e) {
+                            facebookUrl =  FACEBOOK_URL; //normal web url
+                        }
+
+                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+                        facebookIntent.setData(Uri.parse(facebookUrl));
+                        startActivity(facebookIntent);
+                    }
+                });
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.twtIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = null;
+                        try {
+                            // get the Twitter app if possible
+                            getPackageManager().getPackageInfo("com.twitter.android", 0);
+                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=mamdouhelnakeeb"));
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        } catch (Exception e) {
+                            // no Twitter app, revert to browser
+                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mamdouhelnakeeb"));
+                        }
+                        startActivity(intent);
+                    }
+                });
+
+        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.instaIB))
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Uri uri = Uri.parse("http://instagram.com/_u/mamdouhrelnakeeb");
+                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+                        likeIng.setPackage("com.instagram.android");
+
+                        try {
+                            startActivity(likeIng);
+                        } catch (ActivityNotFoundException e) {
+                            startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse("http://instagram.com/mamdouhrelnakeeb")));
+                        }
+                    }
+                });
+
     }
 
     private void loadADs(){
