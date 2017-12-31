@@ -28,6 +28,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.math.BigDecimal;
+
 import me.nakeeb.almezan.R;
 import me.nakeeb.almezan.helper.Utils;
 
@@ -87,36 +89,42 @@ public class ZekrStats extends AppCompatActivity {
                     for (DocumentSnapshot document : task.getResult()) {
                         Log.d("PrayerData: ", document.getId() + " => " + document.getData());
 
-                        int countPerDay = (int) (Float.parseFloat(document.get("count").toString()) / (float) daysNo);
+
+                        float age = Utils.calcAge(getSharedPreferences("User", MODE_PRIVATE).getString("dob", "0/0/0"));
+
+                        BigDecimal countPerDay = BigDecimal.valueOf(Float.parseFloat(document.get("count").toString()) / age / 365);
+//                        int countPerDay = (int) (Float.parseFloat(document.get("count").toString()) / (float) daysNo);
+
+                        String countStr = String.valueOf(countPerDay).substring(0, 6);
 
                         switch (Integer.parseInt(document.getId())){
 
                             case 0:
-                                doaa0TV.setText(String.valueOf(countPerDay));
+                                doaa0TV.setText(countStr);
                                 break;
                             case 1:
-                                doaa1TV.setText(String.valueOf(countPerDay));
+                                doaa1TV.setText(countStr);
                                 break;
                             case 2:
-                                doaa2TV.setText(String.valueOf(countPerDay));
+                                doaa2TV.setText(countStr);
                                 break;
                             case 3:
-                                doaa3TV.setText(String.valueOf(countPerDay));
+                                doaa3TV.setText(countStr);
                                 break;
                             case 4:
-                                doaa4TV.setText(String.valueOf(countPerDay));
+                                doaa4TV.setText(countStr);
                                 break;
                             case 5:
-                                doaa5TV.setText(String.valueOf(countPerDay));
+                                doaa5TV.setText(countStr);
                                 break;
                             case 6:
-                                doaa6TV.setText(String.valueOf(countPerDay));
+                                doaa6TV.setText(countStr);
                                 break;
                             case 7:
-                                doaa7TV.setText(String.valueOf(countPerDay));
+                                doaa7TV.setText(countStr);
                                 break;
                             case 8:
-                                doaa8TV.setText(String.valueOf(countPerDay));
+                                doaa8TV.setText(countStr);
                                 break;
                         }
 
@@ -148,6 +156,7 @@ public class ZekrStats extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
+
         final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
         ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
 
@@ -168,6 +177,7 @@ public class ZekrStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        startActivity(new Intent(getBaseContext(), Landing.class));
                         finish();
                     }
                 });
@@ -176,7 +186,7 @@ public class ZekrStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        startActivity(new Intent(getBaseContext(), Settings.class));
                     }
                 });
 
@@ -184,8 +194,8 @@ public class ZekrStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAuth.signOut();
-                        startActivity(new Intent(ZekrStats.this, Login.class));
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getBaseContext(), Login.class));
                         finish();
                     }
                 });

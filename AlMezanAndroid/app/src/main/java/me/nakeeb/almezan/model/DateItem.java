@@ -18,6 +18,12 @@ public class DateItem {
 
     }
 
+    public DateItem(long timeInMillis, String date){
+
+        this.timeInMillis = timeInMillis;
+        this.date = date;
+    }
+
 //    public DateItem(String day, int number, String month, int year){
 //
 //        this.day = day;

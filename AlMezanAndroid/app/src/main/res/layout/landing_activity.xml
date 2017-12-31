@@ -23,17 +23,9 @@
         android:layout_alignParentBottom="true"/>
 
 
-    <ImageView
-        android:id="@+id/almezan_logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="-10dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/almezan_logo"
-        android:layout_alignParentTop="true"/>
-
 
     <LinearLayout
+        android:id="@+id/menuLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -41,25 +33,24 @@
         android:paddingLeft="16dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_below="@id/almezan_logo"
         android:layout_centerInParent="true">
 
 
         <Button
             android:id="@+id/prayerAddBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:text="تسجيل الصلاة"
-            android:textSize="25sp"
+            android:textSize="@dimen/btn_font"
             android:textStyle="bold"
             android:background="@drawable/btn_bg"/>
 
         <Button
             android:id="@+id/handoutAddBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:text="عداد الصدقة"
-            android:textSize="25sp"
+            android:textSize="@dimen/btn_font"
             android:textStyle="bold"
             android:background="@drawable/btn_bg"
             android:layout_marginTop="10dp"/>
@@ -67,9 +58,9 @@
         <Button
             android:id="@+id/zekrAddBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:text="عداد الذِكر"
-            android:textSize="25sp"
+            android:textSize="@dimen/btn_font"
             android:textStyle="bold"
             android:background="@drawable/btn_bg"
             android:layout_marginTop="10dp"/>
@@ -77,9 +68,9 @@
         <Button
             android:id="@+id/monthlyStatsBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:text="مقارنة الشهور"
-            android:textSize="25sp"
+            android:textSize="@dimen/btn_font"
             android:textStyle="bold"
             android:background="@drawable/btn_bg"
             android:layout_marginTop="10dp"/>
@@ -87,9 +78,9 @@
         <Button
             android:id="@+id/statsBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:text="نسب و إحصائيات"
-            android:textSize="25sp"
+            android:textSize="@dimen/btn_font"
             android:textStyle="bold"
             android:background="@drawable/btn_bg"
             android:layout_marginTop="10dp"/>
@@ -98,9 +89,9 @@
         <Button
             android:id="@+id/zekrStatsBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:text="إحصائيات الذِكر"
-            android:textSize="25sp"
+            android:textSize="@dimen/btn_font"
             android:textStyle="bold"
             android:background="@drawable/btn_bg"
             android:layout_marginTop="10dp"/>
@@ -108,14 +99,24 @@
         <Button
             android:id="@+id/resetBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:text="تصفير العداد"
-            android:textSize="25sp"
+            android:textSize="@dimen/btn_font"
             android:background="@drawable/btn_bg"
             android:textStyle="bold"
             android:layout_marginTop="10dp"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/almezan_logo"
+        android:layout_above="@id/menuLL"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/almezan_logo"
+
+        android:layout_alignParentTop="true"/>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"

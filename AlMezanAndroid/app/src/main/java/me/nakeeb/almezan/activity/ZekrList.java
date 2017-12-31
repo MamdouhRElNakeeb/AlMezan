@@ -129,6 +129,7 @@ public class ZekrList extends AppCompatActivity implements View.OnClickListener 
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
+
         final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
         ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
 
@@ -149,6 +150,7 @@ public class ZekrList extends AppCompatActivity implements View.OnClickListener 
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        startActivity(new Intent(getBaseContext(), Landing.class));
                         finish();
                     }
                 });
@@ -157,7 +159,7 @@ public class ZekrList extends AppCompatActivity implements View.OnClickListener 
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        startActivity(new Intent(getBaseContext(), Settings.class));
                     }
                 });
 
@@ -166,7 +168,7 @@ public class ZekrList extends AppCompatActivity implements View.OnClickListener 
                     @Override
                     public void onClick(View view) {
                         FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(ZekrList.this, Login.class));
+                        startActivity(new Intent(getBaseContext(), Login.class));
                         finish();
                     }
                 });

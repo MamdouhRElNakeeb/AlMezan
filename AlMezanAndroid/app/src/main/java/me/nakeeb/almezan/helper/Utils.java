@@ -1,5 +1,8 @@
 package me.nakeeb.almezan.helper;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.Log;
 
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
@@ -21,6 +24,13 @@ import me.nakeeb.almezan.model.DateItem;
  */
 
 public class Utils {
+
+    public static void changeLocale(Context context, String locale) {
+        Resources res = context.getResources();
+        Configuration conf = res.getConfiguration();
+        conf.locale = new Locale(locale);
+        res.updateConfiguration(conf, res.getDisplayMetrics());
+    }
 
     public static long currentMillis(){
 
@@ -73,20 +83,44 @@ public class Utils {
         Log.d("daysNo", String.valueOf(daysNo));
 
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE \n dd, MMMM y", locale);
-        Calendar calendar = Calendar.getInstance();
-        for (int i = 0; i <= daysNo; i++){
+        Calendar calendar = new GregorianCalendar();
 
-            calendar.setTimeInMillis(oldMillis + 86400000 * i);
+        calendar.setTimeInMillis(oldMillis);
+
+//        for (int i = 0; i <= daysNo; i++){
+//
+//            calendar.setTimeInMillis(oldMillis + 86400000 * i);
+//
+//            DateItem dateItem = new DateItem();
+//            dateItem.date = formatter.format(calendar.getTime());
+//            dateItem.timeInMillis = oldMillis + 86400000 * i;
+//
+//            temp.add(dateItem);
+//
+//            Log.d("daysFormat", temp.get(i).date);
+//            Log.d("daysFormatsss", String.valueOf(oldMillis + 86400000 * i));
+//        }
+
+        temp.add(new DateItem(calendar.getTime().getTime(), formatter.format(calendar.getTime())));
+
+        calendar.add(Calendar.DATE, 1);
+
+        while (calendar.getTime().before(new Date(currentMillis)))
+        {
+            Date result = calendar.getTime();
 
             DateItem dateItem = new DateItem();
-            dateItem.date = formatter.format(calendar.getTime());
-            dateItem.timeInMillis = oldMillis + 86400000 * i;
+            dateItem.date = formatter.format(result);
+            dateItem.timeInMillis = result.getTime();
 
             temp.add(dateItem);
 
-            Log.d("daysFormat", temp.get(i).date);
-            Log.d("daysFormatsss", String.valueOf(oldMillis + 86400000 * i));
+            Log.d("daysFormat", result.toString());
+            Log.d("daysFormatsss", String.valueOf(result.getTime()));
+
+            calendar.add(Calendar.DATE, 1);
         }
+
 
         return temp;
     }
@@ -147,7 +181,7 @@ public class Utils {
 
         ArrayList<Integer> temp = new ArrayList<>();
 
-        int days = (int) TimeUnit.MILLISECONDS.toDays(Math.abs(currentMillis - oldMillis));
+        int days = (int) TimeUnit.MILLISECONDS.toDays(Math.abs(currentMillis - oldMillis)) + 1;
 //
 //        int monthsNo = daysNo / 30;
 //
@@ -286,10 +320,17 @@ public class Utils {
         int age = 0;
         Calendar calendar = Calendar.getInstance();
 
+        Log.d("dob", dob);
         int dobDay = Integer.parseInt(dob.substring(0, dob.indexOf('/')));
+
         dob  = dob.replace(dob.substring(0, dob.indexOf('/') + 1), "");
+
+        Log.d("dob", dob);
         int dobMonth = Integer.parseInt(dob.substring(0, dob.indexOf('/')));
+
         dob  = dob.replace(dob.substring(0, dob.indexOf('/') + 1), "");
+
+        Log.d("dob", dob);
         int dobYear = Integer.parseInt(dob.substring(0, 4));
 
         int curDay = calendar.get(Calendar.DAY_OF_MONTH);

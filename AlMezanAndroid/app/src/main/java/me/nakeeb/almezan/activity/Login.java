@@ -1,5 +1,6 @@
 package me.nakeeb.almezan.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -41,6 +43,7 @@ public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +51,9 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.login_activity);
 
         mAuth = FirebaseAuth.getInstance();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
 
         emailET = findViewById(R.id.emailET);
         passET = findViewById(R.id.passET);
@@ -94,6 +100,9 @@ public class Login extends AppCompatActivity {
             Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        progressDialog.setMessage("Signing in ... Please wait");
+        progressDialog.show();
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -144,8 +153,15 @@ public class Login extends AppCompatActivity {
                         }
 
                         // ...
+                        progressDialog.hide();
                     }
-                });
+                })
+        .addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.hide();
+            }
+        });
     }
 
     private void updateUI (FirebaseUser currentUser){
@@ -181,9 +197,9 @@ public class Login extends AppCompatActivity {
                 user.email = documentSnapshot.getString("email");
                 user.dob = documentSnapshot.getString("dob");
                 user.startTime = documentSnapshot.getLong("startTime");
-
-                Log.d("name", user.name);
-                Log.d("startTime", String.valueOf(user.startTime));
+                user.prayerTime = documentSnapshot.getLong("prayerTime");
+                user.handoutTime = documentSnapshot.getLong("handoutTime");
+                user.zekrTime = documentSnapshot.getLong("zekrTime");
 
                 SharedPreferences prefs = getSharedPreferences("User", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -192,6 +208,9 @@ public class Login extends AppCompatActivity {
                 editor.putString("email", user.email);
                 editor.putString("dob", user.dob);
                 editor.putLong("startTime", user.startTime);
+                editor.putLong("prayerTime", user.prayerTime);
+                editor.putLong("handoutTime", user.handoutTime);
+                editor.putLong("zekrTime", user.zekrTime);
 
                 editor.apply();
 

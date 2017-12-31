@@ -12,4 +12,87 @@
     <string name="doaa8">لا إله إلا أنت سبحانك \n إنى كنت من الظالمين</string>
 
 
+    <string name="reset_message">Do you want to reset the counter of ?</string>
+
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+
+    <string name="prayer">Prayer</string>
+    <string name="handout">Handout</string>
+    <string name="zekr">Zekr</string>
+
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="day">Day</string>
+
+    <string name="app_tut">Application Tutorial</string>
+
+    <string-array name="days">
+        <item>Day</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
+    <string-array name="months">
+        <item>Month</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+
+    <string-array name="reset">
+        <item>All</item>
+        <item>Prayer</item>
+        <item>Handout</item>
+        <item>Zekr</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>Change</item>
+        <item>English</item>
+        <item>العربية</item>
+        <item>Turkish</item>
+        <item>Indonesian</item>
+    </string-array>
+
 </resources>

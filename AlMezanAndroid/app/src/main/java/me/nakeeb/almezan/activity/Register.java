@@ -1,6 +1,7 @@
 package me.nakeeb.almezan.activity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,11 +9,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -28,13 +32,16 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import me.nakeeb.almezan.R;
+import me.nakeeb.almezan.helper.Utils;
 
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
@@ -45,10 +52,12 @@ public class Register extends AppCompatActivity {
     EditText nameET, emailET, passET, ageET, imgET;
     Button regBtn, regToLineBtn;
 
+    AppCompatSpinner daySpinner, monthSpinner, yearSpinner;
+    String dob;
+
     private FirebaseAuth mAuth;
 
-    SimpleDateFormat formatDate;
-    Calendar dateCalender = Calendar.getInstance();
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,12 +66,17 @@ public class Register extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
 
 
         nameET = findViewById(R.id.nameET);
         emailET = findViewById(R.id.emailET);
         passET = findViewById(R.id.passET);
-        ageET = findViewById(R.id.ageET);
+//        ageET = findViewById(R.id.ageET);
+        daySpinner = findViewById(R.id.daySpinner);
+        monthSpinner = findViewById(R.id.monthSpinner);
+        yearSpinner = findViewById(R.id.yearSpinner);
 
         regBtn = findViewById(R.id.regBtn);
         regToLineBtn = findViewById(R.id.regToLoginBtn);
@@ -83,7 +97,9 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        configAge();
+//        configAge();
+
+        initDOB();
 
         loadADs();
     }
@@ -96,37 +112,64 @@ public class Register extends AppCompatActivity {
         updateUI(currentUser);
     }
 
-    private void configAge(){
+//    private void configAge(){
+//
+//        ageET.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                new DatePickerDialog(Register.this, d, dateCalender.get(Calendar.YEAR), dateCalender.get(Calendar.MONTH), dateCalender.get(Calendar.DAY_OF_MONTH)).show();
+//
+//            }
+//        });
+//    }
 
-        ageET.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+//        @Override
+//        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//            dateCalender.set(Calendar.YEAR, year);
+//            dateCalender.set(Calendar.MONTH, monthOfYear);
+//            dateCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+//
+//            formatDate = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+//
+////            ageET.setText(formatDate.format(dateCalender.getTime()));
+//        }
+//    };
 
-                new DatePickerDialog(Register.this, d, dateCalender.get(Calendar.YEAR), dateCalender.get(Calendar.MONTH), dateCalender.get(Calendar.DAY_OF_MONTH)).show();
+    private void initDOB(){
 
-            }
-        });
-    }
+        ArrayAdapter<CharSequence> daysArrAdapter = ArrayAdapter.createFromResource(this, R.array.days, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> monthsArrAdapter = ArrayAdapter.createFromResource(this, R.array.months, R.layout.spinner_item);
 
-    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            dateCalender.set(Calendar.YEAR, year);
-            dateCalender.set(Calendar.MONTH, monthOfYear);
-            dateCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        ArrayList<String> yearsArr = new ArrayList<>();
 
-            formatDate = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        int currentYear = Utils.getDate(System.currentTimeMillis()).get(2);
+        yearsArr.add(getResources().getString(R.string.year));
 
-            ageET.setText(formatDate.format(dateCalender.getTime()));
+        for (int i = currentYear - 7; i >= 1950; i--) {
+            yearsArr.add(String.valueOf(i));
         }
-    };
+
+        ArrayAdapter<String> yearsArrAdapter = new ArrayAdapter<String> (this, R.layout.spinner_item, yearsArr); //selected item will look like a spinner set from XML
+
+//        yearsArrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        daysArrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        monthsArrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        daySpinner.setAdapter(daysArrAdapter);
+        monthSpinner.setAdapter(monthsArrAdapter);
+        yearSpinner.setAdapter(yearsArrAdapter);
+
+    }
 
     private void register(){
 
         String name = nameET.getText().toString().trim();
         String email = emailET.getText().toString().trim();
         String password = passET.getText().toString().trim();
-        String dob = ageET.getText().toString().trim();
+        dob = daySpinner.getSelectedItem().toString() + "/" + monthSpinner.getSelectedItem().toString() + "/" + yearSpinner.getSelectedItem().toString();
+        Log.d("bddd", dob);
 
         if (name.isEmpty()) {
             Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show();
@@ -143,11 +186,28 @@ public class Register extends AppCompatActivity {
             return;
         }
 
-        if (dob.isEmpty()) {
-            Toast.makeText(this, "Please enter your age", Toast.LENGTH_SHORT).show();
+//        if (dob.isEmpty()) {
+//            Toast.makeText(this, "Please enter your age", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
+        if (daySpinner.getSelectedItem().toString().equals(getResources().getString(R.string.day))){
+            Toast.makeText(this, "Please select day of birth date", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        if (monthSpinner.getSelectedItem().toString().equals(getResources().getString(R.string.month))){
+            Toast.makeText(this, "Please select month of birth date", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (yearSpinner.getSelectedItem().toString().equals(getResources().getString(R.string.year))){
+            Toast.makeText(this, "Please select year of birth date", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        progressDialog.setMessage("Registering ... Please wait");
+        progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -197,10 +257,20 @@ public class Register extends AppCompatActivity {
 
                             Log.w("Firebase res", "signInWithEmail:failure", task.getException());
                         }
+                        progressDialog.hide();
 
                         // ...
                     }
-                });
+                })
+        .addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                progressDialog.hide();
+
+                Log.w("Firebase res", "signInWithEmail:failure", e);
+            }
+        });
 
     }
 
@@ -219,7 +289,7 @@ public class Register extends AppCompatActivity {
 
     private void saveUser (){
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser fbUser = mAuth.getCurrentUser();
 
         final long startTime = System.currentTimeMillis();
@@ -227,8 +297,11 @@ public class Register extends AppCompatActivity {
         Map<String, Object> user = new HashMap<>();
         user.put("name", nameET.getText().toString().trim());
         user.put("email", emailET.getText().toString().trim());
-        user.put("dob", ageET.getText().toString().trim());
+        user.put("dob", dob);
         user.put("startTime", startTime);
+        user.put("prayerTime", startTime);
+        user.put("handoutTime", startTime);
+        user.put("zekrTime", startTime);
 
         // Add a new document with a generated ID
         db.collection("users")
@@ -244,7 +317,11 @@ public class Register extends AppCompatActivity {
 
                         editor.putString("name", nameET.getText().toString().trim());
                         editor.putString("email", emailET.getText().toString().trim());
+                        editor.putString("dob", dob);
                         editor.putLong("startTIme", startTime);
+                        editor.putLong("prayerTime", startTime);
+                        editor.putLong("handoutTime", startTime);
+                        editor.putLong("zekrTime", startTime);
 
                         editor.apply();
                     }

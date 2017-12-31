@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="et_height">30dp</dimen>
+    <dimen name="et_font">17sp</dimen>
+    <dimen name="btn_height">40dp</dimen>
+    <dimen name="btn_font">20sp</dimen>
+
+    <dimen name="tv_font">13sp</dimen>
+
+    <dimen name="rg_height">30dp</dimen>
+
+    <dimen name="save_btn_height">30dp</dimen>
+    <dimen name="save_btn_font">15sp</dimen>
+
+
+    <dimen name="islamic_icn">50dp</dimen>
+    <dimen name="header_tv_size">25sp</dimen>
+
+    <dimen name="dayscounter_tv_size">13sp</dimen>
+    <dimen name="dayscounter_height">45dp</dimen>
+
+    <dimen name="spinnerh">14dp</dimen>
+    <dimen name="spinnerw">14dp</dimen>
+    <dimen name="spinnerm">8dp</dimen>
+
+
+    <dimen name="side_margin">10dp</dimen>
+
+    <dimen name="margin5">2.5dp</dimen>
+    <dimen name="margin10">5dp</dimen>
+    <dimen name="margin20">10dp</dimen>
+    <dimen name="margin30">15dp</dimen>
+    <dimen name="margin40">20dp</dimen>
+    <dimen name="margin50">25dp</dimen>
+    <dimen name="margin60">30dp</dimen>
+    <dimen name="margin70">35dp</dimen>
+    <dimen name="margin80">40dp</dimen>
+
+
+    <dimen name="month_tv_size">15sp</dimen>
+    <dimen name="stats_tv_size">13sp</dimen>
+    <dimen name="percentage_headertv_size">20sp</dimen>
+    <dimen name="counter_tv_size">20sp</dimen>
+    <dimen name="zekr_header_tv_size">16sp</dimen>
+
+
+
+
+</resources>

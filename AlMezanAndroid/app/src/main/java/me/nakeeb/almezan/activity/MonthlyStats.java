@@ -360,7 +360,7 @@ public class MonthlyStats extends AppCompatActivity {
 
                         Handout handout = new Handout();
                         handout.amount = Float.parseFloat(document.get("amount").toString());
-                        handout.month = Integer.parseInt(document.get("month").toString());
+                        handout.month = Integer.parseInt(document.get("month").toString()) + 1;
                         handout.timeInMillis = Long.parseLong(document.getId());
 
                         if (Utils.getMillis(System.currentTimeMillis(), "MM/y") == handout.timeInMillis) {
@@ -534,6 +534,7 @@ public class MonthlyStats extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
+
         final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
         ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
 
@@ -554,6 +555,7 @@ public class MonthlyStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        startActivity(new Intent(getBaseContext(), Landing.class));
                         finish();
                     }
                 });
@@ -562,7 +564,7 @@ public class MonthlyStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        startActivity(new Intent(getBaseContext(), Settings.class));
                     }
                 });
 
@@ -570,8 +572,8 @@ public class MonthlyStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAuth.signOut();
-                        startActivity(new Intent(MonthlyStats.this, Login.class));
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getBaseContext(), Login.class));
                         finish();
                     }
                 });

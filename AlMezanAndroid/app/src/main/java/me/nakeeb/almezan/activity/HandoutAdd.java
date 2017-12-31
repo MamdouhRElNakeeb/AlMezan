@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import me.nakeeb.almezan.R;
 import me.nakeeb.almezan.helper.Utils;
@@ -307,6 +309,7 @@ public class HandoutAdd extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        startActivity(new Intent(getBaseContext(), Landing.class));
                         finish();
                     }
                 });
@@ -315,7 +318,7 @@ public class HandoutAdd extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        startActivity(new Intent(getBaseContext(), Settings.class));
                     }
                 });
 
@@ -323,8 +326,8 @@ public class HandoutAdd extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAuth.signOut();
-                        startActivity(new Intent(HandoutAdd.this, Login.class));
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getBaseContext(), Login.class));
                         finish();
                     }
                 });

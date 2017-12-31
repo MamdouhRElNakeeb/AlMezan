@@ -24,12 +24,13 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:src="@drawable/pattern"
+            android:scaleType="centerCrop"
             android:layout_alignParentBottom="true"/>
 
         <ImageView
             android:id="@+id/almezan_logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
             android:src="@drawable/almezan_logo"
             android:layout_alignParentTop="true"/>
@@ -58,414 +59,427 @@
             ads:adUnitId="ca-app-pub-6430998960222915/8188559017">
         </com.google.android.gms.ads.AdView>
 
-
         <LinearLayout
-            android:id="@+id/prayerLL"
-            android:layout_above="@id/adView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_centerInParent="true">
+            android:layout_height="match_parent"
+            android:layout_below="@id/almezan_logo"
+            android:layout_above="@id/adView"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/dateRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ka3ba_bg">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <ImageButton
+                    android:id="@+id/datePrevIB"
+                    android:layout_width="25dp"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="16dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/arrow"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"/>
+
+                <ImageButton
+                    android:id="@+id/dateNextIB"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:scaleX="-1"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/arrow"
+                    android:layout_alignParentLeft="true"
+                    android:background="@android:color/transparent"/>
+            </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/prayerLL"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@drawable/faded_black_gradient">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="الصلاة"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="فى وقتها"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="متأخرة"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="متروكة"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="عذر شرعى"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"/>
-
-            </LinearLayout>
-
-            <RadioGroup
-                android:id="@+id/fajrRG"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="الفجر"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"/>
-
-                <RadioButton
-                    android:id="@+id/f0"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/f1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/f2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/f3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-            </RadioGroup>
-
-            <RadioGroup
-                android:id="@+id/duhrRG"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="الظهر"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"/>
-
-                <RadioButton
-                    android:id="@+id/d0"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/d1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/d2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/d3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-            </RadioGroup>
-
-            <RadioGroup
-                android:id="@+id/asrRG"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="العصر"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"/>
-
-                <RadioButton
-                    android:id="@+id/a0"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/a1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/a2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/a3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-            </RadioGroup>
-
-            <RadioGroup
-                android:id="@+id/mghrebRG"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="المغرب"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"/>
-
-                <RadioButton
-                    android:id="@+id/m0"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/m1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/m2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/m3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-            </RadioGroup>
-
-            <RadioGroup
-                android:id="@+id/ishaRG"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:text="العشاء"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"/>
-
-                <RadioButton
-                    android:id="@+id/i0"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/i1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/i2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-
-
-                <RadioButton
-                    android:id="@+id/i3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/radio_btn" />
-            </RadioGroup>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp">
 
-
-                <Button
-                    android:id="@+id/saveBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="حفظ"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/chkbx_bg"/>
+                    android:background="@drawable/faded_black_gradient">
 
-                <Button
-                    android:id="@+id/editBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="الصلاة"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/tv_font"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="فى وقتها"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/tv_font"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="متأخرة"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/tv_font"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="متروكة"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/tv_font"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="عذر شرعى"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/tv_font"/>
+
+                </LinearLayout>
+
+                <RadioGroup
+                    android:id="@+id/fajrRG"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="تعديل"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/chkbx_bg"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="الفجر"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+
+                    <RadioButton
+                        android:id="@+id/f0"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/f1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/f2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/f3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/duhrRG"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="الظهر"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+
+                    <RadioButton
+                        android:id="@+id/d0"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/d1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/d2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/d3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/asrRG"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="العصر"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+
+                    <RadioButton
+                        android:id="@+id/a0"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/a1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/a2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/a3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/mghrebRG"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="المغرب"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+
+                    <RadioButton
+                        android:id="@+id/m0"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/m1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/m2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/m3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/ishaRG"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="العشاء"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
+
+                    <RadioButton
+                        android:id="@+id/i0"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/i1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/i2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+
+
+                    <RadioButton
+                        android:id="@+id/i3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:button="@android:color/transparent"
+                        android:background="@drawable/radio_btn" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/save_btn_height"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+
+                    <Button
+                        android:id="@+id/saveBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="حفظ"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/save_btn_font"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/chkbx_bg"/>
+
+                    <Button
+                        android:id="@+id/editBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="تعديل"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/save_btn_font"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/chkbx_bg"/>
+
+                </LinearLayout>
 
             </LinearLayout>
+
 
         </LinearLayout>
 
 
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@id/almezan_logo"
-            android:layout_above="@id/prayerLL">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/dateRV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ka3ba_bg">
-
-            </android.support.v7.widget.RecyclerView>
-
-            <ImageButton
-                android:id="@+id/datePrevIB"
-                android:layout_width="25dp"
-                android:scaleType="fitCenter"
-                android:layout_margin="16dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/arrow"
-                android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"/>
-
-            <ImageButton
-                android:id="@+id/dateNextIB"
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:scaleX="-1"
-                android:layout_margin="16dp"
-                android:src="@drawable/arrow"
-                android:layout_alignParentLeft="true"
-                android:background="@android:color/transparent"/>
-        </RelativeLayout>
 
 
     </RelativeLayout>

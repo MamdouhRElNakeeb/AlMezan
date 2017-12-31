@@ -31,28 +31,22 @@
         android:layout_alignParentBottom="true"/>
 
 
-    <ImageView
-        android:id="@+id/almezan_logo"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/almezan_logo"
-        android:layout_alignParentTop="true"/>
+
 
 
     <LinearLayout
+        android:id="@+id/loginLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:layout_below="@id/almezan_logo"
         android:layout_centerInParent="true">
 
         <EditText
             android:id="@+id/emailET"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/et_height"
             android:background="@drawable/edttxt_bg"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -64,11 +58,12 @@
             android:id="@+id/passET"
             android:inputType="textPassword"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/et_height"
             android:layout_marginTop="10dp"
             android:background="@drawable/edttxt_bg"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:gravity="right|center"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:hint="كلمة السر"/>
@@ -78,7 +73,7 @@
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:textStyle="bold"
             android:text="دخول"
             android:textSize="17sp"
@@ -99,6 +94,15 @@
 
     </LinearLayout>
 
+
+    <ImageView
+        android:id="@+id/almezan_logo"
+        android:layout_above="@id/loginLL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:src="@drawable/almezan_logo"
+        android:layout_alignParentTop="true"/>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"

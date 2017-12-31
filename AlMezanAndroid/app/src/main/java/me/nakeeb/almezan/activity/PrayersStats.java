@@ -303,10 +303,30 @@ public class PrayersStats extends AppCompatActivity {
 
 
 
-        Log.d("fajrFB2", String.valueOf(prayersDay.fajr0));
-        Log.d("fajrFB2", String.valueOf(prayersDay.fajr1));
+        Log.d("fajrFB0", String.valueOf(prayersDay.fajr0));
+        Log.d("fajrFB1", String.valueOf(prayersDay.fajr1));
         Log.d("fajrFB2", String.valueOf(prayersDay.fajr2));
         Log.d("fajrFB3", String.valueOf(prayersDay.fajr3));
+
+        Log.d("duhrFB0", String.valueOf(prayersDay.duhr0));
+        Log.d("duhrFB1", String.valueOf(prayersDay.duhr1));
+        Log.d("duhrFB2", String.valueOf(prayersDay.duhr2));
+        Log.d("duhrFB3", String.valueOf(prayersDay.duhr3));
+
+        Log.d("asrFB0", String.valueOf(prayersDay.asr0));
+        Log.d("asrFB1", String.valueOf(prayersDay.asr1));
+        Log.d("asrFB2", String.valueOf(prayersDay.asr2));
+        Log.d("asrFB3", String.valueOf(prayersDay.asr3));
+
+        Log.d("mghrebFB0", String.valueOf(prayersDay.mghreb0));
+        Log.d("mghrebFB1", String.valueOf(prayersDay.mghreb1));
+        Log.d("mghrebFB2", String.valueOf(prayersDay.mghreb2));
+        Log.d("mghrebFB3", String.valueOf(prayersDay.mghreb3));
+
+        Log.d("ishaFB0", String.valueOf(prayersDay.isha0));
+        Log.d("ishaFB1", String.valueOf(prayersDay.isha1));
+        Log.d("ishaFB2", String.valueOf(prayersDay.isha2));
+        Log.d("ishaFB3", String.valueOf(prayersDay.isha3));
         
     }
 
@@ -528,6 +548,7 @@ public class PrayersStats extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
+
         final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
         ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
 
@@ -548,6 +569,7 @@ public class PrayersStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        startActivity(new Intent(getBaseContext(), Landing.class));
                         finish();
                     }
                 });
@@ -556,8 +578,7 @@ public class PrayersStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-
+                        startActivity(new Intent(getBaseContext(), Settings.class));
                     }
                 });
 
@@ -565,8 +586,8 @@ public class PrayersStats extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAuth.signOut();
-                        startActivity(new Intent(PrayersStats.this, Login.class));
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getBaseContext(), Login.class));
                         finish();
                     }
                 });

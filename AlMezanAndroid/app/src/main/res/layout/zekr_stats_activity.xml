@@ -34,8 +34,8 @@
 
         <ImageView
             android:id="@+id/almezan_logo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:src="@drawable/almezan_logo"
@@ -59,28 +59,36 @@
             android:id="@+id/zekrTitleTV"
             android:layout_below="@id/almezan_logo"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/islamic_icn"
             android:text="إحصائيات الذِكر"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="30sp"
+            android:textSize="@dimen/header_tv_size"
             android:padding="5dp"
             android:background="@android:color/holo_red_dark"
             android:layout_centerInParent="true"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="@dimen/margin10"/>
 
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/islamic_icn"
+            android:layout_height="@dimen/islamic_icn"
+            android:scaleY="1.1"
+            android:scaleX="1.1"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_marginRight="@dimen/margin10"
             android:layout_below="@id/almezan_logo"
             android:src="@drawable/islamic_icn"
             android:adjustViewBounds="true"
             android:layout_alignParentRight="true"/>
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/islamic_icn"
+            android:layout_height="@dimen/islamic_icn"
+            android:scaleY="1.1"
+            android:scaleX="1.1"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_marginLeft="@dimen/margin10"
             android:layout_below="@id/almezan_logo"
             android:src="@drawable/islamic_icn"
             android:adjustViewBounds="true"
@@ -131,7 +139,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="@string/doaa0"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/month_tv_size"
                         android:textColor="@color/white"/>
 
                     <TextView
@@ -142,7 +150,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>
@@ -158,7 +166,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="@string/doaa1"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/month_tv_size"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/white"/>
 
@@ -170,7 +178,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>
@@ -187,7 +195,7 @@
                         android:layout_height="wrap_content"
 
                         android:text="@string/doaa2"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/month_tv_size"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/white"/>
 
@@ -199,7 +207,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>
@@ -215,7 +223,7 @@
                         android:layout_height="wrap_content"
 
                         android:text="@string/doaa3"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/month_tv_size"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/white"/>
 
@@ -227,7 +235,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>
@@ -243,7 +251,7 @@
                         android:layout_height="wrap_content"
 
                         android:text="@string/doaa4"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/month_tv_size"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/white"/>
 
@@ -255,7 +263,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>
@@ -271,7 +279,7 @@
                         android:layout_height="wrap_content"
 
                         android:text="@string/doaa5"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/month_tv_size"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/white"/>
 
@@ -283,7 +291,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>
@@ -299,7 +307,7 @@
                         android:layout_height="wrap_content"
 
                         android:text="@string/doaa6"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/month_tv_size"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/white"/>
 
@@ -311,7 +319,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>
@@ -328,7 +336,7 @@
                         android:layout_height="wrap_content"
 
                         android:text="@string/doaa7"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:layout_marginTop="5dp"
                         android:textColor="@color/white"/>
 
@@ -340,7 +348,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>
@@ -357,7 +365,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="@string/doaa8"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:textColor="@color/white"/>
 
                     <TextView
@@ -368,7 +376,7 @@
                         android:layout_alignParentLeft="true"
                         android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
 
                 </RelativeLayout>

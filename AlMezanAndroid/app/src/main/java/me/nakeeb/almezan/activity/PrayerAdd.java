@@ -282,7 +282,6 @@ public class PrayerAdd extends AppCompatActivity {
         updateUI();
         loadPrayers();
 
-
     }
 
     private void updateRG(PrayersDay prayersDay){
@@ -545,8 +544,8 @@ public class PrayerAdd extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
-        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
 
+        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
         ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
 
         sideMenuIB.setOnClickListener(new View.OnClickListener() {
@@ -566,6 +565,7 @@ public class PrayerAdd extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        startActivity(new Intent(getBaseContext(), Landing.class));
                         finish();
                     }
                 });
@@ -574,7 +574,7 @@ public class PrayerAdd extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        startActivity(new Intent(getBaseContext(), Settings.class));
                     }
                 });
 
@@ -582,8 +582,8 @@ public class PrayerAdd extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAuth.signOut();
-                        startActivity(new Intent(PrayerAdd.this, Login.class));
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getBaseContext(), Login.class));
                         finish();
                     }
                 });

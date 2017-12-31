@@ -14,6 +14,9 @@ public class User {
     public String email = "";
     public String dob = "";
     public long startTime = 0;
+    public long prayerTime = 0;
+    public long handoutTime = 0;
+    public long zekrTime = 0;
 
     public User(String name, String email, String dob, long startTime) {
 

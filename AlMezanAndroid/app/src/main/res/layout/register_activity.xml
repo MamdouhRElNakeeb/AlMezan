@@ -20,6 +20,7 @@
         android:adjustViewBounds="true"
         android:src="@drawable/pattern"
         android:scaleY="-1"
+        android:scaleType="centerCrop"
         android:layout_alignParentTop="true"/>
 
 
@@ -28,43 +29,36 @@
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:src="@drawable/pattern"
+        android:scaleType="centerCrop"
         android:layout_alignParentBottom="true"/>
 
-
-    <ImageView
-        android:id="@+id/almezan_logo"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="-20dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/almezan_logo"
-        android:layout_alignParentTop="true"/>
-
-
     <LinearLayout
+        android:id="@+id/regLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_below="@id/almezan_logo"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="0dp"
         android:layout_centerInParent="true">
 
         <EditText
             android:id="@+id/nameET"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/et_height"
             android:background="@drawable/edttxt_bg"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:inputType="textPersonName"
+            android:textSize="@dimen/et_font"
             android:hint="الإسم"/>
 
         <EditText
             android:id="@+id/emailET"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/et_height"
             android:layout_marginTop="10dp"
             android:background="@drawable/edttxt_bg"
             android:layout_marginRight="20dp"
@@ -72,12 +66,13 @@
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:inputType="textEmailAddress"
+            android:textSize="@dimen/et_font"
             android:hint="البريد الإلكترونى"/>
 
         <EditText
             android:id="@+id/passET"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/et_height"
             android:layout_marginTop="10dp"
             android:background="@drawable/edttxt_bg"
             android:layout_marginRight="20dp"
@@ -86,19 +81,62 @@
             android:paddingLeft="20dp"
             android:inputType="textPassword"
             android:gravity="right|center"
+            android:textSize="@dimen/et_font"
             android:hint="كلمة السر"/>
 
-        <EditText
+        <TextView
             android:id="@+id/ageET"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/edttxt_bg"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
-            android:hint="تاريخ الميلاد"/>
+            android:textColor="@color/white"
+            android:textSize="@dimen/et_font"
+            android:text="تاريخ الميلاد"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/et_height"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/daySpinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/margin10"
+                android:background="@drawable/spinner_bg">
+
+            </android.support.v7.widget.AppCompatSpinner>
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/monthSpinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:background="@drawable/spinner_bg">
+
+            </android.support.v7.widget.AppCompatSpinner>
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/yearSpinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/margin10"
+                android:background="@drawable/spinner_bg">
+
+            </android.support.v7.widget.AppCompatSpinner>
+
+        </LinearLayout>
 
 
         <EditText
@@ -117,7 +155,7 @@
         <Button
             android:id="@+id/regBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:text="تسجيل"
             android:textSize="17sp"
             android:textStyle="bold"
@@ -137,6 +175,16 @@
             android:background="@android:color/transparent"/>
 
     </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/almezan_logo"
+        android:layout_above="@id/regLL"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/almezan_logo"
+        android:layout_alignParentTop="true"/>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"

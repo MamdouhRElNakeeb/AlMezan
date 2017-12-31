@@ -34,8 +34,8 @@
 
         <ImageView
             android:id="@+id/almezan_logo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:src="@drawable/almezan_logo"
@@ -59,11 +59,11 @@
             android:id="@+id/zekrTitleTV"
             android:layout_below="@id/almezan_logo"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/islamic_icn"
             android:text="الذِكر"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="40sp"
+            android:textSize="@dimen/header_tv_size"
             android:padding="5dp"
             android:background="@color/green"
             android:layout_centerInParent="true"
@@ -71,16 +71,24 @@
 
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/islamic_icn"
+            android:layout_height="@dimen/islamic_icn"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_below="@id/almezan_logo"
             android:src="@drawable/islamic_icn"
             android:adjustViewBounds="true"
             android:layout_alignParentRight="true"/>
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/islamic_icn"
+            android:layout_height="@dimen/islamic_icn"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:layout_below="@id/almezan_logo"
             android:src="@drawable/islamic_icn"
             android:adjustViewBounds="true"
@@ -100,8 +108,8 @@
         <ScrollView
             android:layout_below="@id/zekrTitleTV"
             android:layout_above="@id/adView"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="@dimen/margin20"
+            android:layout_marginBottom="@dimen/margin10"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -186,7 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/zekr_btn_bg"
-                    android:text="سبحان الله و بحمده \n سبحان الله العظيم"
+                    android:text="@string/doaa7"
                     android:textSize="15sp"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/white"/>
@@ -196,7 +204,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/zekr_btn_bg"
-                    android:text="لا إله إلا أنت سبحانك \n إنى كنت من الظالمين "
+                    android:text="@string/doaa8"
                     android:textSize="15sp"
                     android:layout_marginBottom="30dp"
                     android:layout_marginTop="5dp"

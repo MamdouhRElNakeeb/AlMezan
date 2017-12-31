@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <gradient
-        android:startColor="#454545"
-        android:endColor="#686868"
-        android:angle="90"/>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <corners
-        android:radius="5dp"
-        />
-</shape>
+    <item android:state_pressed="true">
+
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <gradient
+                android:startColor="#b4454545"
+                android:endColor="#b4686868"
+                android:angle="90"/>
+
+            <corners
+                android:radius="5dp"
+                />
+        </shape>
+
+    </item> <!-- pressed -->
+
+    <item android:state_focused="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <gradient
+                android:startColor="#454545"
+                android:endColor="#686868"
+                android:angle="90"/>
+
+            <corners
+                android:radius="5dp"
+                />
+        </shape>
+    </item> <!-- focused -->
+
+    <item>
+
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+            <gradient
+                android:startColor="#454545"
+                android:endColor="#686868"
+                android:angle="90"/>
+
+            <corners
+                android:radius="5dp"
+                />
+        </shape>
+
+    </item> <!-- default -->
+</selector>

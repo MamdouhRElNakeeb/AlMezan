@@ -30,6 +30,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public class ZekrDetails extends AppCompatActivity {
     ImageButton zekrAddBtn;
     Button saveCountBtn;
 
-    int count = 0;
+    int count = 0, totalCount = 0;
 
     FirebaseAuth mAuth;
 
@@ -105,8 +106,10 @@ public class ZekrDetails extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        totalCount += count;
+
         Map<String, Object> zekr = new HashMap<>();
-        zekr.put("count", count);
+        zekr.put("count", totalCount);
 
         // Add a new document with a generated ID
         db.collection("users")
@@ -153,7 +156,8 @@ public class ZekrDetails extends AppCompatActivity {
                 zekr.doaa = doaa;
                 zekr.count = Integer.parseInt(documentSnapshot.get("count").toString());
 
-                count = zekr.count;
+                totalCount = zekr.count;
+                count = 0;
                 zekrCountTV.setText(String.valueOf(count));
 
                 calcZekrStats(zekr);
@@ -176,17 +180,22 @@ public class ZekrDetails extends AppCompatActivity {
             return;
         }
 
-        int age = Utils.calcAge(prefs.getString("dob", "0/0/0"));
+        float age = Utils.calcAge(prefs.getString("dob", "0/0/0"));
 
-        zekrYearlyTV.setText(String.valueOf(zekr.count / age));
-        zekrMonthlyTV.setText(String.valueOf(zekr.count / age / 12));
-        zekrDailyTV.setText(String.valueOf(zekr.count / age / 365));
+        BigDecimal daysStats = BigDecimal.valueOf(zekr.count / age / 365);
+        BigDecimal monthsStats = BigDecimal.valueOf(zekr.count / age / 12);
+        BigDecimal yearsStats = BigDecimal.valueOf(zekr.count / age);
+
+        zekrYearlyTV.setText(String.valueOf(yearsStats).substring(0, 6));
+        zekrMonthlyTV.setText(String.valueOf(monthsStats).substring(0, 6));
+        zekrDailyTV.setText(String.valueOf(daysStats).substring(0, 6));
 
     }
 
     private void initNav(){
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
+
 
         final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
         ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
@@ -208,6 +217,7 @@ public class ZekrDetails extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        startActivity(new Intent(getBaseContext(), Landing.class));
                         finish();
                     }
                 });
@@ -216,8 +226,7 @@ public class ZekrDetails extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-
+                        startActivity(new Intent(getBaseContext(), Settings.class));
                     }
                 });
 
@@ -225,8 +234,8 @@ public class ZekrDetails extends AppCompatActivity {
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAuth.signOut();
-                        startActivity(new Intent(ZekrDetails.this, Login.class));
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getBaseContext(), Login.class));
                         finish();
                     }
                 });
