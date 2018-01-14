@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AlMezan</string>
+    <!-- Landing Menu -->
+    <string name="reg_prayer">Enregistrer La Prière</string>
+    <string name="charity_counter">Comptoir De Charité</string>
+    <string name="zekr_counter">Comptoir Du Zekr</string>
+    <string name="month_compare">Comparaison De Mois</string>
+    <string name="stats">Statistiques</string>
+    <string name="zekr_stats">Statistiques Du Zekr</string>
+    <string name="rst_counter">Réinitialiser Le Comptoir</string>
+
+    <!--Prayer Status-->
+    <string name="on_time">à temps</string>
+    <string name="late">en retard</string>
+    <string name="left_out">laissé</string>
+    <string name="excuse">Excuse</string>
+    <string name="not_reg">Non enregistré</string>
+
+    <!-- Prayers -->
+    <string name="prayer">Prière</string>
+    <string name="fajr">Fajr</string>
+    <string name="duhr">Zuhr</string>
+    <string name="asr">Asr</string>
+    <string name="mghreb">Maghrib</string>
+    <string name="isha">Isha\'a</string>
+
+    <!-- Handouts -->
+    <string name="handout">Charité</string>
+    <string name="amount_charity">montant de la charité</string>
+    <string name="total_charity">Total de la charité</string>
+
+    <!-- Zekr -->
+    <string name="zekr">Zekr</string>
+    <string name="cumulative">Cumulatif</string>
+    <string name="zekr_count">Nombre de louanges</string>
+    <string name="days_count">Nombre de jour vivant</string>
+    <string name="months_count">Nombre de mois vivant</string>
+    <string name="years_count">Nombre d’annee vivant</string>
+
+    <string name="doaa0">Astaghfir Allah Al Azim</string>
+    <string name="doaa1">Allah \'akbar</string>
+    <string name="doaa2">La \'ilah \'ilaa allah</string>
+    <string name="doaa3">La hawl wala quat \'ilaa biallah</string>
+    <string name="doaa4">Alhamd Lilah</string>
+    <string name="doaa5">Subhan Allah</string>
+    <string name="doaa6">Subhan Allah wa bihamdih</string>
+    <string name="doaa7">Subhan Allah wa bihamdih \nSubhan Allah Al Azim</string>
+    <string name="doaa8">La \'ilah \'ilaa \'ant Subhanak \n\'iniy kunt min Al Zalimin</string>
+
+    <!-- Tutorial -->
+    <string name="app_tut">Définition de l\'application</string>
+    <string name="tut1">Appuyez sur le bouton d\'enregistrement de prière</string>
+    <string name="tut2">Marquez la boîte pour la prière que vous voulez enregistrer et ensuite appuyez \"enregistrer\"</string>
+    <string name="tut3">Exemple: \n Si vous priez la prière du Fajr en son temps, vous appuierez sur la boîte pour la prière du Fajr et ensuite vous appuierez sur \"enregistrer\" et répétez à chaque prière dans sa boîte. Pour faciliter, l\'utilisateur peut les enregistrer tous à la fois après la prière du soir si vous voulez pourvu que l'heure n'a pas dépassé minuit. S'il est dépasser  miniut, la prière ne sera pas enregistrée et sera ajoutée à la prière non enregistrée.</string>
+    <string name="tut4">Le pourcentage commence à partir du premier jour où l’application \"Al Mezan\" est démarrée</string>
+    <string name="tut5">Si vous voulez réinitialiser le compteur et redémarrer, vous pouvez appuyer sur le bouton de réinitialisation</string>
+
+    <string name="tut6">Appuyez sur le bouton de \"comptoir de charité\", puis écrivez le montant de la charité, puis appuyez \"enregistrer\"</string>
+    <string name="tut7">Le total est écrit cumulativement depuis le début du premier jour de fonctionnement de \"Al Mezan\"</string>
+
+    <string name="tut8">Cliquez sur le bouton compteur du zekr et sélectionnez le zekr que vous voulez, puis quand chaque zekr que vous dites touche l\'écran, le comptoir commence à travailler avec chaque touche.</string>
+    <string name="tut9">Il ya deux compteur de zekr,le premier est pour la séance presente . Le deuxieme fonctionne cumulativement , après chaque session, nous ajoutons le nouveau total à l\'ancien total et divisons-le par le nombre de jours de votre âge pour connaître le nombre de louanges que vous avez faites en un jour de votre âge.</string>
+
+
+    <!-- Time -->
+    <string name="days_counter">comptoir de jour</string>
+    <string name="year">Année</string>
+    <string name="month">Mois</string>
+    <string name="day">Jour</string>
+    <string name="daily">Par Jour</string>
+    <string name="monthly">Par Mois</string>
+    <string name="yearly">Par Année</string>
+
+    <!-- Months -->
+    <string name="jan">Jan.</string>
+    <string name="feb">Fév.</string>
+    <string name="mar">Mars</string>
+    <string name="april">Avril</string>
+    <string name="may">Mai</string>
+    <string name="jun">Juin</string>
+    <string name="jul">Juillet</string>
+    <string name="aug">Août</string>
+    <string name="sep">Sept.</string>
+    <string name="oct">Oct.</string>
+    <string name="nov">Nov.</string>
+    <string name="dec">Dec.</string>
+
+    <!-- General -->
+    <string name="save">Enregistrer</string>
+    <string name="modify">Ajustement</string>
+    <string name="percentage">Pourcentage</string>
+    <string name="no">Non</string>
+    <string name="yes">Oui</string>
+    <string name="all">Tout</string>
+    <string name="name">Nom</string>
+    <string name="email">E-mail</string>
+    <string name="password">mot de passe</string>
+    <string name="dob">Date de naissance</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="logout">Logout</string>
+    <string name="home">Menu</string>
+    <string name="settings">Paramètres</string>
+    <string name="follow_us">Suivre</string>
+    <string name="lang">Langue</string>
+
+    <!-- Messages-->
+    <string name="reset_message">Voulez-vous réinitialiser le compteur de?</string>
+    <string name="register_new_user">Enregistrer un nouvel utilisateur?</string>
+    <string name="current_user_login_here">Déjà un utilisateur? Connectez vous maintenant</string>
+    <string name="change_lang">Êtes-vous sûr de vouloir changer la langue de l\'application?</string>
+    <string name="slogan">قبل أن تحاسبوا</string>
+
+    <string-array name="days">
+        <item>@string/day</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
+    <string-array name="months">
+        <item>@string/month</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="time_filter">
+        <item>@string/daily</item>
+        <item>@string/monthly</item>
+        <item>@string/yearly</item>
+    </string-array>
+
+    <string-array name="reset">
+        <item>@string/all</item>
+        <item>@string/prayer</item>
+        <item>@string/handout</item>
+        <item>@string/zekr</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>@string/modify</item>
+        <item>English</item>
+        <item>العربية</item>
+        <item>French</item>
+    </string-array>
+</resources>

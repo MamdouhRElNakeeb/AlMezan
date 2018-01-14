@@ -3,8 +3,7 @@
     android:orientation="vertical"
     android:id="@+id/drawer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layoutDirection="rtl">
+    android:layout_height="match_parent">
 
 
     <RelativeLayout
@@ -33,6 +32,8 @@
             android:layout_height="50dp"
             android:adjustViewBounds="true"
             android:src="@drawable/almezan_logo"
+            android:layoutDirection="rtl"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
 
 
@@ -45,6 +46,7 @@
             android:tint="@color/orange"
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
+            android:layoutDirection="rtl"
             android:src="@drawable/sidemenu_icn"
             android:background="@android:color/transparent"/>
 
@@ -56,7 +58,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-6430998960222915/8188559017">
+            ads:adUnitId="ca-app-pub-5330928698678581/4704572551">
         </com.google.android.gms.ads.AdView>
 
         <LinearLayout
@@ -71,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
+                android:layoutDirection="rtl"
                 android:layout_weight="1">
 
                 <android.support.v7.widget.RecyclerView
@@ -88,7 +91,7 @@
                     android:layout_margin="16dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/arrow"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
                     android:background="@android:color/transparent"/>
 
                 <ImageButton
@@ -99,7 +102,7 @@
                     android:scaleX="-1"
                     android:layout_margin="16dp"
                     android:src="@drawable/arrow"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
                     android:background="@android:color/transparent"/>
             </RelativeLayout>
 
@@ -123,7 +126,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="الصلاة"
+                        android:text="@string/prayer"
                         android:textColor="@color/white"
                         android:textSize="@dimen/tv_font"/>
 
@@ -131,7 +134,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="فى وقتها"
+                        android:text="@string/on_time"
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textSize="@dimen/tv_font"/>
@@ -139,7 +142,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="متأخرة"
+                        android:text="@string/late"
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textSize="@dimen/tv_font"/>
@@ -147,7 +150,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="متروكة"
+                        android:text="@string/left_out"
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textSize="@dimen/tv_font"/>
@@ -155,7 +158,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="عذر شرعى"
+                        android:text="@string/excuse"
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textSize="@dimen/tv_font"/>
@@ -175,9 +178,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="الفجر"
+                        android:text="@string/fajr"
                         android:textColor="@color/white"
-                        android:textSize="20sp"/>
+                        android:textSize="@dimen/month_tv_size"/>
 
                     <RadioButton
                         android:id="@+id/f0"
@@ -193,7 +196,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -203,7 +206,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -213,7 +216,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
                 </RadioGroup>
@@ -231,9 +234,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="الظهر"
+                        android:text="@string/duhr"
                         android:textColor="@color/white"
-                        android:textSize="20sp"/>
+                        android:textSize="@dimen/month_tv_size"/>
 
                     <RadioButton
                         android:id="@+id/d0"
@@ -249,7 +252,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -259,7 +262,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -269,7 +272,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
                 </RadioGroup>
@@ -287,9 +290,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="العصر"
+                        android:text="@string/asr"
                         android:textColor="@color/white"
-                        android:textSize="20sp"/>
+                        android:textSize="@dimen/month_tv_size"/>
 
                     <RadioButton
                         android:id="@+id/a0"
@@ -305,7 +308,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -315,7 +318,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -325,7 +328,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
                 </RadioGroup>
@@ -343,9 +346,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="المغرب"
+                        android:text="@string/mghreb"
                         android:textColor="@color/white"
-                        android:textSize="20sp"/>
+                        android:textSize="@dimen/stats_tv_size"/>
 
                     <RadioButton
                         android:id="@+id/m0"
@@ -361,7 +364,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -371,7 +374,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -381,7 +384,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
                 </RadioGroup>
@@ -399,9 +402,9 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="العشاء"
+                        android:text="@string/isha"
                         android:textColor="@color/white"
-                        android:textSize="20sp"/>
+                        android:textSize="@dimen/month_tv_size"/>
 
                     <RadioButton
                         android:id="@+id/i0"
@@ -417,7 +420,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -427,7 +430,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
 
@@ -437,7 +440,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:button="@android:color/transparent"
                         android:background="@drawable/radio_btn" />
                 </RadioGroup>
@@ -455,7 +458,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="حفظ"
+                        android:text="@string/save"
+                        android:textAllCaps="false"
                         android:textStyle="bold"
                         android:textSize="@dimen/save_btn_font"
                         android:layout_marginRight="5dp"
@@ -466,7 +470,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="تعديل"
+                        android:text="@string/modify"
+                        android:textAllCaps="false"
                         android:textStyle="bold"
                         android:textSize="@dimen/save_btn_font"
                         android:layout_marginRight="5dp"

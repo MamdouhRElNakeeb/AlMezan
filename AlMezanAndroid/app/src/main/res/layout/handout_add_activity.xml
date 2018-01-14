@@ -4,14 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layoutDirection="rtl">
+    android:layout_height="match_parent">
 
 
     <RelativeLayout android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layoutDirection="rtl">
+        android:layout_height="match_parent">
 
 
         <ImageView
@@ -36,6 +34,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:adjustViewBounds="true"
+            android:layoutDirection="rtl"
+            android:layout_alignParentRight="true"
             android:src="@drawable/almezan_logo"
             android:layout_alignParentTop="true"/>
 
@@ -49,6 +49,7 @@
             android:tint="@color/orange"
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
+            android:layoutDirection="rtl"
             android:src="@drawable/sidemenu_icn"
             android:background="@android:color/transparent"/>
 
@@ -58,7 +59,7 @@
             android:layout_below="@id/almezan_logo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/islamic_icn"
-            android:text="الصدقة"
+            android:text="@string/handout"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/header_tv_size"
@@ -100,7 +101,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-6430998960222915/4973037038">
+            ads:adUnitId="ca-app-pub-5330928698678581/2649077243">
         </com.google.android.gms.ads.AdView>
 
         <LinearLayout
@@ -117,7 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="عداد الأيام"
+                android:text="@string/days_counter"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dayscounter_tv_size"/>
@@ -133,7 +134,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:layout_marginRight="5dp"
-                    android:text="يوم"
+                    android:text="@string/day"
                     android:textSize="@dimen/dayscounter_tv_size"
                     android:textColor="@color/white"
                     android:gravity="center"/>
@@ -164,7 +165,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:layout_marginRight="5dp"
-                    android:text="شهر"
+                    android:text="@string/month"
                     android:textSize="@dimen/dayscounter_tv_size"
                     android:textColor="@color/white"
                     android:gravity="center"/>
@@ -195,7 +196,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:layout_marginRight="5dp"
-                    android:text="سنة"
+                    android:text="@string/year"
                     android:textSize="@dimen/dayscounter_tv_size"
                     android:textColor="@color/white"
                     android:gravity="center"/>
@@ -234,13 +235,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
-                android:textSize="30sp"
+                android:textSize="@dimen/counter_tv_size"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/handout_txtv_bg"
-                android:text="مبلغ متصدق به"/>
+                android:text="@string/amount_charity"/>
 
             <EditText
                 android:id="@+id/amountET"
@@ -269,7 +270,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/handout_btn_bg"
-                    android:text="حفظ"
+                    android:text="@string/save"
+                    android:textAllCaps="false"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
 
@@ -290,14 +292,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
-                android:textSize="30sp"
+                android:textSize="@dimen/counter_tv_size"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/handout_txtv_bg"
                 android:layout_marginTop="10dp"
-                android:text="إجمالى الصدقات"/>
+                android:text="@string/total_charity"/>
 
             <TextView
                 android:id="@+id/handoutsTotalTV"

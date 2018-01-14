@@ -51,13 +51,12 @@ import me.nakeeb.almezan.model.PrayersDay;
  * Created by mamdouhelnakeeb on 12/13/17.
  */
 
-public class PrayerAdd extends AppCompatActivity {
-
+public class PrayerAdd extends BaseActivity {
 
     RadioGroup fajrRG, duhrRG, asrRG, mghrebRG, ishaRG;
     RadioButton f0, f1, f2, f3, d0, d1, d2, d3, a0, a1, a2, a3, m0, m1, m2, m3, i0, i1, i2, i3;
 
-    int fajrStats = 0, duhrStats = 0, asrStats = 0, mghrebStats = 0, ishaStats = 0;
+    int fajrStats = -1, duhrStats = -1, asrStats = -1, mghrebStats = -1, ishaStats = -1;
 
     RecyclerView dateRV;
     DateRVAdapter dateRVAdapter;
@@ -70,13 +69,16 @@ public class PrayerAdd extends AppCompatActivity {
     ArrayList<DateItem> datesArr;
 
     private FirebaseAuth mAuth;
-    
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.prayer_add_activity;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.prayer_add_activity);
 
-        loadADs();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -86,7 +88,6 @@ public class PrayerAdd extends AppCompatActivity {
         editBtn = findViewById(R.id.editBtn);
 
         initRG();
-        initNav();
 
         getDates();
 
@@ -98,7 +99,7 @@ public class PrayerAdd extends AppCompatActivity {
 
                 datePos--;
                 dateRV.smoothScrollToPosition(datePos);
-                updateUI();
+
                 loadPrayers();
             }
         });
@@ -111,7 +112,7 @@ public class PrayerAdd extends AppCompatActivity {
 
                 datePos++;
                 dateRV.smoothScrollToPosition(datePos);
-                updateUI();
+
                 loadPrayers();
             }
         });
@@ -149,7 +150,7 @@ public class PrayerAdd extends AppCompatActivity {
 
                 datePos = targetPosition;
 
-                updateUI();
+                Log.d("posss", String.valueOf(datePos) + " -- " + String.valueOf(datesArr.size() - 1));
 
                 loadPrayers();
 
@@ -162,23 +163,6 @@ public class PrayerAdd extends AppCompatActivity {
         snapHelper.attachToRecyclerView(dateRV);
         dateRV.setOnFlingListener(snapHelper);
 
-
-        dateRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                updateUI();
-                Log.d("onScrolledStateFunc", "onScrolled");
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                updateUI();
-
-            }
-        });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,6 +187,7 @@ public class PrayerAdd extends AppCompatActivity {
                 saveBtn.setEnabled(true);
 
                 editMode(true);
+                updateUI(true);
 
             }
         });
@@ -214,24 +199,35 @@ public class PrayerAdd extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("User", MODE_PRIVATE);
 
         long currentMillis = System.currentTimeMillis();
-        initRV(currentMillis, prefs.getLong("startTime", currentMillis));
+        initRV(Utils.getDayMillis(currentMillis), Utils.getDayMillis(prefs.getLong("prayerTime", currentMillis)));
 
     }
 
-    private void updateUI(){
+    private void updateUI(boolean edit){
 
         if (datePos != datesArr.size() - 1){
             editBtn.setAlpha((float) 0.3);
             editBtn.setEnabled(false);
+
+            saveBtn.setAlpha((float) 0.3);
+            saveBtn.setEnabled(false);
         }
         else {
-            editBtn.setAlpha(1);
-            editBtn.setEnabled(true);
+            if (edit) {
+                editBtn.setAlpha((float) 0.3);
+                editBtn.setEnabled(false);
+
+                saveBtn.setAlpha(1);
+                saveBtn.setEnabled(true);
+            }
+            else {
+                editBtn.setAlpha(1);
+                editBtn.setEnabled(true);
+
+                saveBtn.setAlpha((float) 0.3);
+                saveBtn.setEnabled(false);
+            }
         }
-
-        saveBtn.setAlpha((float) 0.3);
-        saveBtn.setEnabled(false);
-
 
     }
 
@@ -271,7 +267,7 @@ public class PrayerAdd extends AppCompatActivity {
 
         dateRV.setItemAnimator(new DefaultItemAnimator());
 
-        datesArr = Utils.getDates(currentMillis, oldMillis, new Locale("ar", "EG"));
+        datesArr = Utils.getDates(currentMillis, oldMillis, Locale.getDefault());
 
         dateRVAdapter = new DateRVAdapter(this, datesArr);
         dateRV.setAdapter(dateRVAdapter);
@@ -279,7 +275,7 @@ public class PrayerAdd extends AppCompatActivity {
         datePos = datesArr.size() - 1;
 
         dateRV.scrollToPosition(datePos);
-        updateUI();
+
         loadPrayers();
 
     }
@@ -406,7 +402,6 @@ public class PrayerAdd extends AppCompatActivity {
         i2 = findViewById(R.id.i2);
         i3 = findViewById(R.id.i3);
 
-        editMode(false);
 
         fajrRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -540,121 +535,6 @@ public class PrayerAdd extends AppCompatActivity {
 
     }
 
-    private void initNav(){
-
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-
-
-        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
-        ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
-
-        sideMenuIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDrawerLayout.openDrawer(Gravity.RIGHT);
-            }
-        });
-
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nameTV))
-                .setText(getSharedPreferences("User", MODE_PRIVATE).getString("name", ""));
-
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.ageTV))
-                .setText(String.valueOf(Utils.calcAge(getSharedPreferences("User", MODE_PRIVATE).getString("dob", "0/0/0"))));
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.homeBtnLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getBaseContext(), Landing.class));
-                        finish();
-                    }
-                });
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.settingsBtnLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getBaseContext(), Settings.class));
-                    }
-                });
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.logoutLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getBaseContext(), Login.class));
-                        finish();
-                    }
-                });
-
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.fbIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String FACEBOOK_URL = "https://www.facebook.com/MamdouhRElNakeeb";
-                        String FACEBOOK_PAGE_ID = "MamdouhRElNakeeb";
-                        String facebookUrl = "";
-                        PackageManager packageManager = getPackageManager();
-                        try {
-                            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-                            if (versionCode >= 3002850) { //newer versions of fb app
-                                facebookUrl = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
-                            } else { //older versions of fb app
-                                facebookUrl = "fb://page/" + FACEBOOK_PAGE_ID;
-                            }
-                        } catch (PackageManager.NameNotFoundException e) {
-                            facebookUrl =  FACEBOOK_URL; //normal web url
-                        }
-
-                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                        facebookIntent.setData(Uri.parse(facebookUrl));
-                        startActivity(facebookIntent);
-                    }
-                });
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.twtIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Intent intent = null;
-                        try {
-                            // get the Twitter app if possible
-                            getPackageManager().getPackageInfo("com.twitter.android", 0);
-                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=mamdouhelnakeeb"));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        } catch (Exception e) {
-                            // no Twitter app, revert to browser
-                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mamdouhelnakeeb"));
-                        }
-                        startActivity(intent);
-                    }
-                });
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.instaIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Uri uri = Uri.parse("http://instagram.com/_u/mamdouhrelnakeeb");
-                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-
-                        likeIng.setPackage("com.instagram.android");
-
-                        try {
-                            startActivity(likeIng);
-                        } catch (ActivityNotFoundException e) {
-                            startActivity(new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse("http://instagram.com/mamdouhrelnakeeb")));
-                        }
-                    }
-                });
-
-    }
-
     private void savePrayer (){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -667,27 +547,6 @@ public class PrayerAdd extends AppCompatActivity {
         user.put("asr", asrStats);
         user.put("mghreb", mghrebStats);
         user.put("isha", ishaStats);
-
-        // Add a new document with a generated ID
-//        db.collection("users")
-//                .document(mAuth.getCurrentUser().getUid())
-//                .collection("prayers")
-//                .document(String.valueOf(Utils.getDayMillis(System.currentTimeMillis())))
-//                .set(user)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Log.d("save user: ", "DocumentSnapshot added ");
-//                        updateUI();
-//                        editMode(false);
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w("save user: ", "Error adding document", e);
-//                    }
-//                });
 
         long currentMillis = System.currentTimeMillis();
 
@@ -704,7 +563,7 @@ public class PrayerAdd extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("save user: ", "DocumentSnapshot added ");
-                        updateUI();
+                        updateUI(false);
                         editMode(false);
                     }
                 })
@@ -724,10 +583,8 @@ public class PrayerAdd extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-//        DocumentReference docRef = db.collection("users")
-//                .document(mAuth.getCurrentUser().getUid())
-//                .collection("prayers")
-//                .document(String.valueOf(datesArr.get(datePos).timeInMillis));
+        if (mAuth.getCurrentUser() == null)
+            return;
 
         DocumentReference docRef = db.collection("users")
                 .document(mAuth.getCurrentUser().getUid())
@@ -740,6 +597,15 @@ public class PrayerAdd extends AppCompatActivity {
 
         Log.d("timeInMillisOfUser", String.valueOf(datesArr.get(datePos).timeInMillis));
 
+        if (datePos == datesArr.size() - 1){
+            editMode(true);
+            updateUI(true);
+        }
+        else {
+            editMode(false);
+            updateUI(false);
+        }
+
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -747,6 +613,11 @@ public class PrayerAdd extends AppCompatActivity {
                     return;
 
                 Log.d("PrayerDatadsgd: ", documentSnapshot.getId() + " => " + documentSnapshot.getData());
+
+                if (datePos == datesArr.size() - 1){
+                    editMode(false);
+                    updateUI(false);
+                }
 
                 PrayersDay prayersDay = new PrayersDay();
 
@@ -765,14 +636,4 @@ public class PrayerAdd extends AppCompatActivity {
 
     }
 
-    private void loadADs(){
-
-        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
-
-        AdView mAdView;
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 }

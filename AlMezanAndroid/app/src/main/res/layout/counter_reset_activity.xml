@@ -43,17 +43,36 @@
             android:textColor="@color/black"
             android:text="@string/reset_message"/>
 
-        <android.support.v7.widget.AppCompatSpinner
-            android:id="@+id/rstSpinner"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
             android:layout_marginTop="@dimen/margin20"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:background="@drawable/reset_spinner_bg">
+            android:layout_marginLeft="10dp">
 
-        </android.support.v7.widget.AppCompatSpinner>
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/rstSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/reset_spinner_bg">
+
+
+            </android.support.v7.widget.AppCompatSpinner>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/spinner_arrowb"/>
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -102,7 +121,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-6430998960222915/4973037038">
+        ads:adUnitId="ca-app-pub-5330928698678581/2266111478">
     </com.google.android.gms.ads.AdView>
 
 

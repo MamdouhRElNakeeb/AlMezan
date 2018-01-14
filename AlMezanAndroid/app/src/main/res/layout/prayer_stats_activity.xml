@@ -4,15 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer"
-    android:layoutDirection="rtl">
+    android:id="@+id/drawer">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layoutDirection="rtl">
+        android:layout_height="match_parent">
 
 
         <ImageView
@@ -39,6 +37,8 @@
             android:layout_marginTop="-5dp"
             android:adjustViewBounds="true"
             android:src="@drawable/almezan_logo"
+            android:layoutDirection="rtl"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
 
 
@@ -51,6 +51,7 @@
             android:tint="@color/orange"
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
+            android:layoutDirection="rtl"
             android:src="@drawable/sidemenu_icn"
             android:background="@android:color/transparent"/>
 
@@ -60,7 +61,7 @@
             android:layout_below="@id/almezan_logo"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="النسبة المئوية"
+            android:text="@string/percentage"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/percentage_headertv_size"
@@ -75,7 +76,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-6430998960222915/3414991905">
+            ads:adUnitId="ca-app-pub-5330928698678581/7354786620">
         </com.google.android.gms.ads.AdView>
 
 
@@ -92,7 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="عداد الأيام"
+                android:text="@string/days_counter"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dayscounter_tv_size"/>
@@ -108,7 +109,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:layout_marginRight="5dp"
-                    android:text="يوم"
+                    android:text="@string/daily"
                     android:textSize="@dimen/dayscounter_tv_size"
                     android:textColor="@color/white"
                     android:gravity="center"/>
@@ -139,7 +140,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:layout_marginRight="5dp"
-                    android:text="شهر"
+                    android:text="@string/monthly"
                     android:textSize="@dimen/dayscounter_tv_size"
                     android:textColor="@color/white"
                     android:gravity="center"/>
@@ -170,7 +171,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
                     android:layout_marginRight="5dp"
-                    android:text="سنة"
+                    android:text="@string/yearly"
                     android:textSize="@dimen/dayscounter_tv_size"
                     android:textColor="@color/white"
                     android:gravity="center"/>
@@ -220,42 +221,42 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="الصلاة"
+                        android:text="@string/prayer"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/stats_tv_size"/>
+                        android:textSize="@dimen/prayer_tv_size"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="فى وقتها"
+                        android:text="@string/on_time"
                         android:gravity="center"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/stats_tv_size"/>
+                        android:textSize="@dimen/prayer_tv_size"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="متأخرة"
+                        android:text="@string/late"
                         android:gravity="center"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/stats_tv_size"/>
+                        android:textSize="@dimen/prayer_tv_size"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="متروكة"
+                        android:text="@string/left_out"
                         android:gravity="center"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/stats_tv_size"/>
+                        android:textSize="@dimen/prayer_tv_size"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="غير مسجل"
+                        android:text="@string/not_reg"
                         android:gravity="center"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/stats_tv_size"/>
+                        android:textSize="@dimen/prayer_tv_size"/>
 
                 </LinearLayout>
 
@@ -270,7 +271,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="الفجر"
+                        android:text="@string/fajr"
                         android:textColor="@color/white"
                         android:textSize="@dimen/stats_tv_size"/>
 
@@ -281,6 +282,8 @@
                         android:layout_weight="1"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:textSize="@dimen/stats_tv_size"
                         android:textColor="@color/black"
                         android:gravity="center"/>
@@ -290,7 +293,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -302,10 +306,11 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
-                        android:textSize="15sp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
+                        android:textSize="@dimen/stats_tv_size"
                         android:textColor="@color/black"
                         android:gravity="center"/>
 
@@ -314,8 +319,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
                         android:background="@drawable/chkbx_bg"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
                         android:textColor="@color/black"
@@ -335,7 +341,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="الظهر"
+                        android:text="@string/duhr"
                         android:textColor="@color/white"
                         android:textSize="@dimen/stats_tv_size"/>
 
@@ -346,6 +352,8 @@
                         android:layout_weight="1"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:textSize="@dimen/stats_tv_size"
                         android:textColor="@color/black"
                         android:gravity="center"/>
@@ -355,7 +363,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -367,7 +376,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -379,9 +389,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:textSize="@dimen/stats_tv_size"
                         android:textColor="@color/black"
                         android:gravity="center"/>
@@ -399,7 +410,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="العصر"
+                        android:text="@string/asr"
                         android:textColor="@color/white"
                         android:textSize="@dimen/stats_tv_size"/>
 
@@ -411,6 +422,8 @@
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:textColor="@color/black"
                         android:gravity="center"/>
 
@@ -419,7 +432,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -431,7 +445,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -443,7 +458,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -464,7 +480,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="المغرب"
+                        android:text="@string/mghreb"
                         android:textColor="@color/white"
                         android:textSize="@dimen/stats_tv_size"/>
 
@@ -475,7 +491,9 @@
                         android:layout_weight="1"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/stats_tv_size"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:textColor="@color/black"
                         android:gravity="center"/>
 
@@ -484,7 +502,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -496,7 +515,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -508,7 +528,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -529,7 +550,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="العشاء"
+                        android:text="@string/isha"
                         android:textColor="@color/white"
                         android:textSize="@dimen/stats_tv_size"/>
 
@@ -540,6 +561,8 @@
                         android:layout_weight="1"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:textSize="@dimen/stats_tv_size"
                         android:textColor="@color/black"
                         android:gravity="center"/>
@@ -549,7 +572,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -561,7 +585,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"
@@ -573,7 +598,8 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="@dimen/margin5"
+                        android:layout_marginLeft="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="@dimen/stats_tv_size"

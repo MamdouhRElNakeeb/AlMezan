@@ -2,6 +2,7 @@ package me.nakeeb.almezan.activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import me.nakeeb.almezan.R;
+import me.nakeeb.almezan.helper.LocaleManager;
 import me.nakeeb.almezan.helper.Utils;
 
 /**
@@ -49,7 +51,7 @@ import me.nakeeb.almezan.helper.Utils;
 
 public class Register extends AppCompatActivity {
 
-    EditText nameET, emailET, passET, ageET, imgET;
+    EditText nameET, emailET, passET;
     Button regBtn, regToLineBtn;
 
     AppCompatSpinner daySpinner, monthSpinner, yearSpinner;
@@ -73,7 +75,6 @@ public class Register extends AppCompatActivity {
         nameET = findViewById(R.id.nameET);
         emailET = findViewById(R.id.emailET);
         passET = findViewById(R.id.passET);
-//        ageET = findViewById(R.id.ageET);
         daySpinner = findViewById(R.id.daySpinner);
         monthSpinner = findViewById(R.id.monthSpinner);
         yearSpinner = findViewById(R.id.yearSpinner);
@@ -91,17 +92,20 @@ public class Register extends AppCompatActivity {
         regToLineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(Register.this, Register.class);
-//                startActivity(intent);
                 finish();
             }
         });
 
-//        configAge();
-
         initDOB();
 
         loadADs();
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
+        Log.d("Base", "attachBaseContext");
     }
 
     @Override
@@ -111,31 +115,6 @@ public class Register extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
-
-//    private void configAge(){
-//
-//        ageET.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                new DatePickerDialog(Register.this, d, dateCalender.get(Calendar.YEAR), dateCalender.get(Calendar.MONTH), dateCalender.get(Calendar.DAY_OF_MONTH)).show();
-//
-//            }
-//        });
-//    }
-
-//    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
-//        @Override
-//        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-//            dateCalender.set(Calendar.YEAR, year);
-//            dateCalender.set(Calendar.MONTH, monthOfYear);
-//            dateCalender.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//
-//            formatDate = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-//
-////            ageET.setText(formatDate.format(dateCalender.getTime()));
-//        }
-//    };
 
     private void initDOB(){
 
@@ -152,10 +131,6 @@ public class Register extends AppCompatActivity {
         }
 
         ArrayAdapter<String> yearsArrAdapter = new ArrayAdapter<String> (this, R.layout.spinner_item, yearsArr); //selected item will look like a spinner set from XML
-
-//        yearsArrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        daysArrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        monthsArrAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         daySpinner.setAdapter(daysArrAdapter);
         monthSpinner.setAdapter(monthsArrAdapter);
@@ -185,11 +160,6 @@ public class Register extends AppCompatActivity {
             Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
             return;
         }
-
-//        if (dob.isEmpty()) {
-//            Toast.makeText(this, "Please enter your age", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
 
         if (daySpinner.getSelectedItem().toString().equals(getResources().getString(R.string.day))){
             Toast.makeText(this, "Please select day of birth date", Toast.LENGTH_SHORT).show();
@@ -336,7 +306,7 @@ public class Register extends AppCompatActivity {
 
     private void loadADs(){
 
-        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
+        MobileAds.initialize(this, "ca-app-pub-5330928698678581~9643351697");
 
         AdView mAdView;
 

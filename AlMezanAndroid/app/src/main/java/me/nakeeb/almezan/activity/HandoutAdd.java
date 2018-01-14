@@ -50,7 +50,7 @@ import me.nakeeb.almezan.model.Handout;
  * Created by mamdouhelnakeeb on 12/15/17.
  */
 
-public class HandoutAdd extends AppCompatActivity {
+public class HandoutAdd extends BaseActivity {
 
     EditText amountET;
     TextView handoutsTotalTV;
@@ -62,21 +62,21 @@ public class HandoutAdd extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.handout_add_activity;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.handout_add_activity);
 
         initViews();
-
-        initNav();
 
         getHandoutsTotal();
 
         updatePeriod();
 
-        loadADs();
     }
 
     private void saveHandout(){
@@ -131,16 +131,16 @@ public class HandoutAdd extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         long currentMillis = System.currentTimeMillis();
-//        int yearsNo = Utils.yearsNo(currentMillis, getSharedPreferences("startTime", MODE_PRIVATE).getLong("", currentMillis));
+        long handoutMillis = getSharedPreferences("User", MODE_PRIVATE).getLong("handoutTime", currentMillis);
 
-        ArrayList<DateItem> dateItemArrayList = Utils.getYears(currentMillis, getSharedPreferences("startTime", MODE_PRIVATE).getLong("", currentMillis), new Locale("ar", "EG"));
+        ArrayList<DateItem> dateItemArrayList = Utils.getYears(Utils.getMillis(currentMillis, "y"),
+                Utils.getMillis(handoutMillis, "y"), new Locale("ar", "EG"));
 
         handoutsTotal = 0;
 
         Log.d("yearsNoDates", String.valueOf(dateItemArrayList.size()));
 
         for (int i = 0; i < dateItemArrayList.size(); i++){
-
 
             CollectionReference docRef = db.collection("users")
                     .document(mAuth.getCurrentUser().getUid())
@@ -156,7 +156,11 @@ public class HandoutAdd extends AppCompatActivity {
                     if (task.isSuccessful()) {
 
                         for (DocumentSnapshot document : task.getResult()) {
-                            Log.d("PrayerData: ", document.getId() + " => " + document.getData());
+                            if (!document.exists()){
+                                return;
+                            }
+
+                            Log.d("HandoutData: ", document.getId() + " => " + document.getData());
 
                             Handout handout = new Handout();
                             handout.amount = Float.parseFloat(document.get("amount").toString());
@@ -165,6 +169,7 @@ public class HandoutAdd extends AppCompatActivity {
                             if (Utils.getMillis(System.currentTimeMillis(), "MM/y") == handout.timeInMillis)
                                 monthHandoutsTotal = handout.amount;
 
+                            Log.d("monthHandout", String.valueOf(monthHandoutsTotal));
                             updateHandoutsTotal(handout);
 
                         }
@@ -175,37 +180,7 @@ public class HandoutAdd extends AppCompatActivity {
                 }
             });
 
-
         }
-
-//        CollectionReference docRef = db.collection("users")
-//                .document(mAuth.getCurrentUser().getUid())
-//                .collection("handouts");
-//
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//
-//                    for (DocumentSnapshot document : task.getResult()) {
-//                        Log.d("PrayerData: ", document.getId() + " => " + document.getData());
-//
-//                        Handout handout = new Handout();
-//                        handout.amount = Float.parseFloat(document.get("amount").toString());
-//                        handout.timeInMillis = Long.parseLong(document.getId());
-//
-//                        if (Utils.getMillis(System.currentTimeMillis(), "MM/y") == handout.timeInMillis)
-//                            monthHandoutsTotal = handout.amount;
-//
-//                        updateHandoutsTotal(handout);
-//
-//                    }
-//
-//                } else {
-//                    Log.d("Error: ", "Error getting documents: ", task.getException());
-//                }
-//            }
-//        });
 
     }
 
@@ -223,7 +198,7 @@ public class HandoutAdd extends AppCompatActivity {
         long currentMillis = System.currentTimeMillis();
 
         periodArr = Utils.getDaysMonthsYearsNo(currentMillis,
-                getSharedPreferences("User", MODE_PRIVATE).getLong("startTime", currentMillis));
+                getSharedPreferences("User", MODE_PRIVATE).getLong("handoutTime", currentMillis));
 
         TextView daysCounterTV = findViewById(R.id.daysCounterTV);
         TextView monthsCounterTV = findViewById(R.id.monthsCounterTV);
@@ -246,6 +221,14 @@ public class HandoutAdd extends AppCompatActivity {
         saveBtn.setEnabled(false);
 
 
+        amountET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (amountET.getText().toString().trim().equals("0"))
+                    amountET.setText("");
+            }
+        });
 
         amountET.addTextChangedListener(new TextWatcher() {
             @Override
@@ -284,129 +267,4 @@ public class HandoutAdd extends AppCompatActivity {
 
     }
 
-    private void initNav(){
-
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-
-
-        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
-        ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
-
-        sideMenuIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDrawerLayout.openDrawer(Gravity.RIGHT);
-            }
-        });
-
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nameTV))
-                .setText(getSharedPreferences("User", MODE_PRIVATE).getString("name", ""));
-
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.ageTV))
-                .setText(String.valueOf(Utils.calcAge(getSharedPreferences("User", MODE_PRIVATE).getString("dob", "0/0/0"))));
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.homeBtnLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getBaseContext(), Landing.class));
-                        finish();
-                    }
-                });
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.settingsBtnLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getBaseContext(), Settings.class));
-                    }
-                });
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.logoutLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getBaseContext(), Login.class));
-                        finish();
-                    }
-                });
-
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.fbIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String FACEBOOK_URL = "https://www.facebook.com/MamdouhRElNakeeb";
-                        String FACEBOOK_PAGE_ID = "MamdouhRElNakeeb";
-                        String facebookUrl = "";
-                        PackageManager packageManager = getPackageManager();
-                        try {
-                            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-                            if (versionCode >= 3002850) { //newer versions of fb app
-                                facebookUrl = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
-                            } else { //older versions of fb app
-                                facebookUrl = "fb://page/" + FACEBOOK_PAGE_ID;
-                            }
-                        } catch (PackageManager.NameNotFoundException e) {
-                            facebookUrl =  FACEBOOK_URL; //normal web url
-                        }
-
-                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                        facebookIntent.setData(Uri.parse(facebookUrl));
-                        startActivity(facebookIntent);
-                    }
-                });
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.twtIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Intent intent = null;
-                        try {
-                            // get the Twitter app if possible
-                            getPackageManager().getPackageInfo("com.twitter.android", 0);
-                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=mamdouhelnakeeb"));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        } catch (Exception e) {
-                            // no Twitter app, revert to browser
-                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mamdouhelnakeeb"));
-                        }
-                        startActivity(intent);
-                    }
-                });
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.instaIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Uri uri = Uri.parse("http://instagram.com/_u/mamdouhrelnakeeb");
-                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-
-                        likeIng.setPackage("com.instagram.android");
-
-                        try {
-                            startActivity(likeIng);
-                        } catch (ActivityNotFoundException e) {
-                            startActivity(new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse("http://instagram.com/mamdouhrelnakeeb")));
-                        }
-                    }
-                });
-
-    }
-
-    private void loadADs(){
-
-        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
-
-        AdView mAdView;
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 }

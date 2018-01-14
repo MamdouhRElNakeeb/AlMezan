@@ -1,35 +1,119 @@
 <resources>
     <string name="app_name">AlMezan</string>
 
-    <string name="doaa0">أستغفر الله العظيم</string>
-    <string name="doaa1">الله أكبر</string>
-    <string name="doaa2">لا إله إلا الله</string>
-    <string name="doaa3">لا حول ولا قوة إلا بالله</string>
-    <string name="doaa4">الحمد لله</string>
-    <string name="doaa5">سبحان الله</string>
-    <string name="doaa6">سبحان الله و بحمده</string>
-    <string name="doaa7">سبحان الله و بحمده \n سبحان الله العظيم</string>
-    <string name="doaa8">لا إله إلا أنت سبحانك \n إنى كنت من الظالمين</string>
+    <!-- Landing Menu -->
+    <string name="reg_prayer">Register Prayer</string>
+    <string name="charity_counter">Charity Counter</string>
+    <string name="zekr_counter">Zekr Counter</string>
+    <string name="month_compare">Month Comparison</string>
+    <string name="stats">Statistics</string>
+    <string name="zekr_stats">Zekr Statistics</string>
+    <string name="rst_counter">Reset Counter</string>
+
+    <!-- Prayer Status -->
+    <string name="on_time">On Time</string>
+    <string name="late">Late</string>
+    <string name="left_out">Left Out</string>
+    <string name="excuse">Excuse</string>
+    <string name="not_reg">unregistered</string>
+
+    <!-- Prayers -->
+    <string name="prayer">Prayer</string>
+    <string name="fajr">Fajr</string>
+    <string name="duhr">Zuhr</string>
+    <string name="asr">Asr</string>
+    <string name="mghreb">Maghrib</string>
+    <string name="isha">Isha\'a</string>
+
+    <!-- Handouts -->
+    <string name="handout">Charity</string>
+    <string name="amount_charity">Amount of Charity</string>
+    <string name="total_charity">Charity Total</string>
+
+    <!-- Zekr -->
+    <string name="zekr">Zekr</string>
+    <string name="cumulative">Cumulative</string>
+    <string name="zekr_count">No. of Praises</string>
+    <string name="days_count">No. of days alive</string>
+    <string name="months_count">No. of months alive</string>
+    <string name="years_count">No. of years alive</string>
+
+    <string name="doaa0">Astaghfir Allah Al Azim</string>
+    <string name="doaa1">Allah \'akbar</string>
+    <string name="doaa2">La \'ilah \'ilaa allah</string>
+    <string name="doaa3">La hawl wala quat \'ilaa biallah</string>
+    <string name="doaa4">Alhamd Lilah</string>
+    <string name="doaa5">Subhan Allah</string>
+    <string name="doaa6">Subhan Allah wa bihamdih</string>
+    <string name="doaa7">Subhan Allah wa bihamdih \nSubhan Allah Al Azim</string>
+    <string name="doaa8">La \'ilah \'ilaa \'ant Subhanak \n\'iniy kunt min Al Zalimin</string>
+
+    <!-- Tutorial -->
+    <string name="app_tut">Application Tutorial</string>
+    <string name="tut1">Firstly, Press on \"register prayer\" button</string>
+    <string name="tut2">Secondly, Put a check mark in the box belonging to the prayer which you want to register , then press \"save\".</string>
+    <string name="tut3">Example: If you prayed \"al fajr\" on time, press the box of al fajr on time then press “save”. Repeat the process for each prayer according to the time it was prayed whether on time , late , left out or excuse. To make it easier, you can register all the prayers at once after \"isha’a\" prayer and not after midnight. If it passed midnight it will be considered unregistered and will be added to the unregistered prayers section.</string>
+    <string name="tut4">The percentages are being counted from the first day you start using AlMezan mobile app.</string>
+    <string name="tut5">If you desire to reset the counters and start all over again, press on the reset counter button</string>
+
+    <string name="tut6">Press the \"Charity Counter\" button, right the amount handed out then press \"save\".</string>
+    <string name="tut7">Charity is counted cumulatively from the first day you start using AlMezan mobile app.</string>
+
+    <string name="tut8">Press the \"zekr counter\" button, select the desired zekr. Upon each praise touch the mobile screen so that the counter start counting with every touch. After finishing press \"save\".</string>
+    <string name="tut9">There are two counters for \"zekr\", the first one is for the present praising session. The second counter works cumulatively. Meaning that after each praising session, the current number of praises are added to the previous ones then divided by the number of days in your life so that you know how many praises you said in each day of your life.</string>
 
 
     <string name="reset_message">Do you want to reset the counter of ?</string>
+    <string name="register_new_user">Register new user?</string>
+    <string name="current_user_login_here">Already user? login here</string>
+    <string name="change_lang">Are you sure you want change app language ?</string>
+    <string name="slogan">قبل أن تحاسبوا</string>
 
+    <!-- General -->
+    <string name="save">Save</string>
+    <string name="modify">Modify</string>
+    <string name="percentage">Percentage</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="all">All</string>
+    <string name="name">Name</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="dob">Date of Birth</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="logout">Logout</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="follow_us">Follow</string>
+    <string name="lang">Language</string>
 
-
-    <string name="prayer">Prayer</string>
-    <string name="handout">Handout</string>
-    <string name="zekr">Zekr</string>
-
+    <!-- Time -->
+    <string name="days_counter">Days Counter</string>
     <string name="year">Year</string>
     <string name="month">Month</string>
     <string name="day">Day</string>
+    <string name="daily">Daily</string>
+    <string name="monthly">Monthly</string>
+    <string name="yearly">Yearly</string>
 
-    <string name="app_tut">Application Tutorial</string>
+    <!-- Months -->
+    <string name="jan">Jan.</string>
+    <string name="feb">Feb.</string>
+    <string name="mar">Mar.</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="jun">June</string>
+    <string name="jul">July</string>
+    <string name="aug">Aug.</string>
+    <string name="sep">Sep.</string>
+    <string name="oct">Oct.</string>
+    <string name="nov">Nov.</string>
+    <string name="dec">Dec.</string>
+
 
     <string-array name="days">
-        <item>Day</item>
+        <item>@string/day</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -64,7 +148,7 @@
     </string-array>
 
     <string-array name="months">
-        <item>Month</item>
+        <item>@string/month</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -79,20 +163,24 @@
         <item>12</item>
     </string-array>
 
+    <string-array name="time_filter">
+        <item>@string/daily</item>
+        <item>@string/monthly</item>
+        <item>@string/yearly</item>
+    </string-array>
 
     <string-array name="reset">
-        <item>All</item>
-        <item>Prayer</item>
-        <item>Handout</item>
-        <item>Zekr</item>
+        <item>@string/all</item>
+        <item>@string/prayer</item>
+        <item>@string/handout</item>
+        <item>@string/zekr</item>
     </string-array>
 
     <string-array name="languages">
-        <item>Change</item>
+        <item>@string/modify</item>
         <item>English</item>
         <item>العربية</item>
-        <item>Turkish</item>
-        <item>Indonesian</item>
+        <item>French</item>
     </string-array>
 
 </resources>

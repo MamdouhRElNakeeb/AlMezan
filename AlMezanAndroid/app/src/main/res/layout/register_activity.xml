@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layoutDirection="rtl">
+    android:layout_height="match_parent">
 
 
     <ImageView
@@ -53,7 +52,8 @@
             android:paddingLeft="20dp"
             android:inputType="textPersonName"
             android:textSize="@dimen/et_font"
-            android:hint="الإسم"/>
+            android:gravity="center"
+            android:hint="@string/name"/>
 
         <EditText
             android:id="@+id/emailET"
@@ -67,7 +67,8 @@
             android:paddingLeft="20dp"
             android:inputType="textEmailAddress"
             android:textSize="@dimen/et_font"
-            android:hint="البريد الإلكترونى"/>
+            android:gravity="center"
+            android:hint="@string/email"/>
 
         <EditText
             android:id="@+id/passET"
@@ -80,9 +81,9 @@
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:inputType="textPassword"
-            android:gravity="right|center"
+            android:gravity="center"
             android:textSize="@dimen/et_font"
-            android:hint="كلمة السر"/>
+            android:hint="@string/password"/>
 
         <TextView
             android:id="@+id/ageET"
@@ -95,7 +96,7 @@
             android:paddingLeft="20dp"
             android:textColor="@color/white"
             android:textSize="@dimen/et_font"
-            android:text="تاريخ الميلاد"/>
+            android:text="@string/dob"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,36 +106,126 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp">
 
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/daySpinner"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/margin10"
-                android:background="@drawable/spinner_bg">
+                android:layout_height="match_parent">
 
-            </android.support.v7.widget.AppCompatSpinner>
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/monthSpinner"
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/daySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin10"
+                    android:background="@drawable/spinner_bg">
+
+
+                </android.support.v7.widget.AppCompatSpinner>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/spinner_arrow"/>
+
+            </RelativeLayout>
+
+            <!--<android.support.v7.widget.AppCompatSpinner-->
+                <!--android:id="@+id/daySpinner"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingLeft="@dimen/margin10"-->
+                <!--android:background="@drawable/spinner_bg">-->
+
+            <!--</android.support.v7.widget.AppCompatSpinner>-->
+
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:background="@drawable/spinner_bg">
+                android:layout_marginLeft="10dp">
 
-            </android.support.v7.widget.AppCompatSpinner>
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/monthSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin10"
+                    android:background="@drawable/spinner_bg">
 
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/yearSpinner"
+
+                </android.support.v7.widget.AppCompatSpinner>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/spinner_arrow"/>
+
+            </RelativeLayout>
+
+            <!--<android.support.v7.widget.AppCompatSpinner-->
+                <!--android:id="@+id/monthSpinner"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:background="@drawable/spinner_bg">-->
+
+            <!--</android.support.v7.widget.AppCompatSpinner>-->
+
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/margin10"
-                android:background="@drawable/spinner_bg">
+                android:layout_height="match_parent">
 
-            </android.support.v7.widget.AppCompatSpinner>
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/yearSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin10"
+                    android:background="@drawable/spinner_bg">
+
+
+                </android.support.v7.widget.AppCompatSpinner>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/spinner_arrow"/>
+
+            </RelativeLayout>
+
+            <!--<android.support.v7.widget.AppCompatSpinner-->
+                <!--android:id="@+id/yearSpinner"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingLeft="@dimen/margin10"-->
+                <!--android:background="@drawable/spinner_bg">-->
+
+            <!--</android.support.v7.widget.AppCompatSpinner>-->
 
         </LinearLayout>
 
@@ -156,8 +247,9 @@
             android:id="@+id/regBtn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
-            android:text="تسجيل"
-            android:textSize="17sp"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:textSize="@dimen/btn_font"
             android:textStyle="bold"
             android:background="@drawable/btn_bg"
             android:layout_marginTop="20dp"
@@ -169,7 +261,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="مستخدم حالى؟ ادخل من هنا"
+            android:text="@string/current_user_login_here"
+            android:textAllCaps="false"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:background="@android:color/transparent"/>
@@ -194,7 +287,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-6430998960222915/2761096228">
+        ads:adUnitId="ca-app-pub-5330928698678581/8587799632">
     </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

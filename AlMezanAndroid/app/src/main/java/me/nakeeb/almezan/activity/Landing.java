@@ -1,29 +1,50 @@
 package me.nakeeb.almezan.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Locale;
 
 import me.nakeeb.almezan.R;
+import me.nakeeb.almezan.helper.Utils;
 
 /**
  * Created by mamdouhelnakeeb on 12/12/17.
  */
 
-public class Landing extends AppCompatActivity {
+public class Landing extends BaseActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.landing_activity);
+    protected int getLayoutResourceId() {
+        return R.layout.landing_activity;
+    }
 
-        loadADs();
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
 
         findViewById(R.id.prayerAddBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,15 +102,4 @@ public class Landing extends AppCompatActivity {
         });
     }
 
-    private void loadADs(){
-
-        // Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713
-        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
-
-        AdView mAdView;
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 }

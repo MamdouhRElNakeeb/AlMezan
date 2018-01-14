@@ -40,7 +40,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import me.nakeeb.almezan.R;
 import me.nakeeb.almezan.helper.Utils;
@@ -52,7 +55,7 @@ import me.nakeeb.almezan.model.User;
  * Created by mamdouhelnakeeb on 12/15/17.
  */
 
-public class PrayersStats extends AppCompatActivity {
+public class PrayersStats extends BaseActivity {
 
     TextView fajr0TV, duhr0TV, asr0TV, mghreb0TV, isha0TV;
     TextView fajr1TV, duhr1TV, asr1TV, mghreb1TV, isha1TV;
@@ -64,52 +67,60 @@ public class PrayersStats extends AppCompatActivity {
     PieChart mChart;
 
     private int [] prayersData = {0, 0, 0, 0};
-    private String[] xData = {"فى وقتها", "متأخرة" , "متروكة" , "غير مسجل"};
+    private int[] xData = {
+            R.string.on_time,
+            R.string.late,
+            R.string.left_out,
+            R.string.not_reg
+    };
 
     PrayersDay prayersDay;
 
     int regDays = 0, totalDays = 0;
 
     ArrayList<DateItem> dateItemArrayList;
-    
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.prayer_stats_activity;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.prayer_stats_activity);
 
         prayersDay = new PrayersDay();
 
-        updatePeriod();
-
         initPrayers();
         initChart();
-        initNav();
-
 
         mAuth = FirebaseAuth.getInstance();
 
-
         long currentMillis = System.currentTimeMillis();
-        dateItemArrayList = Utils.getDates(currentMillis,
-                getSharedPreferences("User", MODE_PRIVATE).getLong("startTime", currentMillis),
-                new Locale("ar", "EG"));
+
+        dateItemArrayList = Utils.getDates(Utils.getDayMillis(currentMillis),
+                Utils.getDayMillis(getSharedPreferences("User", MODE_PRIVATE).getLong("prayerTime", currentMillis)),
+                Locale.getDefault());
 
         getPrayersStats();
 
-        loadADs();
-        
+        updatePeriod();
+
     }
 
     private void getPrayersStats(){
 
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Log.d("arrSizeee", String.valueOf(dateItemArrayList.size()));
 
         for (int i = 0; i < dateItemArrayList.size(); i++) {
 
-            // TODO fix path issue
-
             mAuth = FirebaseAuth.getInstance();
+            if (mAuth.getCurrentUser() == null){
+                return;
+            }
+
             DocumentReference docRef = db.collection("users")
                     .document(mAuth.getCurrentUser().getUid())
                     .collection("prayers")
@@ -122,7 +133,6 @@ public class PrayersStats extends AppCompatActivity {
             Log.d("yearP", String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "y")));
             Log.d("monthP", String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "MM/y")));
             Log.d("dayP", String.valueOf(Utils.getMillis(dateItemArrayList.get(i).timeInMillis, "dd/MM/y")));
-
 
             docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
@@ -142,63 +152,11 @@ public class PrayersStats extends AppCompatActivity {
 
                     regDays++;
 
-
                     addDataSet();
 
                 }
             });
 
-//            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                @Override
-//                public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                    if (documentSnapshot.exists())
-//                        Log.d("UserID", documentSnapshot.getId());
-//                    else
-//                        return;
-//                    Log.d("PrayerData: ", documentSnapshot.getId() + " => " + documentSnapshot.getData());
-//
-//                    prayersDay.fajr = Integer.parseInt(documentSnapshot.get("fajr").toString());
-//                    prayersDay.duhr = Integer.parseInt(documentSnapshot.get("duhr").toString());
-//                    prayersDay.asr = Integer.parseInt(documentSnapshot.get("asr").toString());
-//                    prayersDay.mghreb = Integer.parseInt(documentSnapshot.get("mghreb").toString());
-//                    prayersDay.isha = Integer.parseInt(documentSnapshot.get("isha").toString());
-//
-//                    updatePrayers();
-//
-//                    regDays++;
-//
-//                }
-//            });
-
-
-//            docRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                    if (task.isSuccessful()) {
-//                        for (DocumentSnapshot document : task.getResult()) {
-//
-//                            if (!document.exists())
-//                                return;
-//
-//                            Log.d("PrayerData: ", document.getId() + " => " + document.getData());
-//
-//                            prayersDay.fajr = Integer.parseInt(document.get("fajr").toString());
-//                            prayersDay.duhr = Integer.parseInt(document.get("duhr").toString());
-//                            prayersDay.asr = Integer.parseInt(document.get("asr").toString());
-//                            prayersDay.mghreb = Integer.parseInt(document.get("mghreb").toString());
-//                            prayersDay.isha = Integer.parseInt(document.get("isha").toString());
-//
-//                            updatePrayers();
-//
-//                        }
-//
-//                        regDays += task.getResult().size();
-//                        addDataSet();
-//                    } else {
-//                        Log.d("Error: ", "Error getting documents: ", task.getException());
-//                    }
-//                }
-//            });
         }
 
     }
@@ -210,7 +168,7 @@ public class PrayersStats extends AppCompatActivity {
         long currentMillis = System.currentTimeMillis();
 
         periodArr = Utils.getDaysMonthsYearsNo(currentMillis,
-                getSharedPreferences("User", MODE_PRIVATE).getLong("startTime", currentMillis));
+                getSharedPreferences("User", MODE_PRIVATE).getLong("prayerTime", currentMillis));
 
         TextView daysCounterTV = findViewById(R.id.daysCounterTV);
         TextView monthsCounterTV = findViewById(R.id.monthsCounterTV);
@@ -418,11 +376,11 @@ public class PrayersStats extends AppCompatActivity {
         }
 
         for(int i = 1; i < xData.length; i++){
-            xEntrys.add(xData[i]);
+            xEntrys.add(getString(xData[i]));
         }
 
         //create the data set
-        PieDataSet pieDataSet = new PieDataSet(yEntrys, "Prayers Stats");
+        PieDataSet pieDataSet = new PieDataSet(yEntrys, "Prayers Data");
         pieDataSet.setSliceSpace(0);
         pieDataSet.setValueTextSize(14);
         pieDataSet.setValueTextColor(Color.BLACK);
@@ -437,38 +395,48 @@ public class PrayersStats extends AppCompatActivity {
         pieDataSet.setColors(colors);
 
         //add legend to chart
-//        Legend legend = mChart.getLegend();
-//        legend.setForm(Legend.LegendForm.CIRCLE);
-//        legend.setForm(Legend.LegendForm.SQUARE);
-
         LegendEntry inTime = new LegendEntry();
-        inTime.label = xData[0];
+        inTime.label = getString(xData[0]);
         inTime.form = Legend.LegendForm.SQUARE;
         inTime.formColor = getResources().getColor(R.color.green);
         inTime.formSize = 10;
 
         LegendEntry late = new LegendEntry();
-        late.label = xData[1];
+        late.label = getString(xData[1]);
         late.form = Legend.LegendForm.SQUARE;
         late.formColor = getResources().getColor(R.color.yellow);
         late.formSize = 10;
 
         LegendEntry left = new LegendEntry();
-        left.label = xData[2];
+        left.label = getString(xData[2]);
         left.form = Legend.LegendForm.SQUARE;
         left.formColor = getResources().getColor(R.color.red);
         left.formSize = 10;
 
         LegendEntry notReg = new LegendEntry();
-        notReg.label = xData[3];
+        notReg.label = getString(xData[3]);
         notReg.form = Legend.LegendForm.SQUARE;
         notReg.formColor = getResources().getColor(R.color.dark_grey);
         notReg.formSize = 10;
 
-        LegendEntry legendEntry[] = {inTime, late, left, notReg};
 
-        Legend legend = new Legend(legendEntry);
-//        legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+        List<LegendEntry> legendEntrySet = new ArrayList<>();
+        legendEntrySet.add(inTime);
+        legendEntrySet.add(late);
+        legendEntrySet.add(left);
+        legendEntrySet.add(notReg);
+
+        Legend l = mChart.getLegend();
+        l.setCustom(legendEntrySet);
+        l.setTextColor(getResources().getColor(R.color.white));
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(true);
+        l.setForm(Legend.LegendForm.SQUARE);
+        l.setFormSize(10f);
+        l.setTextSize(14f);
+        l.setXEntrySpace(4f);
 
         //create pie data object
         PieData pieData = new PieData(pieDataSet);
@@ -481,37 +449,23 @@ public class PrayersStats extends AppCompatActivity {
         mChart = findViewById(R.id.chart1);
         mChart.setUsePercentValues(true);
         mChart.getDescription().setEnabled(false);
-//        mChart.setExtraOffsets(5, 10, 5, 5);
 
         mChart.setDragDecelerationFrictionCoef(0.95f);
 
         mChart.setDrawHoleEnabled(true);
         mChart.setHoleColor(Color.WHITE);
 
-//        mChart.setTransparentCircleColor(Color.WHITE);
-//        mChart.setTransparentCircleAlpha(110);
-
         mChart.setHoleRadius(0f);
-//        mChart.setTransparentCircleRadius(61f);
-
-//        mChart.setDrawCenterText(true);
-
         mChart.setRotationAngle(0);
+
         // enable rotation of the chart by touch
         mChart.setRotationEnabled(true);
         mChart.setHighlightPerTapEnabled(true);
 
-        // mChart.setUnit(" €");
-        // mChart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-//        mChart.setOnChartValueSelectedListener(this);
-
-//        setData(4, 100);
-
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
     }
+
     private void initPrayers(){
 
 
@@ -544,129 +498,4 @@ public class PrayersStats extends AppCompatActivity {
 
     }
 
-    private void initNav(){
-
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-
-
-        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
-        ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
-
-        sideMenuIB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDrawerLayout.openDrawer(Gravity.RIGHT);
-            }
-        });
-
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nameTV))
-                .setText(getSharedPreferences("User", MODE_PRIVATE).getString("name", ""));
-
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.ageTV))
-                .setText(String.valueOf(Utils.calcAge(getSharedPreferences("User", MODE_PRIVATE).getString("dob", "0/0/0"))));
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.homeBtnLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getBaseContext(), Landing.class));
-                        finish();
-                    }
-                });
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.settingsBtnLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getBaseContext(), Settings.class));
-                    }
-                });
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.logoutLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getBaseContext(), Login.class));
-                        finish();
-                    }
-                });
-
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.fbIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String FACEBOOK_URL = "https://www.facebook.com/MamdouhRElNakeeb";
-                        String FACEBOOK_PAGE_ID = "MamdouhRElNakeeb";
-                        String facebookUrl = "";
-                        PackageManager packageManager = getPackageManager();
-                        try {
-                            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-                            if (versionCode >= 3002850) { //newer versions of fb app
-                                facebookUrl = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
-                            } else { //older versions of fb app
-                                facebookUrl = "fb://page/" + FACEBOOK_PAGE_ID;
-                            }
-                        } catch (PackageManager.NameNotFoundException e) {
-                            facebookUrl =  FACEBOOK_URL; //normal web url
-                        }
-
-                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                        facebookIntent.setData(Uri.parse(facebookUrl));
-                        startActivity(facebookIntent);
-                    }
-                });
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.twtIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Intent intent = null;
-                        try {
-                            // get the Twitter app if possible
-                            getPackageManager().getPackageInfo("com.twitter.android", 0);
-                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=mamdouhelnakeeb"));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        } catch (Exception e) {
-                            // no Twitter app, revert to browser
-                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mamdouhelnakeeb"));
-                        }
-                        startActivity(intent);
-                    }
-                });
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.instaIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Uri uri = Uri.parse("http://instagram.com/_u/mamdouhrelnakeeb");
-                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-
-                        likeIng.setPackage("com.instagram.android");
-
-                        try {
-                            startActivity(likeIng);
-                        } catch (ActivityNotFoundException e) {
-                            startActivity(new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse("http://instagram.com/mamdouhrelnakeeb")));
-                        }
-                    }
-                });
-
-    }
-
-    private void loadADs(){
-
-        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
-
-        AdView mAdView;
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 }

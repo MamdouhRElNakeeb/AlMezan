@@ -1,6 +1,44 @@
 <resources>
     <string name="app_name">AlMezan</string>
 
+    <!-- Landing Menu -->
+    <string name="reg_prayer">تسجيل الصلاة</string>
+    <string name="charity_counter">عداد الصدقة</string>
+    <string name="zekr_counter">عداد الذِكر</string>
+    <string name="month_compare">مقارنة الشهور</string>
+    <string name="stats">نسب و إحصائيات</string>
+    <string name="zekr_stats">إحصائيات الذِكر</string>
+    <string name="rst_counter">تصفير العداد</string>
+
+    <!--Prayer Status-->
+    <string name="on_time">في وقتها</string>
+    <string name="late">متأخرة</string>
+    <string name="left_out">متروكة</string>
+    <string name="excuse">عذر شرعي</string>
+    <string name="not_reg">غير مسجل</string>
+
+    <!-- Prayers -->
+    <string name="prayer">الصلاة</string>
+    <string name="fajr">فجر</string>
+    <string name="duhr">ظهر</string>
+    <string name="asr">عصر</string>
+    <string name="mghreb">مغرب</string>
+    <string name="isha">عشاء</string>
+
+    <!-- Handout -->
+    <string name="handout">الصدقة</string>
+    <string name="amount_charity">مبلغ متصدق به</string>
+    <string name="total_charity">اجمالي الصدقة</string>
+
+
+    <!-- Zekr -->
+    <string name="zekr">الذِكر</string>
+    <string name="cumulative">تراكمى</string>
+    <string name="zekr_count">عدد التسابيح</string>
+    <string name="days_count">عدد أيام العمر</string>
+    <string name="months_count">عدد شهور العمر</string>
+    <string name="years_count">عدد سنين العمر</string>
+
     <string name="doaa0">أستغفر الله العظيم</string>
     <string name="doaa1">الله أكبر</string>
     <string name="doaa2">لا إله إلا الله</string>
@@ -11,23 +49,73 @@
     <string name="doaa7">سبحان الله و بحمده \n سبحان الله العظيم</string>
     <string name="doaa8">لا إله إلا أنت سبحانك \n إنى كنت من الظالمين</string>
 
+    <!-- Tutorial -->
+    <string name="app_tut">التعريف بالبرنامج</string>
+    <string name="tut1">أولا: نضغط على زر تسجيل الصلاة</string>
+    <string name="tut2">نضع علامة في المربع الذي يخص الصلاة التي تريد تسجيلها ثم تضغط حفظ</string>
+    <string name="tut3">مثال: إذا صليت صلاة الفجر في وقتها تضغط على المربع الخاص بصلاة الفجر ثم تضغط حفظ وتكرر ذلك عند كل صلاة في المربع الخاص بها. وتسهيلًا على المستخدم نستطيع تسجيلهم كلهم دفعة واحدة بعد صلاة العشاء إذا أردت بشرط ألا تكون الساعة قد تجاوزت الثانية عشر مساءً. وإذا تعدت الساعة الثانية عشر مساءً سوف تكون الصلاة بذلك غير مسجلة وتضاف إلى بند الصلوات غير المسجلة</string>
+    <string name="tut4">يبدأ احتساب النسبة المئوية من أول يوم بدأ فيه تشغيل تطبيق "الميزان"</string>
+    <string name="tut5">إذا أردت تصفير العداد والبدء من جديد تستطيع الضغط على زر تصفير العداد</string>
+
+    <string name="tut6">تضغط على زر عداد الصدقة ثم تكتب المبلغ المتصدق به ثم تسجل حفظ</string>
+    <string name="tut7">يكتب الإجمالي بشكل تراكمي منذ بدء أول يوم من تشغيل "الميزان"</string>
+
+    <string name="tut8">اضغط على زر عداد الذكر ثم أختر الذكر الذي تريده ثم عند كل تسبيحة أو ذكر تقوله إلمس شاشة المحمول فيبدأ العداد في العمل مع كل لمسة. وعند الانتهاء إضغط حفظ</string>
+    <string name="tut9">هناك عدادين للذكر، العداد الأول يكون للجلسة الواحدة، أما الثاني فيعمل بشكل تراكمي فبعد كل جلسة نضيف المجموع الجديد على المجموع القديم ثم يقسمه على عدد أيام عمرك لتعرف كم تسبيحة أو ذكر قد قلته في اليوم الواحد من عمرك</string>
+
 
     <string name="reset_message">هل تريد تصفير عداد ؟</string>
-    <string name="no">لا</string>
-    <string name="yes">نعم</string>
+    <string name="register_new_user">تسجيل مستخدم جديد؟</string>
+    <string name="current_user_login_here">مستخدم حالى؟ ادخل من هنا</string>
+    <string name="change_lang">هل أنت متأكد من تغيير لغة التطبيق؟</string>
+    <string name="slogan">قبل أن تحاسبوا</string>
 
+
+    <!-- Time -->
+    <string name="days_counter">عداد الأيام</string>
     <string name="year">سنة</string>
     <string name="month">شهر</string>
     <string name="day">يوم</string>
+    <string name="daily">يومياً</string>
+    <string name="monthly">شهرياً</string>
+    <string name="yearly">سنوياً</string>
 
-    <string name="prayer">الصلاة</string>
-    <string name="handout">الصدقة</string>
-    <string name="zekr">الذِكر</string>
+    <!-- Months -->
+    <string name="jan">يناير</string>
+    <string name="feb">فبراير</string>
+    <string name="mar">مارس</string>
+    <string name="april">أبريل</string>
+    <string name="may">مايو</string>
+    <string name="jun">يونيو</string>
+    <string name="jul">يوليو</string>
+    <string name="aug">أغسطس</string>
+    <string name="sep">سبتمبر</string>
+    <string name="oct">أكتوبر</string>
+    <string name="nov">نوفمبر</string>
+    <string name="dec">ديسمبر</string>
 
-    <string name="app_tut">التعريف بالبرنامج</string>
+
+    <!-- Other -->
+    <string name="save">حفظ</string>
+    <string name="modify">تعديل</string>
+    <string name="percentage">النسبة المئوية</string>
+    <string name="no">لا</string>
+    <string name="yes">نعم</string>
+    <string name="all">الكل</string>
+    <string name="name">الإسم</string>
+    <string name="email">البريد الإلكترونى</string>
+    <string name="password">كلمة السر</string>
+    <string name="dob">تاريخ الميلاد</string>
+    <string name="login">دخول</string>
+    <string name="register">تسجيل</string>
+    <string name="logout">خروج</string>
+    <string name="home">الرئيسية</string>
+    <string name="settings">الإعدادات</string>
+    <string name="follow_us">تابعنا على</string>
+    <string name="lang">اللغة</string>
 
     <string-array name="days">
-        <item>يوم</item>
+        <item>@string/day</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -62,7 +150,7 @@
     </string-array>
 
     <string-array name="months">
-        <item>شهر</item>
+        <item>@string/month</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -77,11 +165,24 @@
         <item>12</item>
     </string-array>
 
+    <string-array name="time_filter">
+        <item>@string/daily</item>
+        <item>@string/monthly</item>
+        <item>@string/yearly</item>
+    </string-array>
+
     <string-array name="reset">
-        <item>الكل</item>
-        <item>الصلاة</item>
-        <item>الصدقة</item>
-        <item>الذِكر</item>
+        <item>@string/all</item>
+        <item>@string/prayer</item>
+        <item>@string/handout</item>
+        <item>@string/zekr</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>@string/modify</item>
+        <item>English</item>
+        <item>العربية</item>
+        <item>French</item>
     </string-array>
 
 </resources>

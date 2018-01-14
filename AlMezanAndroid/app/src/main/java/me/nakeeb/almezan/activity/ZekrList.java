@@ -2,6 +2,7 @@ package me.nakeeb.almezan.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +18,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -28,14 +32,30 @@ import me.nakeeb.almezan.helper.Utils;
  * Created by mamdouhelnakeeb on 12/15/17.
  */
 
-public class ZekrList extends AppCompatActivity implements View.OnClickListener {
+public class ZekrList extends BaseActivity implements View.OnClickListener {
 
     Button doaa0, doaa1, doaa2, doaa3, doaa4, doaa5, doaa6, doaa7, doaa8;
+
+    private InterstitialAd mInterstitialAd;
+
+
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.zekr_add_activity;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.zekr_add_activity);
+
+
+        prefs = getSharedPreferences("ADs", MODE_PRIVATE);
+        editor = prefs.edit();
+
+        loadPopup();
 
         doaa0 = findViewById(R.id.doaa0);
         doaa1 = findViewById(R.id.doaa1);
@@ -57,9 +77,7 @@ public class ZekrList extends AppCompatActivity implements View.OnClickListener 
         doaa7.setOnClickListener(this);
         doaa8.setOnClickListener(this);
 
-        initNav();
 
-        loadADs();
     }
 
     @Override
@@ -125,129 +143,63 @@ public class ZekrList extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    private void initNav(){
+    private void loadPopup(){
 
-        NavigationView navigationView = findViewById(R.id.navigation_view);
+//        test: ca-app-pub-3940256099942544/1033173712
 
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-5330928698678581/7252992079");
 
-        final DrawerLayout mDrawerLayout = findViewById(R.id.drawer);
-        ImageButton sideMenuIB = findViewById(R.id.sideMenuIB);
+        if (!prefs.getBoolean("popup", false)){
 
-        sideMenuIB.setOnClickListener(new View.OnClickListener() {
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        }
+
+        mInterstitialAd.setAdListener(new AdListener() {
             @Override
-            public void onClick(View view) {
-                mDrawerLayout.openDrawer(Gravity.RIGHT);
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+
+                editor.putBoolean("popup", true);
+                editor.apply();
+                showPopup();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                editor.putBoolean("popup", false);
+                editor.apply();
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when the ad is displayed.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the interstitial ad is closed.
+
             }
         });
 
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.nameTV))
-                .setText(getSharedPreferences("User", MODE_PRIVATE).getString("name", ""));
+    }
 
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.ageTV))
-                .setText(String.valueOf(Utils.calcAge(getSharedPreferences("User", MODE_PRIVATE).getString("dob", "0/0/0"))));
+    private void showPopup(){
 
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.homeBtnLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getBaseContext(), Landing.class));
-                        finish();
-                    }
-                });
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.settingsBtnLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getBaseContext(), Settings.class));
-                    }
-                });
-
-        ((LinearLayout) navigationView.getHeaderView(0).findViewById(R.id.logoutLL))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getBaseContext(), Login.class));
-                        finish();
-                    }
-                });
-
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.fbIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        String FACEBOOK_URL = "https://www.facebook.com/MamdouhRElNakeeb";
-                        String FACEBOOK_PAGE_ID = "MamdouhRElNakeeb";
-                        String facebookUrl = "";
-                        PackageManager packageManager = getPackageManager();
-                        try {
-                            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
-                            if (versionCode >= 3002850) { //newer versions of fb app
-                                facebookUrl = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
-                            } else { //older versions of fb app
-                                facebookUrl = "fb://page/" + FACEBOOK_PAGE_ID;
-                            }
-                        } catch (PackageManager.NameNotFoundException e) {
-                            facebookUrl =  FACEBOOK_URL; //normal web url
-                        }
-
-                        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
-                        facebookIntent.setData(Uri.parse(facebookUrl));
-                        startActivity(facebookIntent);
-                    }
-                });
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.twtIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Intent intent = null;
-                        try {
-                            // get the Twitter app if possible
-                            getPackageManager().getPackageInfo("com.twitter.android", 0);
-                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=mamdouhelnakeeb"));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        } catch (Exception e) {
-                            // no Twitter app, revert to browser
-                            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mamdouhelnakeeb"));
-                        }
-                        startActivity(intent);
-                    }
-                });
-
-        ((ImageButton) navigationView.getHeaderView(0).findViewById(R.id.instaIB))
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Uri uri = Uri.parse("http://instagram.com/_u/mamdouhrelnakeeb");
-                        Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-
-                        likeIng.setPackage("com.instagram.android");
-
-                        try {
-                            startActivity(likeIng);
-                        } catch (ActivityNotFoundException e) {
-                            startActivity(new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse("http://instagram.com/mamdouhrelnakeeb")));
-                        }
-                    }
-                });
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
 
     }
 
-    private void loadADs(){
-
-        MobileAds.initialize(this, "ca-app-pub-6430998960222915~3066549688");
-
-        AdView mAdView;
-
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 }

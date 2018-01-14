@@ -1,12 +1,15 @@
 package me.nakeeb.almezan.helper;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.Log;
 
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,53 +22,44 @@ import java.util.concurrent.TimeUnit;
 
 import me.nakeeb.almezan.model.DateItem;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by mamdouhelnakeeb on 12/15/17.
  */
 
 public class Utils {
 
-    public static void changeLocale(Context context, String locale) {
-        Resources res = context.getResources();
-        Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(locale);
-        res.updateConfiguration(conf, res.getDisplayMetrics());
-    }
-
-    public static long currentMillis(){
-
-        long x = System.currentTimeMillis();
-
-        return x;
-    }
-
     public static ArrayList<DateItem> getYears(long currentMillis, long oldMillis, Locale locale){
 
         ArrayList<DateItem> temp = new ArrayList<>();
 
-        int yearsNo = yearsNo(getDayMillis(currentMillis), getDayMillis(oldMillis));
-
-        if (yearsNo == 0){
-            yearsNo = 1;
-        }
-
-        Log.d("yearsNo", String.valueOf(yearsNo));
-
         SimpleDateFormat formatter = new SimpleDateFormat("y", locale);
-        Calendar calendar = Calendar.getInstance();
-        for (int i = 0; i < yearsNo; i++){
+        Calendar calendar = new GregorianCalendar(locale);
 
-            calendar.setTimeInMillis(oldMillis + 32140800000L * i);
+        calendar.setTimeInMillis(oldMillis);
+        Log.d("oldHandMillis", String.valueOf(oldMillis));
+        Log.d("curHandMillis", String.valueOf(currentMillis));
+
+        while (calendar.getTime().before(new Date(currentMillis)))
+        {
+            Date result = calendar.getTime();
 
             DateItem dateItem = new DateItem();
-            dateItem.date = formatter.format(calendar.getTime());
-            dateItem.timeInMillis = oldMillis + 32140800000L * i;
+            dateItem.date = formatter.format(result);
+            dateItem.timeInMillis = result.getTime();
 
             temp.add(dateItem);
 
-            Log.d("daysFormat", temp.get(i).date);
-            Log.d("daysFormatsss", String.valueOf(oldMillis + 32140800000L * i));
+            Log.d("daysFormat", result.toString());
+            Log.d("daysFormatsss", String.valueOf(result.getTime()));
+
+            calendar.add(Calendar.YEAR, 1);
         }
+
+        calendar.setTimeInMillis(currentMillis);
+        temp.add(new DateItem(calendar.getTime().getTime(), formatter.format(calendar.getTime())));
+
 
         return temp;
     }
@@ -74,36 +68,10 @@ public class Utils {
 
         ArrayList<DateItem> temp = new ArrayList<>();
 
-        int daysNo = daysNo(getDayMillis(currentMillis), getDayMillis(oldMillis));
-
-        if (daysNo == 0){
-            daysNo = 1;
-        }
-
-        Log.d("daysNo", String.valueOf(daysNo));
-
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE \n dd, MMMM y", locale);
-        Calendar calendar = new GregorianCalendar();
+        Calendar calendar = new GregorianCalendar(locale);
 
         calendar.setTimeInMillis(oldMillis);
-
-//        for (int i = 0; i <= daysNo; i++){
-//
-//            calendar.setTimeInMillis(oldMillis + 86400000 * i);
-//
-//            DateItem dateItem = new DateItem();
-//            dateItem.date = formatter.format(calendar.getTime());
-//            dateItem.timeInMillis = oldMillis + 86400000 * i;
-//
-//            temp.add(dateItem);
-//
-//            Log.d("daysFormat", temp.get(i).date);
-//            Log.d("daysFormatsss", String.valueOf(oldMillis + 86400000 * i));
-//        }
-
-        temp.add(new DateItem(calendar.getTime().getTime(), formatter.format(calendar.getTime())));
-
-        calendar.add(Calendar.DATE, 1);
 
         while (calendar.getTime().before(new Date(currentMillis)))
         {
@@ -120,6 +88,9 @@ public class Utils {
 
             calendar.add(Calendar.DATE, 1);
         }
+
+        calendar.setTimeInMillis(currentMillis);
+        temp.add(new DateItem(calendar.getTime().getTime(), formatter.format(calendar.getTime())));
 
 
         return temp;
@@ -145,9 +116,19 @@ public class Utils {
             e.printStackTrace();
         }
 
-        Log.d("timeInMillis", String.valueOf(dayInMilliseconds));
-
         return dayInMilliseconds;
+
+    }
+
+    public static int getDateNo(long dateInMillis, String pattern){
+
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern, Locale.US);
+        Calendar calendar = new GregorianCalendar(Locale.US);
+
+        calendar.setTimeInMillis(dateInMillis);
+
+        Date result = calendar.getTime();
+        return Integer.valueOf(formatter.format(result));
 
     }
 
@@ -171,8 +152,6 @@ public class Utils {
             e.printStackTrace();
         }
 
-        Log.d("timeInMillis", String.valueOf(dayInMilliseconds));
-
         return dayInMilliseconds;
 
     }
@@ -182,20 +161,12 @@ public class Utils {
         ArrayList<Integer> temp = new ArrayList<>();
 
         int days = (int) TimeUnit.MILLISECONDS.toDays(Math.abs(currentMillis - oldMillis)) + 1;
-//
-//        int monthsNo = daysNo / 30;
-//
-//        int yearsNo = daysNo / 365;
 
-
-        long totalsec = (currentMillis - oldMillis) / 1000;
-
-//        int days = (int) ((totalsec / (1000 * 60 * 60 * 24)) % 7);
-//        int weeks = (int) (totalsec / (1000 * 60 * 60 * 24 * 7));
-        int months = days / 30; // weeks / 30;
+        int months = days / 30;
         int years = months / 12;
 
         months = months - years * 12;
+        days = days - months * 30;
 
         temp.add(days);
         temp.add(months);
@@ -220,118 +191,30 @@ public class Utils {
 
     }
 
-    public static ArrayList<String> getDate(long milliSeconds, String dateFormat)
-    {
-        // Create a DateFormatter object for displaying date in specified format.
-//        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, new Locale("ar", "EG"));
-//
-//        // Create a calendar object that will convert the date and time value in milliseconds to date.
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(milliSeconds);
-//
-//
-//        Calendar cal = new UmmalquraCalendar();
-////        cal.setTimeInMillis(milliSeconds);
-//        cal.setTime(calendar.getTime());
+    public static float round(float value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
 
-        ArrayList<String> temp = new ArrayList<String>();
-//        formatter.setCalendar(calendar);
-//        temp.add(formatter.format(calendar.getTime()));
-////        formatter.setCalendar(cal);
-//        temp.add(formatter.format(cal.getTime()));
-
-
-
-//        GregorianCalendar gCal = new GregorianCalendar(2012, Calendar.FEBRUARY, 12);
-//        Calendar uCal = new UmmalquraCalendar();
-//        uCal.setTime(gCal.getTime());
-//
-//        temp.add(formatter.format(uCal.getTime()));
-////        formatter.setCalendar(cal);
-//        temp.add(formatter.format(uCal.getTime()));
-
-
-
-        GregorianCalendar gCal = new GregorianCalendar(2012, 1, 12);
-        Calendar uCal = new UmmalquraCalendar();
-        uCal.setTime(gCal.getTime());
-
-        uCal.get(Calendar.YEAR);         // 1433
-        uCal.get(Calendar.MONTH);        // 2
-        uCal.get(Calendar.DAY_OF_MONTH); // 20
-
-        temp.add(uCal.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("ar")));
-        temp.add(uCal.getDisplayName(Calendar.MONTH, Calendar.LONG, new Locale("ar")));
-
-        return temp;
-    }
-
-    public static int daysNo(long currentMillis, long oldMillis){
-
-        return (int) ((currentMillis - oldMillis) / 86400000);
-
-    }
-
-    public static int yearsNo(long currentMillis, long oldMillis){
-
-        return (int) ((currentMillis - oldMillis) / 32140800000L);
-
-    }
-
-    public static ArrayList<Integer> miladiToHegri(int day, int month, int year){
-
-        ArrayList<Integer> temp = new ArrayList<>();
-
-        GregorianCalendar gCal = new GregorianCalendar(2017, Calendar.JUNE, 2);
-        Calendar uCal = new UmmalquraCalendar();
-        uCal.setTime(gCal.getTime());
-
-        uCal.get(Calendar.YEAR);         // 1433
-        uCal.get(Calendar.MONTH);        // 2
-        uCal.get(Calendar.DAY_OF_MONTH); // 20
-
-        temp.add(Calendar.DAY_OF_MONTH);
-        temp.add(Calendar.MONTH);
-        temp.add(Calendar.YEAR);
-
-        return temp;
-    }
-
-    public static ArrayList<Integer> hegriToMiladi(int day, int month, int year){
-
-        ArrayList<Integer> temp = new ArrayList<>();
-
-        Calendar uCal = new UmmalquraCalendar(year, month - 1, day);
-        GregorianCalendar gCal = new GregorianCalendar();
-        gCal.setTime(uCal.getTime());
-
-        gCal.get(Calendar.YEAR);         // 2012
-        gCal.get(Calendar.MONTH);        // 1
-        gCal.get(Calendar.DAY_OF_MONTH); // 7
-
-        temp.add(Calendar.DAY_OF_MONTH);
-        temp.add(Calendar.MONTH);
-        temp.add(Calendar.YEAR);
-
-        return temp;
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.floatValue();
     }
 
     public static int calcAge(String dob){
         int age = 0;
         Calendar calendar = Calendar.getInstance();
 
+
         Log.d("dob", dob);
+
+        Log.d("dobDay", dob.substring(0, dob.indexOf('/')));
+
+        Log.d("dobMonth", dob.substring(dob.indexOf('/') + 1, dob.lastIndexOf('/')));
+
+        Log.d("dobYear", dob.substring(dob.lastIndexOf('/') + 1, dob.length()));
+
         int dobDay = Integer.parseInt(dob.substring(0, dob.indexOf('/')));
-
-        dob  = dob.replace(dob.substring(0, dob.indexOf('/') + 1), "");
-
-        Log.d("dob", dob);
-        int dobMonth = Integer.parseInt(dob.substring(0, dob.indexOf('/')));
-
-        dob  = dob.replace(dob.substring(0, dob.indexOf('/') + 1), "");
-
-        Log.d("dob", dob);
-        int dobYear = Integer.parseInt(dob.substring(0, 4));
+        int dobMonth = Integer.parseInt(dob.substring(dob.indexOf('/') + 1, dob.lastIndexOf('/')));
+        int dobYear = Integer.parseInt(dob.substring(dob.lastIndexOf('/') + 1, dob.length()));
 
         int curDay = calendar.get(Calendar.DAY_OF_MONTH);
         int curMonth = calendar.get(Calendar.MONTH);
@@ -353,5 +236,13 @@ public class Utils {
         }
 
         return age;
+    }
+
+    public static void logout(Context context){
+
+        SharedPreferences.Editor editor = context.getSharedPreferences("User", MODE_PRIVATE).edit();
+        editor.putBoolean("login", false);
+        editor.apply();
+
     }
 }

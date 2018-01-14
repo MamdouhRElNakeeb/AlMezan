@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layoutDirection="rtl">
+    android:layout_height="match_parent">
 
 
     <ImageView
@@ -50,9 +49,11 @@
             android:background="@drawable/edttxt_bg"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:gravity="center"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
-            android:hint="البريد الإلكترونى"/>
+            android:textSize="@dimen/stats_tv_size"
+            android:hint="@string/email"/>
 
         <EditText
             android:id="@+id/passET"
@@ -63,10 +64,11 @@
             android:background="@drawable/edttxt_bg"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:gravity="right|center"
+            android:gravity="center"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
-            android:hint="كلمة السر"/>
+            android:textSize="@dimen/stats_tv_size"
+            android:hint="@string/password"/>
 
 
 
@@ -75,8 +77,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
             android:textStyle="bold"
-            android:text="دخول"
-            android:textSize="17sp"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textSize="@dimen/stats_tv_size"
             android:background="@drawable/btn_bg"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
@@ -87,7 +90,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="تسجيل مستخدم جديد ؟"
+            android:text="@string/register_new_user"
+            android:textAllCaps="false"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:background="@android:color/transparent"/>
@@ -112,7 +116,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-6430998960222915/3105421596">
+        ads:adUnitId="ca-app-pub-5330928698678581/9102627348">
     </com.google.android.gms.ads.AdView>
 
 

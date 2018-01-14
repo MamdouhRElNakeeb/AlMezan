@@ -4,14 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layoutDirection="rtl">
+    android:layout_height="match_parent">
 
 
     <RelativeLayout android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layoutDirection="rtl">
+        android:layout_height="match_parent">
 
 
         <ImageView
@@ -37,6 +35,8 @@
             android:layout_height="50dp"
             android:adjustViewBounds="true"
             android:src="@drawable/almezan_logo"
+            android:layoutDirection="rtl"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
 
 
@@ -49,6 +49,7 @@
             android:tint="@color/orange"
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
+            android:layoutDirection="rtl"
             android:src="@drawable/sidemenu_icn"
             android:background="@android:color/transparent"/>
 
@@ -62,7 +63,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-6430998960222915/4973037038">
+            ads:adUnitId="ca-app-pub-5330928698678581/4985921385">
         </com.google.android.gms.ads.AdView>
 
         <LinearLayout
@@ -76,7 +77,7 @@
                 android:id="@+id/handoutTitleTV"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/save_btn_height"
-                android:text="الإعدادات"
+                android:text="@string/settings"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/month_tv_size"
@@ -99,18 +100,39 @@
                     android:textSize="@dimen/counter_tv_size"
                     android:textColor="@color/white"
                     android:gravity="center"
+                    android:text="@string/lang"/>
 
-                    android:text="اللغة"/>
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/langSpinner"
+                <RelativeLayout
+                    android:id="@+id/filterSpinnerRL"
+                    android:layout_below="@id/zekrTitleTV"
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:gravity="center"
-                    android:background="@drawable/reset_spinner_bg">
+                    android:layout_marginRight="@dimen/margin10"
+                    android:layout_marginLeft="@dimen/margin10"
+                    android:gravity="center">
 
-                </android.support.v7.widget.AppCompatSpinner>
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/langSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@drawable/reset_spinner_bg">
+
+
+                    </android.support.v7.widget.AppCompatSpinner>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/spinner_arrowb"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -121,11 +143,11 @@
                 android:layout_marginRight="@dimen/margin20"
                 android:layout_marginLeft="@dimen/margin20"
                 android:layout_marginTop="@dimen/margin10"
-                android:text="التعريف بالبرنامج"
+                android:text="@string/app_tut"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/counter_tv_size"
-                android:gravity="right"
+                android:gravity="start|center_vertical"
                 android:background="@android:color/transparent"/>
 
         </LinearLayout>

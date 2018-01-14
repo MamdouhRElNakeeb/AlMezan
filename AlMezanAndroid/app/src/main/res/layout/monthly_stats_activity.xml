@@ -4,15 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer"
-    android:layoutDirection="rtl">
+    android:id="@+id/drawer">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layoutDirection="rtl">
+        android:layout_height="match_parent">
 
 
         <ImageView
@@ -38,6 +36,8 @@
             android:layout_height="50dp"
             android:adjustViewBounds="true"
             android:layout_marginTop="-5dp"
+            android:layoutDirection="rtl"
+            android:layout_alignParentRight="true"
             android:src="@drawable/almezan_logo"
             android:layout_alignParentTop="true"/>
 
@@ -51,26 +51,20 @@
             android:tint="@color/orange"
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
+            android:layoutDirection="rtl"
             android:src="@drawable/sidemenu_icn"
             android:background="@android:color/transparent"/>
 
-
-        <TextView
-            android:id="@+id/statsTitleTV"
-            android:layout_below="@id/almezan_logo"
+        <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/islamic_icn"
-            android:text="مقارنة الشهور"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/header_tv_size"
-            android:padding="5dp"
+            android:layout_below="@id/almezan_logo"
             android:background="@color/red"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="@dimen/margin10"/>
 
 
         <ImageView
+            android:id="@+id/islamic_icn1"
             android:layout_width="@dimen/islamic_icn"
             android:layout_height="@dimen/islamic_icn"
             android:layout_marginTop="5dp"
@@ -80,6 +74,7 @@
             android:layout_alignParentRight="true"/>
 
         <ImageView
+            android:id="@+id/islamic_icn2"
             android:layout_width="@dimen/islamic_icn"
             android:layout_height="@dimen/islamic_icn"
             android:layout_marginTop="5dp"
@@ -88,39 +83,57 @@
             android:adjustViewBounds="true"
             android:layout_alignParentLeft="true"/>
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/yearNoRV"
+        <TextView
+            android:id="@+id/statsTitleTV"
+            android:layout_below="@id/almezan_logo"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_below="@id/statsTitleTV"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/stats_bg">
+            android:layout_toLeftOf="@id/islamic_icn1"
+            android:layout_toRightOf="@id/islamic_icn2"
+            android:layout_height="@dimen/islamic_icn"
+            android:text="@string/month_compare"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/counter_tv_size"
+            android:padding="5dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/margin5"/>
 
-        </android.support.v7.widget.RecyclerView>
 
         <RelativeLayout
+            android:id="@+id/monthsRVRL"
             android:layout_width="match_parent"
             android:layout_height="130dp"
+            android:layoutDirection="rtl"
+            android:layout_marginBottom="@dimen/margin10"
             android:layout_below="@id/statsTitleTV">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/yearNoRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/stats_bg">
+
+            </android.support.v7.widget.RecyclerView>
+
             <ImageButton
+                android:id="@+id/datePrevIB"
                 android:layout_width="25dp"
                 android:scaleType="fitCenter"
                 android:layout_margin="16dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/arrow"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
                 android:background="@android:color/transparent"/>
 
             <ImageButton
+                android:id="@+id/dateNextIB"
                 android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
                 android:scaleX="-1"
                 android:layout_margin="16dp"
                 android:src="@drawable/arrow"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
                 android:background="@android:color/transparent"/>
         </RelativeLayout>
 
@@ -132,72 +145,77 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-6430998960222915/7507701030">
+            ads:adUnitId="ca-app-pub-5330928698678581/9966785320">
         </com.google.android.gms.ads.AdView>
+
+        <LinearLayout
+            android:id="@+id/titleHeaderLL"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_below="@id/monthsRVRL"
+            android:background="@drawable/faded_black_gradient"
+            android:layout_marginRight="@dimen/side_margin"
+            android:layout_marginLeft="@dimen/side_margin">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/on_time"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/stats_tv_size"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/late"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/stats_tv_size"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/left_out"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/stats_tv_size"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/handout"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/stats_tv_size"/>
+
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/yearNoRV"
+            android:layout_below="@id/titleHeaderLL"
             android:layout_above="@id/adView">
 
             <LinearLayout
                 android:id="@+id/prayerLL"
-                android:layout_below="@id/statsTitleTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginRight="@dimen/side_margin"
                 android:layout_marginLeft="@dimen/side_margin">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:background="@drawable/faded_black_gradient">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text=""
-                        android:textColor="@color/white"
-                        android:textSize="15sp"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="فى وقتها"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="متأخرة"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="متروكة"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="الصدقة"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"/>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -209,7 +227,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="يناير"
+                        android:text="@string/jan"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -229,7 +247,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -241,7 +259,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -253,7 +271,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -273,7 +291,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="فبراير"
+                        android:text="@string/feb"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -293,7 +311,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -305,7 +323,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -317,7 +335,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -336,7 +354,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="مارس"
+                        android:text="@string/mar"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -356,7 +374,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -368,7 +386,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -380,7 +398,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -400,7 +418,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="أبريل"
+                        android:text="@string/april"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -420,7 +438,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -432,7 +450,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -444,7 +462,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -464,7 +482,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="مايو"
+                        android:text="@string/may"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -484,7 +502,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -496,7 +514,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -508,7 +526,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -528,7 +546,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="يونيو"
+                        android:text="@string/jun"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -548,7 +566,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -560,7 +578,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -572,7 +590,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -593,7 +611,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="يوليو"
+                        android:text="@string/jul"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -613,7 +631,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -625,7 +643,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -637,7 +655,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -657,7 +675,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="أغسطس"
+                        android:text="@string/aug"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -677,7 +695,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -689,7 +707,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -701,7 +719,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -721,7 +739,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="سبتمبر"
+                        android:text="@string/sep"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -741,7 +759,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -753,7 +771,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -765,7 +783,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -785,7 +803,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="أكتوبر"
+                        android:text="@string/oct"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -805,7 +823,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -817,7 +835,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -829,7 +847,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -850,7 +868,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="نوفمبر"
+                        android:text="@string/nov"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -870,7 +888,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -882,7 +900,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -894,7 +912,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -915,7 +933,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="ديسمبر"
+                        android:text="@string/dec"
                         android:textColor="@color/white"
                         android:textSize="@dimen/month_tv_size"/>
 
@@ -935,7 +953,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -947,7 +965,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"
@@ -959,7 +977,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="@dimen/margin5"
                         android:background="@drawable/chkbx_bg"
                         android:text="0"
                         android:textSize="15sp"

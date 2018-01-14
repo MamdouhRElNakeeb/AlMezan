@@ -14,14 +14,14 @@
         </shape>
     </item>
 
-    <item
-        android:drawable="@drawable/spinner_arrowb"
-        android:width="@dimen/spinnerw"
-        android:height="@dimen/spinnerh"
-        android:top="@dimen/margin20"
-        android:bottom="@dimen/spinnerm"
-        android:gravity="left"
-        android:left="@dimen/spinnerm"
-        />
+    <!--<item-->
+        <!--android:drawable="@drawable/spinner_arrowb"-->
+        <!--android:width="@dimen/spinnerw"-->
+        <!--android:height="@dimen/spinnerh"-->
+        <!--android:top="@dimen/margin20"-->
+        <!--android:bottom="@dimen/spinnerm"-->
+        <!--android:left="@dimen/spinnerm"-->
+        <!--android:right="@dimen/spinnerm"-->
+        <!--/>-->
 
 </layer-list>

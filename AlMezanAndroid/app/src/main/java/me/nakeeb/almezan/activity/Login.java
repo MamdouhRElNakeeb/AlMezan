@@ -1,6 +1,7 @@
 package me.nakeeb.almezan.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import me.nakeeb.almezan.R;
+import me.nakeeb.almezan.helper.LocaleManager;
 import me.nakeeb.almezan.model.User;
 
 /**
@@ -79,9 +81,19 @@ public class Login extends AppCompatActivity {
     }
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
+        Log.d("Base", "attachBaseContext");
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
+        if (!getSharedPreferences("User", MODE_PRIVATE).getBoolean("login", false)){
+            FirebaseAuth.getInstance().signOut();
+            return;
+        }
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
@@ -117,26 +129,34 @@ public class Login extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
 
                             updateUI(null);
-                            String err = "";
+                            String err = "", errCode = "";
 
-                            switch (((FirebaseAuthException) task.getException()).getErrorCode()){
+                            try {
+                                errCode = ((FirebaseAuthException) task.getException()).getErrorCode();
 
-                                case "ERROR_INVALID_EMAIL":
-                                    err = "Please enter a valid Email";
-                                    break;
-                                case "ERROR_INVALID_PASSWORD":
-                                    err = "Please enter a valid password";
-                                    break;
-                                case "ERROR_ACCOUNT_EXISTED_WITH_DIFFERENT_CREDENTIALS":
-                                    err = "Wrong password!";
-                                    break;
-                                case "ERROR_USER_NOT_FOUND":
-                                    err = "User not found";
-                                    break;
+                                switch (errCode) {
+
+                                    case "ERROR_INVALID_EMAIL":
+                                        err = "Please enter a valid Email";
+                                        break;
+                                    case "ERROR_INVALID_PASSWORD":
+                                        err = "Please enter a valid password";
+                                        break;
+                                    case "ERROR_ACCOUNT_EXISTED_WITH_DIFFERENT_CREDENTIALS":
+                                        err = "Wrong password!";
+                                        break;
+                                    case "ERROR_USER_NOT_FOUND":
+                                        err = "User not found";
+                                        break;
+                                }
+
+                                if (err.isEmpty()) {
+                                    err = task.getException().getMessage();
+                                }
+
                             }
-
-                            if (err.isEmpty()){
-                                err = task.getException().getMessage();
+                            catch (Exception e){
+                                err = "An error occurred, Try again later!";
                             }
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
@@ -191,7 +211,7 @@ public class Login extends AppCompatActivity {
                     Log.d("UserID", documentSnapshot.getId());
                 else
                     return;
-                Log.d("docCon", documentSnapshot.toString());
+                Log.d("docCon", documentSnapshot.getData().toString());
                 User user = new User();// = documentSnapshot.toObject(User.class);
                 user.name = documentSnapshot.getString("name");
                 user.email = documentSnapshot.getString("email");
@@ -211,7 +231,7 @@ public class Login extends AppCompatActivity {
                 editor.putLong("prayerTime", user.prayerTime);
                 editor.putLong("handoutTime", user.handoutTime);
                 editor.putLong("zekrTime", user.zekrTime);
-
+                editor.putBoolean("login", true);
                 editor.apply();
 
             }

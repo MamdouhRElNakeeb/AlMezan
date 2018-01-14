@@ -4,15 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer"
-    android:layoutDirection="rtl">
+    android:id="@+id/drawer">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layoutDirection="rtl">
+        android:layout_height="match_parent">
 
 
         <ImageView
@@ -39,6 +37,8 @@
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:src="@drawable/almezan_logo"
+            android:layoutDirection="rtl"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
 
 
@@ -51,48 +51,59 @@
             android:tint="@color/orange"
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
+            android:layoutDirection="rtl"
             android:src="@drawable/sidemenu_icn"
             android:background="@android:color/transparent"/>
 
-
-        <TextView
-            android:id="@+id/zekrTitleTV"
-            android:layout_below="@id/almezan_logo"
+        <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/islamic_icn"
-            android:text="@string/doaa8"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/zekr_header_tv_size"
-            android:padding="5dp"
+            android:layout_below="@id/almezan_logo"
             android:background="@color/deep_orange"
-            android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/margin10"/>
 
-
         <ImageView
+            android:id="@+id/islamic_icn1"
             android:layout_width="@dimen/islamic_icn"
             android:layout_height="@dimen/islamic_icn"
             android:scaleY="1.1"
             android:scaleX="1.1"
             android:layout_marginTop="@dimen/margin10"
-            android:layout_marginRight="@dimen/margin10"
+            android:layout_marginStart="@dimen/margin10"
+            android:layout_marginEnd="@dimen/margin10"
             android:layout_below="@id/almezan_logo"
             android:src="@drawable/islamic_icn"
             android:adjustViewBounds="true"
             android:layout_alignParentRight="true"/>
 
         <ImageView
+            android:id="@+id/islamic_icn2"
             android:layout_width="@dimen/islamic_icn"
             android:layout_height="@dimen/islamic_icn"
             android:scaleY="1.1"
             android:scaleX="1.1"
             android:layout_marginTop="@dimen/margin10"
-            android:layout_marginLeft="@dimen/margin10"
+            android:layout_marginStart="@dimen/margin10"
+            android:layout_marginEnd="@dimen/margin10"
             android:layout_below="@id/almezan_logo"
             android:src="@drawable/islamic_icn"
             android:adjustViewBounds="true"
             android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/zekrTitleTV"
+            android:layout_below="@id/almezan_logo"
+            android:layout_width="match_parent"
+            android:layout_toLeftOf="@id/islamic_icn1"
+            android:layout_toRightOf="@id/islamic_icn2"
+            android:layout_height="@dimen/islamic_icn"
+            android:text="@string/doaa8"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/zekr_header_tv_size"
+            android:padding="5dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/margin10"/>
 
 
         <com.google.android.gms.ads.AdView
@@ -103,7 +114,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-6430998960222915/3853975603">
+            ads:adUnitId="ca-app-pub-5330928698678581/6438603854">
         </com.google.android.gms.ads.AdView>
 
         <LinearLayout
@@ -142,7 +153,10 @@
                     android:textStyle="bold"
                     android:layout_alignParentLeft="true"
                     android:background="@drawable/handout_btn_bg"
-                    android:text="حفظ"/>
+                    android:text="@string/save"
+                    android:paddingRight="@dimen/margin5"
+                    android:paddingLeft="@dimen/margin5"
+                    android:textAllCaps="false"/>
 
             </RelativeLayout>
 
@@ -187,9 +201,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="عدد التسابيح"
+                                android:text="@string/zekr_count"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/month_tv_size"/>
+                                android:textSize="@dimen/stats_tv_size"/>
 
                             <View
                                 android:layout_width="match_parent"
@@ -199,9 +213,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="عدد أيام العمر"
+                                android:text="@string/days_count"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/month_tv_size"/>
+                                android:textSize="@dimen/stats_tv_size"/>
 
                         </LinearLayout>
 
@@ -210,7 +224,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:orientation="vertical"
-                            android:layout_marginRight="10dp">
+                            android:layout_marginRight="@dimen/margin10"
+                            android:layout_marginLeft="@dimen/margin10">
 
                             <View
                                 android:layout_width="25dp"
@@ -230,14 +245,14 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginEnd="10dp"
                             android:gravity="center">
 
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="تراكمى"
+                                android:text="@string/cumulative"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/stats_tv_size"/>
 
@@ -262,11 +277,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="فى اليوم"
+                            android:text="@string/daily"
                             android:layout_gravity="center"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/month_tv_size"
-                            android:layout_marginRight="10dp"/>
+                            android:textSize="@dimen/stats_tv_size"/>
 
                     </LinearLayout>
 
@@ -286,9 +300,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="عدد التسابيح"
+                                android:text="@string/zekr_count"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/month_tv_size"/>
+                                android:textSize="@dimen/stats_tv_size"/>
 
                             <View
                                 android:layout_width="match_parent"
@@ -298,9 +312,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="عدد شهور العمر"
+                                android:text="@string/months_count"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/month_tv_size"/>
+                                android:textSize="@dimen/stats_tv_size"/>
 
                         </LinearLayout>
 
@@ -309,7 +323,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:orientation="vertical"
-                            android:layout_marginRight="10dp">
+                            android:layout_marginRight="@dimen/margin10"
+                            android:layout_marginLeft="@dimen/margin10">
 
                             <View
                                 android:layout_width="25dp"
@@ -329,14 +344,14 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginEnd="10dp"
                             android:gravity="center">
 
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="تراكمى"
+                                android:text="@string/cumulative"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/stats_tv_size"/>
 
@@ -361,11 +376,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="فى الشهر"
+                            android:text="@string/monthly"
                             android:layout_gravity="center"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/month_tv_size"
-                            android:layout_marginRight="10dp"/>
+                            android:textSize="@dimen/stats_tv_size"/>
 
                     </LinearLayout>
 
@@ -385,9 +399,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="عدد التسابيح"
+                                android:text="@string/zekr_count"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/month_tv_size"/>
+                                android:textSize="@dimen/stats_tv_size"/>
 
                             <View
                                 android:layout_width="match_parent"
@@ -397,9 +411,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="عدد سنين العمر"
+                                android:text="@string/years_count"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/month_tv_size"/>
+                                android:textSize="@dimen/stats_tv_size"/>
 
                         </LinearLayout>
 
@@ -408,7 +422,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:orientation="vertical"
-                            android:layout_marginRight="10dp">
+                            android:layout_marginRight="@dimen/margin10"
+                            android:layout_marginLeft="@dimen/margin10">
 
                             <View
                                 android:layout_width="25dp"
@@ -428,14 +443,14 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginEnd="10dp"
                             android:gravity="center">
 
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="تراكمى"
+                                android:text="@string/cumulative"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/stats_tv_size"/>
 
@@ -460,11 +475,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="فى السنة"
+                            android:text="@string/yearly"
                             android:layout_gravity="center"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/month_tv_size"
-                            android:layout_marginRight="10dp"/>
+                            android:textSize="@dimen/stats_tv_size"/>
 
                     </LinearLayout>
                 </LinearLayout>

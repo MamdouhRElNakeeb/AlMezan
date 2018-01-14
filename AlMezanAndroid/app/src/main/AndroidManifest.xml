@@ -20,21 +20,34 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.Login"/>
-        <activity android:name=".activity.Register"/>
-        <activity android:name=".activity.Landing"/>
-        <activity android:name=".activity.PrayerAdd"/>
-        <activity android:name=".activity.PrayersStats"/>
+        <activity android:name=".activity.Login"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.Register"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.Landing"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PrayerAdd"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PrayersStats"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.HandoutAdd"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.ZekrList"/>
-        <activity android:name=".activity.ZekrDetails"/>
-        <activity android:name=".activity.ZekrStats"/>
-        <activity android:name=".activity.MonthlyStats"/>
-        <activity android:name=".activity.Reset"/>
-        <activity android:name=".activity.Settings"/>
-        <activity android:name=".activity.About"/>
+        <activity android:name=".activity.ZekrList"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ZekrDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.ZekrStats"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MonthlyStats"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.Reset"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.Settings"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.About"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

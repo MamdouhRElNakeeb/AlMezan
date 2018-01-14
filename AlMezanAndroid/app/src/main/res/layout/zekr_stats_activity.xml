@@ -4,15 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer"
-    android:layoutDirection="rtl">
+    android:id="@+id/drawer">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layoutDirection="rtl">
+        android:layout_height="match_parent">
 
 
         <ImageView
@@ -39,6 +37,8 @@
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:src="@drawable/almezan_logo"
+            android:layoutDirection="rtl"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
 
 
@@ -51,26 +51,20 @@
             android:tint="@color/orange"
             android:layout_weight="1"
             android:layout_alignParentLeft="true"
+            android:layoutDirection="rtl"
             android:src="@drawable/sidemenu_icn"
             android:background="@android:color/transparent"/>
 
-
-        <TextView
-            android:id="@+id/zekrTitleTV"
-            android:layout_below="@id/almezan_logo"
+        <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/islamic_icn"
-            android:text="إحصائيات الذِكر"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/header_tv_size"
-            android:padding="5dp"
+            android:layout_below="@id/almezan_logo"
             android:background="@android:color/holo_red_dark"
-            android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/margin10"/>
 
 
         <ImageView
+            android:id="@+id/islamic_icn1"
             android:layout_width="@dimen/islamic_icn"
             android:layout_height="@dimen/islamic_icn"
             android:scaleY="1.1"
@@ -83,6 +77,7 @@
             android:layout_alignParentRight="true"/>
 
         <ImageView
+            android:id="@+id/islamic_icn2"
             android:layout_width="@dimen/islamic_icn"
             android:layout_height="@dimen/islamic_icn"
             android:scaleY="1.1"
@@ -94,6 +89,23 @@
             android:adjustViewBounds="true"
             android:layout_alignParentLeft="true"/>
 
+        <TextView
+            android:id="@+id/zekrTitleTV"
+            android:layout_below="@id/almezan_logo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/islamic_icn"
+            android:layout_toLeftOf="@id/islamic_icn1"
+            android:layout_toRightOf="@id/islamic_icn2"
+            android:text="@string/zekr_stats"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/header_tv_size"
+            android:padding="5dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/margin10"/>
+
+
+
 
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -103,12 +115,57 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-6430998960222915/6396378467">
+            ads:adUnitId="ca-app-pub-5330928698678581/2481556280">
         </com.google.android.gms.ads.AdView>
 
+        <RelativeLayout
+            android:id="@+id/filterSpinnerRL"
+            android:layout_below="@id/zekrTitleTV"
+            android:layout_width="140dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/margin20"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="@dimen/margin30"
+            android:layout_marginRight="@dimen/margin30">
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/filterSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/reset_spinner_bg">
+
+
+            </android.support.v7.widget.AppCompatSpinner>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/spinner_arrowb"/>
+
+        </RelativeLayout>
+
+        <!--<android.support.v7.widget.AppCompatSpinner-->
+            <!--android:id="@+id/filterSpinner"-->
+            <!--android:layout_below="@id/zekrTitleTV"-->
+            <!--android:layout_width="@dimen/margin140"-->
+            <!--android:layout_height="@dimen/btn_height"-->
+            <!--android:layout_marginTop="@dimen/margin20"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginLeft="@dimen/margin30"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/reset_spinner_bg">-->
+
+        <!--</android.support.v7.widget.AppCompatSpinner>-->
 
         <ScrollView
-            android:layout_below="@id/zekrTitleTV"
+            android:layout_below="@id/filterSpinnerRL"
             android:layout_above="@id/adView"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -125,6 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
+                    android:visibility="gone"
                     android:layout_gravity="left"
                     android:text="يومياً"
                     android:textColor="@color/white"
@@ -135,23 +193,27 @@
                     android:layout_height="40dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="@string/doaa0"
-                        android:textSize="@dimen/month_tv_size"
-                        android:textColor="@color/white"/>
-
-                    <TextView
                         android:id="@+id/doaa0StatsTV"
-                        android:layout_width="70dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
                         android:text="0"
+                        android:layout_alignParentEnd="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/stats_tv_size"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
                         android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa0StatsTV"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/doaa0"
+                        android:textSize="@dimen/stats_tv_size"
+                        android:textColor="@color/white"/>
 
                 </RelativeLayout>
 
@@ -160,26 +222,29 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="@string/doaa1"
-                        android:textSize="@dimen/month_tv_size"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/doaa1StatsTV"
-                        android:layout_width="70dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
                         android:text="0"
                         android:textColor="@color/black"
                         android:textSize="@dimen/stats_tv_size"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
                         android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa1StatsTV"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/doaa1"
+                        android:textSize="@dimen/month_tv_size"
+                        android:textColor="@color/white"/>
 
                 </RelativeLayout>
 
@@ -190,25 +255,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="@string/doaa2"
-                        android:textSize="@dimen/month_tv_size"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/doaa2StatsTV"
-                        android:layout_width="70dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
                         android:text="0"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
                         android:textColor="@color/black"
                         android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa2StatsTV"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/doaa2"
+                        android:textSize="@dimen/month_tv_size"
+                        android:textColor="@color/white"/>
 
                 </RelativeLayout>
 
@@ -217,26 +286,29 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="@string/doaa3"
-                        android:textSize="@dimen/month_tv_size"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/doaa3StatsTV"
-                        android:layout_width="70dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
                         android:text="0"
                         android:textColor="@color/black"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
                         android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa3StatsTV"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/doaa3"
+                        android:textSize="@dimen/stats_tv_size"
+                        android:textColor="@color/white"/>
 
                 </RelativeLayout>
 
@@ -245,26 +317,29 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="@string/doaa4"
-                        android:textSize="@dimen/month_tv_size"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/doaa4StatsTV"
-                        android:layout_width="70dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
                         android:text="0"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
                         android:textColor="@color/black"
                         android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa4StatsTV"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/doaa4"
+                        android:textSize="@dimen/month_tv_size"
+                        android:textColor="@color/white"/>
 
                 </RelativeLayout>
 
@@ -273,26 +348,30 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="@string/doaa5"
-                        android:textSize="@dimen/month_tv_size"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/doaa5StatsTV"
-                        android:layout_width="70dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
                         android:text="0"
                         android:textColor="@color/black"
                         android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa5StatsTV"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/doaa5"
+                        android:textSize="@dimen/month_tv_size"
+                        android:textColor="@color/white"/>
+
 
                 </RelativeLayout>
 
@@ -301,26 +380,30 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="@string/doaa6"
-                        android:textSize="@dimen/month_tv_size"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/doaa6StatsTV"
-                        android:layout_width="70dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
                         android:text="0"
                         android:textColor="@color/black"
                         android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa6StatsTV"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/doaa6"
+                        android:textSize="@dimen/stats_tv_size"
+                        android:textColor="@color/white"/>
+
 
                 </RelativeLayout>
 
@@ -330,26 +413,29 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="@string/doaa7"
-                        android:textSize="@dimen/stats_tv_size"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/doaa7StatsTV"
-                        android:layout_width="70dp"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
+                        android:layout_alignParentEnd="true"
                         android:text="0"
                         android:textColor="@color/black"
                         android:textSize="@dimen/stats_tv_size"
                         android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa7StatsTV"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/doaa7"
+                        android:textSize="@dimen/stats_tv_size"
+                        android:textColor="@color/white"/>
 
                 </RelativeLayout>
 
@@ -361,23 +447,27 @@
                     android:layout_height="40dp">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/doaa8StatsTV"
+                        android:layout_width="60dp"
                         android:layout_height="match_parent"
+                        android:background="@drawable/zekr_stats_btn_bg"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginLeft="@dimen/margin10"
+                        android:layout_marginRight="@dimen/margin10"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/stats_tv_size"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@id/doaa8StatsTV"
+                        android:layout_alignParentStart="true"
                         android:gravity="center_vertical"
                         android:text="@string/doaa8"
                         android:textSize="@dimen/stats_tv_size"
                         android:textColor="@color/white"/>
-
-                    <TextView
-                        android:id="@+id/doaa8StatsTV"
-                        android:layout_width="70dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/zekr_stats_btn_bg"
-                        android:layout_alignParentLeft="true"
-                        android:text="0"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/stats_tv_size"
-                        android:gravity="center"/>
 
                 </RelativeLayout>
 
